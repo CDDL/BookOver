@@ -6,14 +6,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by Cd on 17/03/2016.
+ * Created by Demils on 17/03/2016.
  */
 
 public class TestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
         // Set response content type
         resp.setContentType("text/html");
 
