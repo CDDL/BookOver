@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 /**
  * Created by Cd on 17/03/2016.
  */
-@WebServlet
+@WebServlet("/HelloWorld")
 public class TestServlet {
     // Extend HttpServlet class
     public class HelloWorld extends HttpServlet {
@@ -26,12 +26,9 @@ public class TestServlet {
                           HttpServletResponse response)
                 throws ServletException, IOException
         {
-            // Set response content type
             response.setContentType("text/html");
-
-            // Actual logic goes here.
-            PrintWriter out = response.getWriter();
-            out.println("<h1>" + message + "</h1>");
+            PrintWriter printWriter  = response.getWriter();
+            printWriter.println("<h1>Hello World!</h1>");
         }
 
         public void destroy()
