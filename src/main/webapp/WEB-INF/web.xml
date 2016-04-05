@@ -6,21 +6,25 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="false">
 
+
     <servlet>
-        <servlet-name>servlets.TestServlet</servlet-name>
-        <servlet-class>servlets.TestServlet</servlet-class>
+        <servlet-name>rest-test</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>servlets.TestServlet</servlet-name>
-        <url-pattern>/HelloWorld</url-pattern>
+        <servlet-name> rest-test</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
-
 
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>servlets.authentication.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -28,10 +32,9 @@
     </servlet-mapping>
 
 
-
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>servlets.RegisterServlet</servlet-class>
+        <servlet-class>servlets.authentication.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
