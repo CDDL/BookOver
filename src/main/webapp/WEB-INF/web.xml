@@ -5,15 +5,37 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="false">
+
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>TestServlet</servlet-class>
+        <servlet-name>servlets.TestServlet</servlet-name>
+        <servlet-class>servlets.TestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
+        <servlet-name>servlets.TestServlet</servlet-name>
         <url-pattern>/HelloWorld</url-pattern>
     </servlet-mapping>
 
+
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>servlets.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 </web-app>
 
