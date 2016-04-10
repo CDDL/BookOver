@@ -2,6 +2,7 @@ package modelo.datos;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by David on 03/04/2016.
@@ -11,7 +12,7 @@ import java.util.Date;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "transacciones")
-public class Transaccion { //EN CONSTRUCCION
+public class Transaccion {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -21,5 +22,46 @@ public class Transaccion { //EN CONSTRUCCION
     @Column
     private Boolean aceptada;
 
+    @JoinTable(name = "mantienen",
+            joinColumns = {@JoinColumn(name = "id_transaccion", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_usuario", referencedColumnName = "id")})
+    @ManyToMany(targetEntity=Usuario.class)
+    private Set usuarios;
+
+
+    public Transaccion() {
+
+    }
+
+    public Transaccion(Date fecha, Boolean aceptada) {
+
+        this.fecha = fecha;
+        this.aceptada = aceptada;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Boolean getAceptada() {
+        return aceptada;
+    }
+
+    public void setAceptada(Boolean aceptada) {
+        this.aceptada = aceptada;
+    }
 
 }
