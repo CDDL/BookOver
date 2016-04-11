@@ -6,6 +6,8 @@ import java.util.Date;
 /**
  * Created by David on 10/04/2016.
  */
+@Entity
+@Table(name = "mensajes")
 public class Mensaje {
 
     @Id

@@ -13,6 +13,8 @@
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.18.2" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.18.2" />
           <element id="library" level="project" name="Maven: org.apache.openejb:javaee-api:6.0-6" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:eclipselink:2.0.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:javax.persistence:2.0.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

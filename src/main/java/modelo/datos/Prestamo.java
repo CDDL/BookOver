@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @PrimaryKeyJoinColumn(name="id")
 @Table(name = "prestamos")
-public class Prestamo {
+public class Prestamo extends Transaccion{
 
     @Column
     private Boolean confirmacionDevolucion;

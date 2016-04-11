@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy =InheritanceType.JOINED)
 @Table(name = "transacciones")
 public class Transaccion {
 
