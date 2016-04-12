@@ -23,7 +23,7 @@ public class LibroService {
         libro.setEditorial(editorial);
         libro.setEsIntercambiable(esIntercambiable);
         libro.setEsVendible(esVendible);
-        libro.setEsIntercambiable(esIntercambiable);
+        libro.setEsPrestable(esPrestable);
         libro.setIsbn(isbn);
         libro.setEstado(estado);
         libro.setTitulo(titulo);
