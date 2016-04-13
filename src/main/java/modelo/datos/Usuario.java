@@ -30,6 +30,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario",targetEntity = Libro.class)
     private List listaLibros;
 
+    @OneToMany(mappedBy = "usuarioValorado",targetEntity = Valoracion.class)
+    private List listaValoraciones;
+
     public List getListaLibros() {
         return listaLibros;
     }

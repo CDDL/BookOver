@@ -15,7 +15,7 @@ public class FotoLibro {
     private String foto;
 
     @ManyToOne
-    @JoinColumn(name="id_foto", referencedColumnName = "id")
+    @JoinColumn(name="id_libro", referencedColumnName = "id")
     private Libro libro;
 
     public FotoLibro(String foto) {

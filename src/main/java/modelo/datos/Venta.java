@@ -15,6 +15,7 @@ public class Venta extends Transaccion{
     private Boolean confirmacion;
 
     @ManyToOne
+    @JoinColumn(name="id_libro", referencedColumnName = "id")
     private Libro libro;
 
     public Venta(Boolean confirmacion, Libro libro) {
