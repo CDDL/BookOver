@@ -22,6 +22,14 @@ public class Transaccion {
     @Column
     private Boolean aceptada;
 
+    public Set getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set usuarios) {
+        this.usuarios = usuarios;
+    }
+
     @JoinTable(name = "mantienen",
             joinColumns = {@JoinColumn(name = "id_transaccion", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_usuario", referencedColumnName = "id")})

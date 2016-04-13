@@ -51,6 +51,14 @@ public class Usuario {
         this.username = username;
     }
 
+    public List getListaValoraciones() {
+        return listaValoraciones;
+    }
+
+    public void setListaValoraciones(List listaValoraciones) {
+        this.listaValoraciones = listaValoraciones;
+    }
+
     public Usuario() {
     }
 
