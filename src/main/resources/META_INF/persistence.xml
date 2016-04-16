@@ -25,7 +25,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
             <!-- Propiedades comunes a toda conexión jpa -->
             <!-- Para MySQL las propiedades son -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gimenoDB" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookover" />
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="senda01" />
 

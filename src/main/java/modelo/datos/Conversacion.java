@@ -16,9 +16,11 @@ public class Conversacion {
     private int id;
 
     @OneToOne
+    @JoinColumn(name="id_usuario1")
     private Usuario usuario1;
 
     @OneToOne
+    @JoinColumn(name="id_usuario2")
     private Usuario usuario2;
 
 

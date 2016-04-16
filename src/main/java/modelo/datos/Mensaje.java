@@ -19,6 +19,7 @@ public class Mensaje {
     private Conversacion conversacion;
 
     @OneToOne
+    @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
     @Column
