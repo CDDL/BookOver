@@ -4,6 +4,10 @@
 
 var myApp = angular.module('BookOver',['ngAnimate', 'ui.bootstrap']);
 
-myApp.controller('ControladorNavBar', function() {
-    this.dipe = 'Hola!';
+myApp.controller('ControladorNavBar', function($scope) {
+    this.abierto = true;
+});
+
+myApp.controller('ControladorLogin', function($scope){
+
 });
