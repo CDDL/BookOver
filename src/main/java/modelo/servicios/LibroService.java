@@ -7,40 +7,42 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * Created by David on 11/04/2016.
- */
 public class LibroService {
 
-    public void add(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esVendible, Boolean esIntercambiable, Boolean esPrestable, Usuario usuario){
+    public boolean add(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esVendible, Boolean esIntercambiable, Boolean esPrestable, Usuario usuario){
 
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "bookover" );
         EntityManager entitymanager = emfactory.createEntityManager( );
         entitymanager.getTransaction( ).begin( );
 
+        Usuario usuarioAux = (Usuario) entitymanager.createQuery(
+                "SELECT u FROM Usuario u WHERE u.id = :id")
+                .setParameter("id", usuario.getId())
+                .getResultList().get(0);
+        if (usuario.equals(usuarioAux)) {
 
+            Libro libro = new Libro();
+            libro.setAutor(autor);
+            libro.setEditorial(editorial);
+            libro.setEsIntercambiable(esIntercambiable);
+            libro.setEsVendible(esVendible);
+            libro.setEsPrestable(esPrestable);
+            libro.setIsbn(isbn);
+            libro.setEstado(estado);
+            libro.setTitulo(titulo);
+            libro.setInfoAdicional(infoAdicional);
+            
+            usuario.getListaLibros().add(libro);
 
-        Libro libro = new Libro();
-        libro.setAutor(autor);
-        libro.setEditorial(editorial);
-        libro.setEsIntercambiable(esIntercambiable);
-        libro.setEsVendible(esVendible);
-        libro.setEsPrestable(esPrestable);
-        libro.setIsbn(isbn);
-        libro.setEstado(estado);
-        libro.setTitulo(titulo);
-        libro.setInfoAdicional(infoAdicional);
+            entitymanager.persist(libro);
 
-        usuario.getListaLibros().add(libro);
-
-        entitymanager.persist(libro);
-
-
-
-        entitymanager.getTransaction().commit();
-        entitymanager.close();
-        emfactory.close();
-
+            entitymanager.getTransaction().commit();
+            entitymanager.close();
+            emfactory.close();
+            return true;
+        } else{
+            return false;
+        }
     }
 
 
