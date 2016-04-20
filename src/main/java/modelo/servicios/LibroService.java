@@ -18,6 +18,8 @@ public class LibroService {
         EntityManager entitymanager = emfactory.createEntityManager( );
         entitymanager.getTransaction( ).begin( );
 
+
+
         Libro libro = new Libro();
         libro.setAutor(autor);
         libro.setEditorial(editorial);
@@ -29,7 +31,6 @@ public class LibroService {
         libro.setTitulo(titulo);
         libro.setInfoAdicional(infoAdicional);
 
-        libro.setUsuario(usuario);
         usuario.getListaLibros().add(libro);
 
         entitymanager.persist(libro);
@@ -41,7 +42,6 @@ public class LibroService {
         emfactory.close();
 
     }
-
 
 
     public Libro getById(int id){
@@ -72,5 +72,41 @@ public class LibroService {
         return libro;
     }
 
+    public boolean edit(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esVendible, Boolean esIntercambiable, Boolean esPrestable, Usuario usuario, int id) {
 
+        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("bookover");
+        EntityManager entitymanager = emfactory.createEntityManager();
+        entitymanager.getTransaction().begin();
+
+        Usuario usuarioAux = (Usuario) entitymanager.createQuery(
+                "SELECT u FROM Usuario u WHERE u.id = :id")
+                .setParameter("id", usuario.getId())
+                .getResultList().get(0);
+        if (usuario.equals(usuarioAux)) {
+            Libro libro = getById(id);
+
+            if (libro!=null){
+                libro.setAutor(autor);
+                libro.setEditorial(editorial);
+                libro.setEsIntercambiable(esIntercambiable);
+                libro.setEsVendible(esVendible);
+                libro.setEsPrestable(esPrestable);
+                libro.setIsbn(isbn);
+                libro.setEstado(estado);
+                libro.setTitulo(titulo);
+                libro.setInfoAdicional(infoAdicional);
+
+                entitymanager.persist(libro);
+
+                entitymanager.getTransaction().commit();
+                entitymanager.close();
+                emfactory.close();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
