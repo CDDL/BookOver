@@ -31,7 +31,7 @@ public class LibroService {
             libro.setEstado(estado);
             libro.setTitulo(titulo);
             libro.setInfoAdicional(infoAdicional);
-            
+
             usuario.getListaLibros().add(libro);
 
             entitymanager.persist(libro);
