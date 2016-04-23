@@ -1,5 +1,6 @@
 package modelo.servicios;
 
+import com.sun.jersey.spi.resource.Singleton;
 import modelo.datos.Usuario;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.Persistence;
 /**
  * Created by David on 11/04/2016.
  */
+@Singleton
 public class UserService {
 
 

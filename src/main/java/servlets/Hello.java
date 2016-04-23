@@ -1,5 +1,6 @@
 package servlets;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -11,8 +12,11 @@ import java.io.InputStream;
 
 @Path("hello")
 public class Hello {
+    @RolesAllowed("ADMIN")
     @GET
     public String hello() {
+
+
         return "Hello";
     }
 
