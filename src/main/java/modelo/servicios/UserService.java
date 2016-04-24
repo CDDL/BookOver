@@ -14,15 +14,13 @@ import javax.persistence.Persistence;
 public class UserService {
 
 
-    public void add(String nombre, String apellidos, String password, String email, String ubicacion, String username ){
+    public Usuario add(String password, String email, String ubicacion, String username ){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "bookover" );
         EntityManager entitymanager = emfactory.createEntityManager( );
         entitymanager.getTransaction( ).begin( );
 
         Usuario usuario = new Usuario();
 
-        usuario.setNombre(nombre);
-        usuario.setApellidos(apellidos);
         usuario.setPassword(password);
         usuario.setEmail(email);
         usuario.setUbicacion(ubicacion);
@@ -33,6 +31,7 @@ public class UserService {
         entitymanager.getTransaction().commit();
         entitymanager.close();
         emfactory.close();
+        return usuario;
 
 
     }
@@ -58,6 +57,21 @@ public class UserService {
         Usuario usuario = (Usuario) entitymanager.createQuery(
                 "SELECT u FROM Usuario u WHERE u.email LIKE :email")
                 .setParameter("email", email)
+                .getResultList().get(0);
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
+        emfactory.close();
+        return usuario;
+    }
+
+    public Usuario getByUsername(String username){
+        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "bookover" );
+        EntityManager entitymanager = emfactory.createEntityManager( );
+        entitymanager.getTransaction( ).begin( );
+
+        Usuario usuario = (Usuario) entitymanager.createQuery(
+                "SELECT u FROM Usuario u WHERE u.username LIKE :username")
+                .setParameter("username", username)
                 .getResultList().get(0);
         entitymanager.getTransaction().commit();
         entitymanager.close();
