@@ -8,6 +8,8 @@
     <link href="http://blackrockdigital.github.io/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+
 </head>
 <body ng-app="BookOver">
 
@@ -18,21 +20,21 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Identificación</h3>
                 </div>
-                <div class="panel-body" ng-controller="ControladorLogin">
+                <div class="panel-body" ng-controller="CtrlLogin as ctrl">
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input ng-model="login_email" class="form-control" placeholder="Email" name="email" autofocus="" type="email">
+                                <input ng-model="user" class="form-control" placeholder="Usuario" name="usuario" autofocus="" type="email">
                             </div>
                             <div class="form-group">
-                                <input ng-model="login_contrasena" class="form-control" placeholder="Contraseña" name="password" value="" type="password">
+                                <input ng-model="passwd" class="form-control" placeholder="Contraseña" name="password" value="" type="password">
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input name="remember" value="login_recordar" type="checkbox">Recordar en este dispositivo
                                 </label>
                             </div>
-                            <button class="btn btn-lg btn-success btn-block" ng-click="enviarLogin()">Enviar</button>
+                            <button class="btn btn-lg btn-success btn-block" ng-click="ctrl.login(user, passwd)">Enviar</button>
                         </fieldset>
                     </form>
                 </div>
@@ -41,7 +43,9 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<script src="../../js/angular_app.js"></script>
+
+<script src="../../js/angular_apps.js"></script>
+<script src="../../js/angular_controllers.js"></script>
+<script src="../../js/angular_services.js"></script>
 </body>
 </html>
