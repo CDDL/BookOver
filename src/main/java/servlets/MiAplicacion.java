@@ -1,5 +1,6 @@
 package servlets;
 
+import controlador.LoginController;
 import controlador.RegisterController;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -14,6 +15,7 @@ public class MiAplicacion extends ResourceConfig {
             Set<Class<?>> s = new HashSet<Class<?>>();
             s.add(Hello.class);
             s.add(RegisterController.class);
+            s.add(LoginController.class);
             return s;
         }
     }

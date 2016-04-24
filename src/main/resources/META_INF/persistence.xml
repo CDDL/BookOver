@@ -33,7 +33,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
             <!-- Indicamos la BBDD -->
             <property name="eclipselink.target-database" value="MySQL"/>
             <!-- Cada vez que se ejecuta la aplicación borramos todas las tablas -->
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
             <!-- Detalle de la información que muestra EclipseLink -->
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
