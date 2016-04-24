@@ -21,7 +21,7 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
         if(password != password_check) console.log("error contraseñas");
         else WebService.register(user, password, email, localization)
             .success(function (data) {
-                console.log(data.msg);
+                console.log(data);
             });
     }
 }]);

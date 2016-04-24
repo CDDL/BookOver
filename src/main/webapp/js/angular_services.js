@@ -4,9 +4,9 @@
 var appBookOver = angular.module('BookOver');
 
 appBookOver.baseURI = 'http://localhost:8080/services/';
-// appBookOver.loginURI = 'http://localhost:8080/services/login/';
-appBookOver.loginURI = 'https://demo9104233.mockable.io/test';
-appBookOver.registerURI = 'http://localhost:8080/services/register';
+
+appBookOver.loginURI = appBookOver.baseURI + "login";
+appBookOver.registerURI = appBookOver.baseURI + "register";
 
 appBookOver.service('WebService', ['$http', function ($http) {
 
@@ -17,8 +17,8 @@ appBookOver.service('WebService', ['$http', function ($http) {
     // }
 
     this.login = function (user, password) {
-        data = {'loginData': {'user': user, 'password': password}};
-        return $http.get(appBookOver.loginURI, data);
+        data = {'user': user, 'passwd' : password};
+        return $http.post(appBookOver.loginURI, data);
     }
 
     this.register = function (user, password, email, localization) {
