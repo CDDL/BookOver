@@ -1,5 +1,6 @@
 package modelo.servicios;
 
+import com.sun.jersey.spi.resource.Singleton;
 import modelo.datos.Libro;
 import modelo.datos.Usuario;
 
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+@Singleton
 public class LibroService {
 
     public boolean add(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esVendible, Boolean esIntercambiable, Boolean esPrestable, Usuario usuario){

@@ -15,10 +15,6 @@ public class Usuario {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     @Column
-    private String nombre;
-    @Column
-    private String apellidos;
-    @Column
     private String password;
     @Column
     private String email;
@@ -41,9 +37,8 @@ public class Usuario {
         this.listaLibros = listaLibros;
     }
 
-    public Usuario(String nombre, String apellidos, String password, String email, String ubicacion, String username) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+    public Usuario(String password, String email, String ubicacion, String username) {
+
         this.password = password;
         this.email = email;
         this.ubicacion = ubicacion;
@@ -68,22 +63,6 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getPassword() {
