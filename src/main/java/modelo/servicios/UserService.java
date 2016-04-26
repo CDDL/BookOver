@@ -2,7 +2,8 @@ package modelo.servicios;
 
 import modelo.datos.Usuario;
 
-import javax.inject.Singleton;
+import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

@@ -23,6 +23,7 @@ public class Mensaje {
     private Usuario usuario;
 
     @Column
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
     @Column

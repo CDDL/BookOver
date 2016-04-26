@@ -18,6 +18,7 @@ public class Transaccion {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     @Column
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     @Column
     private Boolean aceptada;
