@@ -23,6 +23,7 @@ public class Usuario {
     @Column
     private String username;
 
+
     @OneToMany(mappedBy = "usuario",targetEntity = Libro.class)
     private List listaLibros;
 
