@@ -22,7 +22,7 @@ public class LibroService {
                 .setParameter("id", usuario.getId())
                 .getResultList().get(0);
 
-        if (usuario.equals(usuarioAux)) {
+        if (usuario.getId() == usuarioAux.getId()) {
 
             Libro libro = new Libro();
             libro.setAutor(autor);
@@ -69,7 +69,7 @@ public class LibroService {
                 "SELECT u FROM Usuario u WHERE u.id = :id")
                 .setParameter("id", usuario.getId())
                 .getResultList().get(0);
-        if (usuario.equals(usuarioAux)) {
+        if (usuario.getId() == usuarioAux.getId()) {
             Libro libro = getById(id);
 
             if (libro!=null){
@@ -83,7 +83,7 @@ public class LibroService {
                 libro.setTitulo(titulo);
                 libro.setInfoAdicional(infoAdicional);
 
-                entitymanager.persist(libro);
+//                entitymanager.persist(libro);
 
                 return true;
             } else {
