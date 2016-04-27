@@ -1,7 +1,9 @@
 package controlador;
 
+import modelo.datos.LoginData;
 import modelo.datos.Usuario;
 import modelo.servicios.UserService;
+import org.apache.commons.lang.WordUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -18,15 +20,14 @@ public class LoginController {
     UserService userService;
 
     @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response login(@FormParam("user") String user, @FormParam("password") String password) {
-        Usuario usuario = userService.getByUsername(user);
-        if(usuario==null){
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response login(LoginData loginData) {
+        Usuario usuario = userService.getByUsername(loginData.getUsername());
+        if (usuario == null)
             return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        if(!usuario.getPassword().equals(password)){
+
+        if (!usuario.getPassword().equals(loginData.getPassword()))
             Response.status(Response.Status.CONFLICT).build();
-        }
 
         return Response.status(Response.Status.ACCEPTED).build();
     }

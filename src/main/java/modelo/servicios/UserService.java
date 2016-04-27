@@ -4,10 +4,7 @@ import modelo.datos.Usuario;
 
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
 /**
  * Created by David on 11/04/2016.
@@ -19,26 +16,13 @@ public class UserService {
     EntityManager entitymanager;
 
 
-    public Usuario add(String password, String email, String ubicacion, String username ){
-        Usuario usuario = new Usuario();
-
-        usuario.setPassword(password);
-        usuario.setEmail(email);
-        usuario.setUbicacion(ubicacion);
-        usuario.setUsername(username);
-
+    public Usuario add(Usuario usuario){
         entitymanager.persist(usuario);
-
         return usuario;
-
-
     }
 
     public Usuario getById(int id){
-
-        Usuario usuario = entitymanager.getReference(Usuario.class, id);
-
-        return usuario;
+        return entitymanager.getReference(Usuario.class, id);
     }
 
     public Usuario getByEmail(String email){
@@ -51,17 +35,14 @@ public class UserService {
     }
 
     public Usuario getByUsername(String username){
-
-        Usuario usuario = (Usuario) entitymanager.createQuery(
-                "SELECT u FROM Usuario u WHERE u.username LIKE :username")
-                .setParameter("username", username)
-                .getResultList().get(0);
-        return usuario;
+        Query petición = entitymanager.createQuery("SELECT u FROM Usuario u WHERE u.username LIKE :username")
+                .setParameter("username", username);
+        try {
+            Usuario usuario = (Usuario) petición.getSingleResult();
+            return usuario;
+        } catch (Exception e){
+            return null;
+        }
     }
-
-
-
-
-
 
 }

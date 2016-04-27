@@ -22,11 +22,10 @@ public class RegisterController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(Usuario usuario) {
         Usuario usuarioSistema = userService.getByUsername(usuario.getUsername());
-        if(usuarioSistema!=null){
+        if (usuarioSistema != null)
             return Response.status(Response.Status.CONFLICT).build();
-        }
 
-        Usuario myUsuario = userService.add(usuario.getPassword(),usuario.getEmail(), usuario.getUbicacion(), usuario.getUsername());
+        Usuario myUsuario = userService.add(usuario);
         return Response.ok(myUsuario).build();
     }
 
