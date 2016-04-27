@@ -67,6 +67,8 @@ public class Libro {
     public Libro() {
     }
 
+
+
     public int getId() {
         return id;
     }
