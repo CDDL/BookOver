@@ -19,7 +19,7 @@ public class Hello {
     @GET
     public String hello() {
 //        UserService userService = new UserService();
-        userService.add("password", "email", "ubicación", "username");
+//        userService.add("password", "email", "ubicación", "username");
         return "Hello";
     }
 

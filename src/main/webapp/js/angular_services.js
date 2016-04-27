@@ -1,15 +1,16 @@
 /**
  * Created by Demils on 24/04/2016.
  */
+
+
 var appBookOver = angular.module('BookOver');
 
-appBookOver.baseURI = 'http://localhost:8080/services/';
+appBookOver.baseURI = 'http://localhost:8080/BookOver/';
 
 appBookOver.loginURI = appBookOver.baseURI + "login";
 appBookOver.registerURI = appBookOver.baseURI + "register";
 
 appBookOver.service('WebService', ['$http', function ($http) {
-
     // this.create = function(nombre, apellidos, nif) {
     //     dato = {'persona': {'nombre': nombre, 'apellidos': apellidos, 'nif': nif}};
     //     var url = appBookOver.baseURI + nif;
@@ -17,14 +18,14 @@ appBookOver.service('WebService', ['$http', function ($http) {
     // }
 
     this.login = function (user, password) {
-        data = {'user': user, 'passwd' : password};
-        return $http.post(appBookOver.loginURI, data);
-    }
+        return $http.post(appBookOver.loginURI,
+            {'loginData':{'username': user, 'password': password}});
+    };
 
     this.register = function (user, password, email, localization) {
-        data = {'Usuario': {'password': password, 'email': email, 'ubicacion' : localization, 'username' : user}};
-        return $http.post(appBookOver.loginURI, data);
-    }
+        return $http.post(appBookOver.registerURI,
+            {'user': user, 'password': password, 'email': email, 'localization':localization});
+    };
 
     // this.retrieveContact = function(nif) {
     //     var url = appBookOver.baseURI + nif;
