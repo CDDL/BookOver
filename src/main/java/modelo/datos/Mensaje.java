@@ -1,11 +1,16 @@
 package modelo.datos;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
 /**
  * Created by David on 10/04/2016.
  */
+@XmlRootElement
+@XmlType(propOrder = {"id", "fecha", "mensaje"})
 @Entity
 @Table(name = "mensajes")
 public class Mensaje {
@@ -14,10 +19,12 @@ public class Mensaje {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_conversacion", referencedColumnName = "id")
     private Conversacion conversacion;
 
+    @XmlTransient
     @OneToOne
     @JoinColumn(name="id_usuario")
     private Usuario usuario;

@@ -5,8 +5,13 @@ package modelo.datos;
  */
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
+@XmlRootElement
+@XmlType(propOrder = {"id", "password", "email","ubicacion","username"})
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -14,19 +19,24 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
+
     @Column
     private String password;
+
     @Column
     private String email;
+
     @Column
     private String ubicacion;
+
     @Column
     private String username;
 
-
+    @XmlTransient
     @OneToMany(mappedBy = "usuario",targetEntity = Libro.class)
     private List listaLibros;
 
+    @XmlTransient
     @OneToMany(mappedBy = "usuarioValorado",targetEntity = Valoracion.class)
     private List listaValoraciones;
 

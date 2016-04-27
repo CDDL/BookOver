@@ -1,11 +1,16 @@
 package modelo.datos;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by David on 02/04/2016.
  */
 
+@XmlRootElement
+@XmlType(propOrder = {"id","fecha", "aceptada", "confirmacionUser1", "confirmacionUser2"})
 @Entity
 @PrimaryKeyJoinColumn(name="id")
 @Table(name = "intercambios")
@@ -17,10 +22,12 @@ public class Intercambio extends Transaccion {
     @Column
     private boolean confirmacionUser2;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_libro1", referencedColumnName = "id")
     private Libro libroOfrecido;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_libro2", referencedColumnName = "id")
     private Libro libroBuscado;

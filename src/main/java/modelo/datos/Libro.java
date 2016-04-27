@@ -5,8 +5,13 @@ package modelo.datos;
  */
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
+@XmlRootElement
+@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
 @Entity
 @Table(name = "libros")
 public class Libro {
@@ -35,9 +40,11 @@ public class Libro {
     @Column
     private int precio;
 
+    @XmlTransient
     @OneToMany(mappedBy = "libro", targetEntity = FotoLibro.class)
     private List fotos;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_usuario", referencedColumnName = "id")
     private Usuario usuario;
