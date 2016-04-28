@@ -25,6 +25,9 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
         else WebService.register(user, password, email, localization)
             .then(function successCallback(response) {
                 console.log("Registrado");
+            }, function errorCallBack(response){
+                $scope.append()
+                console.log("Error");
             });
     };
 }]);
