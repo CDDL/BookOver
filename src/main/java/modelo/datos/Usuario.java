@@ -40,9 +40,11 @@ public class Usuario {
     @OneToMany(mappedBy = "usuarioValorado",targetEntity = Valoracion.class)
     private List listaValoraciones;
 
+    @XmlTransient
     public List getListaLibros() {
         return listaLibros;
     }
+
 
     public void setListaLibros(List listaLibros) {
         this.listaLibros = listaLibros;
@@ -57,9 +59,11 @@ public class Usuario {
         this.username = username;
     }
 
+    @XmlTransient
     public List getListaValoraciones() {
         return listaValoraciones;
     }
+
 
     public void setListaValoraciones(List listaValoraciones) {
         this.listaValoraciones = listaValoraciones;

@@ -1,3 +1,4 @@
+/*
 package controlador;
 
 import com.sun.xml.bind.v2.TODO;
@@ -12,9 +13,11 @@ import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+*/
 /**
  * Created by Elite Legend on 27/04/2016.
- */
+ *//*
+
 public class LibroController {
 
     @Inject
@@ -85,3 +88,4 @@ public class LibroController {
     }
 
 }
+*/
