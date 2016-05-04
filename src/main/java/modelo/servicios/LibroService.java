@@ -44,39 +44,8 @@ public class LibroService {
 
     public Libro edit(Libro libro) {
 
-        libro.getUsuario().getListaLibros().add(libro);
+        entitymanager.merge(libro);
 
         return libro;
-    }
-
-    public boolean edit(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esVendible, Boolean esIntercambiable, Boolean esPrestable, Usuario usuario, int id) {
-
-        Usuario usuarioAux = (Usuario) entitymanager.createQuery(
-                "SELECT u FROM Usuario u WHERE u.id = :id")
-                .setParameter("id", usuario.getId())
-                .getResultList().get(0);
-        if (usuario.getId() == usuarioAux.getId()) {
-            Libro libro = getById(id);
-
-            if (libro != null) {
-                libro.setAutor(autor);
-                libro.setEditorial(editorial);
-                libro.setEsIntercambiable(esIntercambiable);
-                libro.setEsVendible(esVendible);
-                libro.setEsPrestable(esPrestable);
-                libro.setIsbn(isbn);
-                libro.setEstado(estado);
-                libro.setTitulo(titulo);
-                libro.setInfoAdicional(infoAdicional);
-
-//                entitymanager.persist(libro);
-
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
     }
 }

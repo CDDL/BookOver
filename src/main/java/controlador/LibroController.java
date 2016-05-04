@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 */
 /**
@@ -28,26 +29,16 @@ public class LibroController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     //TODO fxd muy fuerte
-    public Response registrarLibro(Object caca) {
-        //Usuario usuario = LoginServiceUtils.getUser();
-        if(usuario!=null){
+    public Response registrarLibro(List<Object> parametros) {
+        Usuario usuario = (Usuario) parametros.get(0);
+        if(usuario==null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         ////////////////////////////
-        Libro requestL = new Libro();
+        Libro libro = (Libro) parametros.get(1);
         ////////////////////////////
 
-        Libro libro = new Libro();
-        libro.setTitulo(requestL.getTitulo());
-        libro.setAutor(requestL.getAutor());
-        libro.setEditorial(requestL.getEditorial());
-        libro.setIsbn(requestL.getIsbn());
-        libro.setEstado(requestL.getEstado());
-        libro.setInfoAdicional(requestL.getInfoAdicional());
-        libro.setEsIntercambiable(requestL.getEsIntercambiable());
-        libro.setEsVendible(requestL.getEsVendible());
-        libro.setEsPrestable(requestL.getEsPrestable());
         libro.setUsuario(usuario);
 
         libroService.add(libro);
@@ -62,15 +53,15 @@ public class LibroController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     //TODO más xD
-    public Response editarLibro(Object caca) {
-        //Usuario usuario = LoginServiceUtils.getUser();
-        if(usuario!=null){
+    public Response editarLibro(List<Object> parametros) {
+        Usuario usuario = (Usuario) parametros.get(0);
+        if(usuario==null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         ////////////////////////////
-        Libro requestL = new Libro();
-        ////////////////////////////
+        Libro requestL = (Libro) parametros.get(1);
+        //////////////////////////////
 
         Libro libro = libroService.getById(requestL.getId());
         libro.setTitulo(requestL.getTitulo());
@@ -86,6 +77,5 @@ public class LibroController {
 
         return Response.ok(libro).build();
     }
-
 }
 */
