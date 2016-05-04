@@ -1,6 +1,8 @@
 package modelo.datos;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 import java.util.Set;
 
@@ -8,7 +10,8 @@ import java.util.Set;
  * Created by David on 03/04/2016.
  */
 
-
+@XmlRootElement
+@XmlType(propOrder = {"id", "fecha", "aceptada"})
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
 @Table(name = "transacciones")
@@ -17,9 +20,11 @@ public class Transaccion {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
     @Column
     @Temporal(TemporalType.DATE)
     private Date fecha;
+
     @Column
     private Boolean aceptada;
 

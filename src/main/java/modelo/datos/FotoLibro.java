@@ -1,10 +1,15 @@
 package modelo.datos;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by David on 01/04/2016.
  */
+@XmlRootElement
+@XmlType(propOrder = {"id", "foto"})
 @Entity
 @Table(name = "fotoslibros")
 public class FotoLibro {
@@ -14,6 +19,7 @@ public class FotoLibro {
     private int id;
     private String foto;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_libro", referencedColumnName = "id")
     private Libro libro;

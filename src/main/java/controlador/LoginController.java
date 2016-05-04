@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.datos.LoginData;
+
 import modelo.datos.Usuario;
 import modelo.servicios.UserService;
 import org.apache.commons.lang.WordUtils;
@@ -28,6 +29,17 @@ public class LoginController {
 
         if (!usuario.getPassword().equals(loginData.getPassword()))
             Response.status(Response.Status.CONFLICT).build();
+
+        return Response.status(Response.Status.ACCEPTED).build();
+    }
+
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("prueba")
+    public Response prueba(LoginData loginData, Usuario usuario){
+        System.out.println(loginData.getUsername() + " " + loginData.getPassword());
+        System.out.println(usuario.getUsername()+" " + usuario.getEmail());
 
         return Response.status(Response.Status.ACCEPTED).build();
     }

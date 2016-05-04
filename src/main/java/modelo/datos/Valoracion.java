@@ -1,13 +1,17 @@
 package modelo.datos;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by David on 10/04/2016.
  */
 
+@XmlRootElement
+@XmlType(propOrder = {"id", "descripcion", "puntuacion"})
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "valoraciones")
 public class Valoracion {
 
@@ -21,14 +25,17 @@ public class Valoracion {
     @Column
     private int puntuacion;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_usuario_realiza", referencedColumnName = "id")
     private Usuario usuarioRealiza;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_usuario_valorado", referencedColumnName = "id")
     private Usuario usuarioValorado;
 
+    @XmlTransient
     @ManyToOne
     @JoinColumn(name="id_transaccion", referencedColumnName = "id")
     private Transaccion transaccion;
