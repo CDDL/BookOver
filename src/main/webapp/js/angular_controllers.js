@@ -1,6 +1,6 @@
 /**
- * Created by Demils on 24/04/2016.
- */
+* Created by Demils on 24/04/2016.
+*/
 
 var appBookOver = angular.module('BookOver');
 
@@ -25,9 +25,58 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
         else WebService.register(user, password, email, localization)
             .then(function successCallback(response) {
                 console.log("Registrado");
-            }, function errorCallBack(response){
-                $scope.append()
-                console.log("Error");
             });
     };
+}]);
+
+appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
+    var self = this;
+
+    // $scope.usuario ?? cmprbr
+
+    $scope.libros = WebService.recuperaTodosLibros()
+        .success(function(data){
+            $scope.libros = data.libro; // cmprbr ???
+        });
+
+    self.recuperaLibro = function(id) {
+        WebService.recuperaLibro(id)
+            .success(function(data) {
+                console.log(data);
+                $scope.libroActual = data;
+            });
+    }
+
+    self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
+        var dato = { libro: {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+
+        WebService.registrarLibro(dato)
+            .then(function successCallback(response) {
+                console.log("Libro registrado");
+            });
+    };
+
+    //cmprbr - esta funcion incluye el id
+    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
+        var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+
+        WebService.editarLibro(dato)
+            .then(function successCallback(response) {
+                console.log("Libro editado correctamente");
+            });
+    };
+
+    self.cargaFotos = function (event) {
+        document.getElementById("fotos").innerHTML = '';
+        document.getElementById("fotos").appendChild(document.createElement("br"));
+        for (i = 0; i < event.target.files.length; i++) {
+            var elem = document.createElement("img");
+            elem.setAttribute("src", URL.createObjectURL(event.target.files[i]));
+            elem.setAttribute("height", "100");
+            elem.setAttribute("width", "100");
+            document.getElementById("fotos").appendChild(elem);
+        }
+        ;
+    }
+
 }]);
