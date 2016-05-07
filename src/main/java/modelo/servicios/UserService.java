@@ -45,4 +45,10 @@ public class UserService {
         }
     }
 
+    public Boolean isUserValid(String username, String password) {
+        Usuario usuario = this.getByUsername(username);
+        return usuario != null && usuario.getPassword().equals(password);
+
+    }
+
 }

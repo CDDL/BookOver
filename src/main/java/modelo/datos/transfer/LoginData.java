@@ -1,4 +1,4 @@
-package modelo.datos;
+package modelo.datos.transfer;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;

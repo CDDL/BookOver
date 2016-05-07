@@ -1,10 +1,9 @@
 package controlador;
 
-import modelo.datos.LoginData;
+import modelo.datos.transfer.LoginData;
 
 import modelo.datos.Usuario;
 import modelo.servicios.UserService;
-import org.apache.commons.lang.WordUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
