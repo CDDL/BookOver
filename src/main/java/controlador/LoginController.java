@@ -38,7 +38,7 @@ public class LoginController {
     @Path("prueba")
     public Response prueba(LoginData loginData, Usuario usuario){
         System.out.println(loginData.getUsername() + " " + loginData.getPassword());
-        System.out.println(usuario.getUsername()+" " + usuario.getEmail());
+        System.out.println(usuario.getUsername()+ " " + usuario.getEmail());
 
         return Response.status(Response.Status.ACCEPTED).build();
     }

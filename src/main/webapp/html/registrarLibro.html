@@ -1,40 +1,80 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <section id="register">
-        <div class="container">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BookOver - Identificación</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/sb-admin.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+
+
+</head>
+<body ng-app="BookOver">
+
+<div id="wrapper">
+
+    <ng-include src="'/BookOver/html/components/navbar.html'"></ng-include>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
             <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <div class="form-wrap">
-                        <h1>Registra un libro</h1>
+                <div class="col-lg-12 ">
+                    <h1 class="page-header">
+                        Registra un libro
+
+                    </h1>
+
+                    <div class="panel-body" ng-controller="CtrlLogin as ctrl">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <h6 class="text-center"></h6>
                             <div class="form-group">
                                 <label for="titulo" >Titulo</label>
-                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Luces de bohemia" required>
+                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Luces de bohemia">
                             </div>
                             <div class="form-group">
                                 <label for="autor" >Autor</label>
-                                <input type="text" name="autor" id="autor" class="form-control" placeholder="Ramón María del Valle-Inclán" required>
+                                <input type="text" name="autor" id="autor" class="form-control" placeholder="Ramón María del Valle-Inclán">
                             </div>
                             <div class="form-group">
                                 <label for="editorial">Editorial</label>
-                                <input type="text" name="editorial" id="editorial" class="form-control" placeholder="Imprenta Cervantina" required>
+                                <input type="text" name="editorial" id="editorial" class="form-control" placeholder="Imprenta Cervantina">
                             </div>
                             <div class="form-group">
-                                <label for="isbn">ISBN</label>
-                                <input type="text" name="isbn" id="isbn" class="form-control" placeholder="578887742">
+                                <label for="isbn13">ISBN de 13 dígitos</label>
+                                <input type="text" name="isbn13" id="isbn13" class="form-control" placeholder="578887742366">
+                            </div>
+                            <div class="form-group">
+                                <label for="isbn10">ISBN de 10 dígitos</label>
+                                <input type="text" name="isbn10" id="isbn10" class="form-control" placeholder="6778877420">
                             </div>
                             <div class="form-group">
                                 <label for="estado1" >Estado del libro</label><br>
 
-                                <input type="radio" name="estado" id="estado1" value="true" required>Nuevo
+                                <input type="radio" name="estado" id="estado1" value="estado" required>Nuevo
 
-                                <input type="radio" name="estado"  id="estado2" value="true">Poco usado
+                                <input type="radio" name="estado"  id="estado2" value="estado">Poco usado
 
-                                <input type="radio" name="estado"  id="estado3" value="true">Usado
+                                <input type="radio" name="estado"  id="estado3" value="estado">Usado
 
-                                <input type="radio" name="estado"  id="estado4" value="true">Muy usado
+                                <input type="radio" name="estado"  id="estado4" value="estado">Muy usado
 
                             </div>
                             <div class="form-group">
@@ -44,21 +84,35 @@
                             <div class="form-group">
                                 <label for="opcionesLibro1" >¿Qué quieres hacer con el libro?</label><br>
 
-                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro1" value="true" />Venderlo
-                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro2" value="true" />Intercambiarlo
-                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro3" value="true" />Prestarlo
+                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro1" value="Cat" />Venderlo
+                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro2" value="Dog" />Intercambiarlo
+                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro3" value="Bird" />Prestarlo
+                                <input type="checkbox" name="opcionesLibro" id= "opcionesLibro4" value="Bird" />Donarlo
                             </div>
 
-                            <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="RegistrarLibro">
+                            <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Registrar Libro">
                         </form>
-
                     </div>
-                </div> <!-- /.col-xs-12 -->
-            </div> <!-- /.row -->
-        </div> <!-- /.container -->
-    </section>
+
+                </div>
+            </div>
+            <!-- /.row -->
 
 
-    <hr>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
 
 </div>
+<!-- /#wrapper -->
+
+<script src="../js/angular.js"></script>
+<script src="../js/angular_apps.js"></script>
+<script src="../js/angular_services.js"></script>
+<script src="../js/angular_controllers.js"></script>
+<script src="../js/angular_directives.js"></script>
+</body>
+</html>
