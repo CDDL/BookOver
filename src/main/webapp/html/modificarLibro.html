@@ -1,11 +1,44 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <section id="register">
-        <div class="container">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BookOver - Identificación</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/sb-admin.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<body ng-app="BookOver">
+
+<div id="wrapper">
+
+    <ng-include src="'/BookOver/html/components/navbar.html'"></ng-include>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
             <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <div class="form-wrap">
-                        <h1>Registra un libro</h1>
+                <div class="col-lg-12 ">
+                    <h1 class="page-header">
+                        Modifica un libro
+
+                    </h1>
+
+                    <div class="panel-body" ng-controller="CtrlLogin as ctrl">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <h6 class="text-center"></h6>
@@ -54,16 +87,27 @@
                                 <input type="checkbox" name="opcionesLibro" id= "opcionesLibro4" value="Bird" />Donarlo
                             </div>
 
-                            <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="RegistrarLibro">
+                            <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Registrar Libro">
                         </form>
-
                     </div>
-                </div> <!-- /.col-xs-12 -->
-            </div> <!-- /.row -->
-        </div> <!-- /.container -->
-    </section>
 
+                </div>
+            </div>
+            <!-- /.row -->
 
-    <hr>
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
 
 </div>
+<!-- /#wrapper -->
+
+<script src="../js/angular.js"></script>
+<script src="../js/angular_apps.js"></script>
+<script src="../js/angular_services.js"></script>
+<script src="../js/angular_controllers.js"></script>
+<script src="../js/angular_directives.js"></script>
+</body>
+</html>
