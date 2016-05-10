@@ -1,8 +1,10 @@
-package modelo.datos;
+package modelo.datos.entidades;
 
 /**
  * Created by David on 01/04/2016.
  */
+
+import modelo.datos.LoginData;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,13 +13,13 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "password", "email","ubicacion","username"})
+@XmlType(propOrder = {"id", "password", "email", "ubicacion", "username"})
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements LoginData {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column
@@ -33,11 +35,11 @@ public class Usuario {
     private String username;
 
     @XmlTransient
-    @OneToMany(mappedBy = "usuario",targetEntity = Libro.class)
+    @OneToMany(mappedBy = "usuario", targetEntity = Libro.class)
     private List listaLibros;
 
     @XmlTransient
-    @OneToMany(mappedBy = "usuarioValorado",targetEntity = Valoracion.class)
+    @OneToMany(mappedBy = "usuarioValorado", targetEntity = Valoracion.class)
     private List listaValoraciones;
 
     @XmlTransient

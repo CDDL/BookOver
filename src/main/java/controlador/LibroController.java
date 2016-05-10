@@ -2,8 +2,8 @@
 package controlador;
 
 import com.sun.xml.bind.v2.TODO;
-import modelo.datos.Libro;
-import modelo.datos.Usuario;
+import modelo.datos.entidades.Libro;
+import modelo.datos.entidades.Usuario;
 import modelo.servicios.LibroService;
 
 import javax.ws.rs.Consumes;

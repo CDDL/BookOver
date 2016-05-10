@@ -1,12 +1,9 @@
 package modelo.servicios;
 
-import modelo.datos.Libro;
-import modelo.datos.Usuario;
+import modelo.datos.entidades.Libro;
 
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 @Singleton

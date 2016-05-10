@@ -1,10 +1,10 @@
 package controlador;
 
+import controlador.security.IdentificationRequiered;
 import modelo.datos.LoginData;
 
-import modelo.datos.Usuario;
+import modelo.datos.entidades.Usuario;
 import modelo.servicios.UserService;
-import org.apache.commons.lang.WordUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -21,25 +21,28 @@ public class LoginController {
     UserService userService;
 
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(LoginData loginData) {
-        Usuario usuario = userService.getByUsername(loginData.getUsername());
-        if (usuario == null)
-            return Response.status(Response.Status.NOT_FOUND).build();
+    public Response login(LoginData login) {
+        Usuario usuario = userService.getByUsername(login.getUsername());
 
-        if (!usuario.getPassword().equals(loginData.getPassword()))
-            Response.status(Response.Status.CONFLICT).build();
+        if (usuario != null && usuario.getPassword().equals(login.getPassword()))
+            return Response.status(Response.Status.UNAUTHORIZED).build();
 
-        return Response.status(Response.Status.ACCEPTED).build();
+
+        return Response.status(Response.Status.ACCEPTED).entity(generateToken(login)).build();
+    }
+
+    private String generateToken(LoginData login) {
+
+        return null;
     }
 
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @IdentificationRequiered
+    @GET
     @Path("prueba")
-    public Response prueba(LoginData loginData, Usuario usuario){
-        System.out.println(loginData.getUsername() + " " + loginData.getPassword());
-        System.out.println(usuario.getUsername()+" " + usuario.getEmail());
+    public Response prueba() {
 
         return Response.status(Response.Status.ACCEPTED).build();
     }

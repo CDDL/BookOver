@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.datos.Usuario;
+import modelo.datos.entidades.Usuario;
 import modelo.servicios.UserService;
 
 import javax.inject.Inject;

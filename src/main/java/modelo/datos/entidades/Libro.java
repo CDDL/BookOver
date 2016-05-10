@@ -1,4 +1,4 @@
-package modelo.datos;
+package modelo.datos.entidades;
 
 /**
  * Created by David on 01/04/2016.

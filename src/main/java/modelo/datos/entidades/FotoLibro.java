@@ -1,4 +1,4 @@
-package modelo.datos;
+package modelo.datos.entidades;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

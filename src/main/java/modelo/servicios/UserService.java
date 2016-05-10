@@ -1,9 +1,8 @@
 package modelo.servicios;
 
-import modelo.datos.Usuario;
+import modelo.datos.entidades.Usuario;
 
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 import javax.persistence.*;
 
 /**
