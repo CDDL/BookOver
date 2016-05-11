@@ -1,24 +1,26 @@
-/*
+
 package controlador;
 
-import com.sun.xml.bind.v2.TODO;
+
 import modelo.datos.Libro;
 import modelo.datos.Usuario;
 import modelo.servicios.LibroService;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-*/
+
 /**
  * Created by Elite Legend on 27/04/2016.
- *//*
+ */
 
+@Path("libro")
 public class LibroController {
 
     @Inject
@@ -28,18 +30,11 @@ public class LibroController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    //TODO fxd muy fuerte
-    public Response registrarLibro(List<Object> parametros) {
-        Usuario usuario = (Usuario) parametros.get(0);
-        if(usuario==null){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    @Path("registrar")
+    public Response registrarLibro(Libro libro) {
 
-        ////////////////////////////
-        Libro libro = (Libro) parametros.get(1);
-        ////////////////////////////
 
-        libro.setUsuario(usuario);
+        //libro.setUsuario(usuario);
 
         libroService.add(libro);
 
@@ -78,4 +73,3 @@ public class LibroController {
         return Response.ok(libro).build();
     }
 }
-*/
