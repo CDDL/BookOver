@@ -21,14 +21,13 @@
 </head>
 <body ng-app="BookOver">
 
-<div id="wrapper">
+<div style="min-height: 92.8vh;background-color: #54030A;" id="wrapper">
 
-    <ng-include src="'/BookOver/html/components/navbar.html'"></ng-include>
+    <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div id="page-wrapper">
+    <div style="background-color: #F5D2BC; position: relative; transform: translateY(25%); border-radius: 30px 30px 30px 30px;margin:auto;width: 35em" id="page-wrapper">
 
         <div class="container-fluid">
-
             <!-- Page Heading -->
 
             <div class="row">
@@ -37,7 +36,7 @@
                         Registro
                     </h1>
 
-                    <div class="panel-body" ng-controller="CtrlRegister as ctrl">
+                    <div class="panel-body" style="margin:auto" ng-controller="CtrlRegister as ctrl">
                         <form role="form">
                             <fieldset>
                                 <div class="form-group">
