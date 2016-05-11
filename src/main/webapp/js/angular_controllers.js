@@ -7,10 +7,13 @@ var appBookOver = angular.module('BookOver');
 appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
+    console.log('Content-Range: ' + response.headers('Content-Range'))
+
     self.login = function (user, password) {
         WebService.login(user, password)
             .then(function (jsonObject) {
                 console.log("Login success");
+                token = response.headers('Content-Range');
             }, function errorCallBack(response){
                 console.log("Login failed");
             });
@@ -33,14 +36,17 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     var self = this;
 
     // $scope.usuario ?? cmprbr
+    
 
-    $scope.libros = WebService.recuperaTodosLibros()
-        .success(function(data){
-            $scope.libros = data.libro; // cmprbr ???
-        });
+    self.recuperaTodosLibros = function (idUsuario){
+        WebService.recuperaTodosLibros(idUsuario)
+            .success(function(data) {
+                $scope.libros = data.libro;
+            });
+    }
 
-    self.recuperaLibro = function(id) {
-        WebService.recuperaLibro(id)
+    self.recuperaLibro = function(idLibro) {
+        WebService.recuperaLibro(idLibro)
             .success(function(data) {
                 console.log(data);
                 $scope.libroActual = data;
@@ -59,7 +65,7 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     //cmprbr - esta funcion incluye el id
     self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
         var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
-
+        //CC
         WebService.editarLibro(dato)
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
