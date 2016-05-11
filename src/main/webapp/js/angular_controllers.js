@@ -13,7 +13,8 @@ appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, W
         WebService.login(user, password)
             .then(function (jsonObject) {
                 console.log("Login success");
-                token = response.headers('Content-Range');
+                token = response.headers('Authorization');
+                console.log('Authorization: ' + response.headers('Authorization'))
             }, function errorCallBack(response){
                 console.log("Login failed");
             });

@@ -50,7 +50,7 @@ appBookOver.service('WebService', ['$http', function ($http) {
 
     this.login = function (user, password) {
         return $http.post(appBookOver.loginURI,
-            {'loginData':{'username': user, 'password': password}}, {headers: {'Authorization': token}});
+            {'loginData':{'username': user, 'password': password}});
     };
 
     this.register = function (user, password, email, localization) {
