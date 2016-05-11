@@ -8,6 +8,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.*;
 
+import static javax.ws.rs.core.Response.Status.CONFLICT;
+import static javax.ws.rs.core.Response.Status.OK;
+
 /**
  * Created by David on 24/04/2016.
  */
@@ -21,24 +24,18 @@ public class RegisterController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(Usuario usuario) {
-        Usuario usuarioSistema = userService.getByUsername(usuario.getUsername());
-        if (usuarioSistema != null)
-            return Response.status(Response.Status.CONFLICT).build();
+        if(existeUsuario(usuario)) return Response.status(CONFLICT).build();
+        Usuario mUsuario = userService.add(usuario);
 
-        Usuario myUsuario = userService.add(usuario);
-        return Response.ok(myUsuario).build();
+        return Response
+                .status(OK)
+                .entity(mUsuario)
+                .build();
     }
 
-    /*@GET
-    @Path("{multiplicando}")
-    public int duplica(@PathParam("multiplicando") int multiplicando) {
-        return 2 * multiplicando;
+    private boolean existeUsuario(Usuario usuario) {
+        String mUsername = usuario.getUsername();
+        Usuario mUsuario = userService.getByUsername(mUsername);
+        return mUsuario != null;
     }
-
-    @GET
-    @Path("new")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String newMethod(@QueryParam("name") String name, @QueryParam("surname") String surname) {
-        return name.toUpperCase() + "_" + surname.toUpperCase();
-    }*/
 }

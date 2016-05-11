@@ -4,7 +4,8 @@ package modelo.datos.entidades;
  * Created by David on 01/04/2016.
  */
 
-import modelo.datos.LoginData;
+
+import modelo.datos.transfer.LoginData;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

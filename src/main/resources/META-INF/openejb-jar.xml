@@ -1,0 +1,5 @@
+<openejb-jar xmlns="http://www.openejb.org/openejb-jar/1.1">
+    <pojo-deployment class-name="jaxrs-application">
+        <properties>cxf.jaxrs.providers = org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter</properties>
+    </pojo-deployment>
+</openejb-jar>
