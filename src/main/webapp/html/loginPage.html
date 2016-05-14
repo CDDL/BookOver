@@ -17,7 +17,14 @@
     <link href="../css/sb-admin.css" rel="stylesheet">
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <style>
+        .enviar{
+            background-color: #179D5C;
+        }
+        .enviar:hover{
+            background-color: #148D52;
+        }
+    </style>
 </head>
 <body ng-app="BookOver">
 
@@ -52,7 +59,7 @@
                                         <input name="remember" value="login_recordar" type="checkbox">Recordar en este dispositivo
                                     </label>
                                 </div>
-                                <button class="btn btn-lg btn-success btn-block" ng-click="ctrl.login(user, passwd)">Enviar</button>
+                                <button class="btn btn-lg btn-success btn-block enviar" ng-click="ctrl.login(user, passwd)">Enviar</button>
                             </fieldset>
                         </form>
                     </div>
