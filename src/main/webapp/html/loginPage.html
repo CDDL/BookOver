@@ -18,17 +18,14 @@
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
-
-
-
 </head>
 <body ng-app="BookOver">
 
-<div id="wrapper">
+<div style="min-height: 92.5vh;background-image: url(../resources/books.jpg);" id="wrapper">
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;width: 35em" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(28%); border-radius: 30px 30px 30px 30px;margin:auto;width: 35em" id="page-wrapper">
 
         <div class="container-fluid">
 
@@ -50,7 +47,7 @@
                                 <div class="form-group">
                                     <input ng-model="passwd" class="form-control" placeholder="Contraseña" name="password" value="" type="password">
                                 </div>
-                                <div class="checkbox">
+                                <div style="color: #ffffff;" class="checkbox">
                                     <label>
                                         <input name="remember" value="login_recordar" type="checkbox">Recordar en este dispositivo
                                     </label>
