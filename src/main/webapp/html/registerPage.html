@@ -10,18 +10,21 @@
     <meta name="author" content="">
     <title>BookOver - Registro</title>
 
+    <link rel="shortcut icon" href="../resources/favicon.ico"/>
+
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
+
     <!-- Custom CSS -->
     <link href="../css/sb-admin.css" rel="stylesheet">
-
+    <link href="../css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 </head>
 <body ng-app="BookOver">
 
-<div style="min-height: 92.5vh;background-image: url(../resources/books.jpg);" id="wrapper">
+<div style="min-height: 100vh;background-image: url(../resources/books.jpg);" id="wrapper">
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
@@ -58,7 +61,7 @@
                                 <div class="form-group">
                                     <input ng-model="localization" class="form-control" placeholder="Ubicación" type="text">
                                 </div>
-                                <button class="btn btn-lg btn-success btn-block"
+                                <button class="btn btn-lg btn-success btn-block enviar"
                                         ng-click="ctrl.register(user, passwd, passwd_check, email, localization)">Enviar
                                 </button>
                             </fieldset>

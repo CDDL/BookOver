@@ -1,0 +1,43 @@
+.enviar{
+    background-color: #179D5C;
+}
+.enviar:hover{
+    background-color: #148D52;
+}
+
+.option-menu{
+    color: #fff;
+    font-size:100%;
+}
+
+.option-menu:hover{
+    background-color: #ffffff;
+    color: #ffffff;
+}
+
+.inicio-sesion{
+    font-size: 25px;
+    vertical-align: middle;
+    color: #54030A;
+    margin: auto;
+}
+
+.inicio-sesion:hover{
+    color: #380004;
+}
+
+#imaginary_container{
+    margin-top:20%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
