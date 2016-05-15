@@ -1,8 +1,14 @@
 .enviar{
     background-color: #179D5C;
+    color: #ffffff;
 }
 .enviar:hover{
     background-color: #148D52;
+    color: #ffffff;
+}
+
+.texto-form{
+    color: #ffffff;
 }
 
 .option-menu{
