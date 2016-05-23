@@ -37,13 +37,13 @@
     </style>
 
 </head>
-<body ng-app="BookOver">
+<body style="background-image: url(../resources/books.jpg);" ng-app="BookOver">
 
-<div style="min-height: 92.5vh;background-image: url(../resources/books.jpg);" id="wrapper">
+<div id="wrapper">
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:10em; width:60em" id="page-wrapper">
 
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -81,9 +81,9 @@
                                     <th>Editorial</th>
                                     <th>ISBN</th>
                                     <th>Estado</th>
-                                    <th>Intercambiable</th>
-                                    <th>Prestable</th>
-                                    <th>Vendible</th>
+                                    <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
+                                    <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
+                                    <th><img src="../resources/compra.png" style="width: 2em;"></th>
                                 </tr>
                                 </thead>
 
@@ -94,9 +94,9 @@
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
 
                                 </tr>
                                 <tr>
@@ -105,9 +105,9 @@
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
                                 </tr>
                                 </tbody>
                             </table>
