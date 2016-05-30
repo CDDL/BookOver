@@ -1,7 +1,8 @@
-package controlador.filterSecurity;
+package servicios.interceptorSecurity;
 
-import controlador.TokenController;
+import servicios.comunicacionControlador.IControllerToken;
 
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -15,19 +16,20 @@ import javax.ws.rs.core.Response;
  */
 
 @Interceptor
-@IdentificationRequiered
-public class AuthenticationInterceptor {
+@AuthenticationRequired
+@Stateful
+public class InterceptorAuthentication {
 
     @Context
     HttpHeaders headers;
 
     @Inject
-    TokenController tokenController;
+    IControllerToken controladorToken;
 
     @AroundInvoke
     public Object comprobarLogin(InvocationContext context) throws Exception {
         String token = headers.getHeaderString("Authentication");
-        if (!tokenController.existsToken(token)) return Response.status(Response.Status.UNAUTHORIZED).build();
+        if (!controladorToken.existeToken(token)) return Response.status(Response.Status.UNAUTHORIZED).build();
         return context.proceed();
     }
 }

@@ -1,11 +1,12 @@
-package controlador.filterSecurity;
+package servicios.interceptorSecurity;
 
 import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -16,4 +17,4 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 @InterceptorBinding
-public @interface IdentificationRequiered { }
+public @interface AuthenticationRequired { }
