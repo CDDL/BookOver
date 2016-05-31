@@ -5,7 +5,7 @@ package modelo.datos.entidades;
  */
 
 
-import modelo.datos.transfer.LoginData;
+import modelo.datos.transferencia.DataLogin;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +17,7 @@ import java.util.List;
 @XmlType(propOrder = {"id", "password", "email", "ubicacion", "username"})
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements LoginData {
+public class Usuario implements DataLogin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
