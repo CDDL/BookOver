@@ -8,6 +8,7 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.junit.Test;
 import utils.DatabaseTest;
 
+import javax.swing.border.LineBorder;
 import javax.ws.rs.core.Response;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -83,13 +84,14 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        WebClient.create(URI_APP_BASE + "/libro/nuevo").header("Authentication", token.getToken()).post(libroNuevo);
+        Response libroResponse = WebClient.create(URI_APP_BASE + "/libro/nuevo").header("Authentication", token.getToken()).post(libroNuevo);
+        Libro libro = libroResponse.readEntity(Libro.class);
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "libro/editar").put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libro/"+ libro.getId()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));
