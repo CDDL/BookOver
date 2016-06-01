@@ -46,13 +46,14 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        WebClient.create(URI_APP_BASE + "/libro/nuevo").header("Authentication", token.getToken()).post(libroNuevo);
+        Response libroResponse = WebClient.create(URI_APP_BASE + "/libros").header("Authentication", token.getToken()).post(libroNuevo);
+        Libro libro = libroResponse.readEntity(Libro.class);
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "/libro/editar").header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "/libros/" + libro.getId()).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));

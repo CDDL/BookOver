@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataLogin;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
 
@@ -35,6 +36,7 @@ public class ServicioIdentificacion {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response login(Usuario usuario) {
+        System.out.println(usuario.getPassword());
         if (!mUserController.existeUsuario(usuario.getUsername())) return status(UNAUTHORIZED).build();
         if (!mUserController.isLoginCorrecto(usuario)) return status(UNAUTHORIZED).build();
 

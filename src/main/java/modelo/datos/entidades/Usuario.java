@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "password", "email", "ubicacion", "username"})
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Usuario.getByUsername", query = "SELECT p FROM Usuario p WHERE p.username = :username")
