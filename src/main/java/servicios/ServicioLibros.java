@@ -7,7 +7,10 @@ import servicios.comunicacionControlador.IControllerToken;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -31,14 +34,14 @@ public class ServicioLibros {
     IControllerLibro mLibroController;
 
     @POST
-    @Path("{idLibro}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response registrarLibro(@HeaderParam("Authentication") String token,@PathParam("idLibro") int idLibro, Libro libro) {
+    public Response registrarLibro(@HeaderParam("Authentication") String token, Libro libro) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         libro.setUsuario(mTokenController.getUserFromToken(token));
-        libro.setId(idLibro);
         mLibroController.registrarLibro(libro);
+
         return status(OK)
                 .build();
     }
+
 }

@@ -69,7 +69,7 @@ public class LibroAñadir extends DatabaseTest {
         libroNuevo.setEsVendible(false);
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "libro/nuevo").post(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libro").post(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));
