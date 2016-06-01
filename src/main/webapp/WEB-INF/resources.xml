@@ -6,29 +6,13 @@
         userName = sql8116677
         password = RB6Fk2AzSV
     </Resource>
-    <!--<Resource id="derbyDataSource" type="DataSource">-->
-    <!--jdbcDriver = org.apache.derby.jdbc.ClientDriver-->
-    <!--jdbcUrl = jdbc:derby://localhost:1527/prueba;create=true-->
-    <!--jtaManaged = true-->
-    <!--maxActive = 20-->
-    <!--maxIdle = 20-->
-    <!--password = APP-->
-    <!--userName = APP-->
-    <!--</Resource>-->
-    <Resource id="derbyDataSource" type="DataSource">
+    <Resource id="derbyDataSource" type="javax.sql.DataSource">
         JdbcDriver = org.apache.derby.jdbc.EmbeddedDriver
-        JdbcUrl = jdbc:derby:derbyDB;create=true
+        JdbcUrl = jdbc:derby:target/social-network;create=true
         jtaManaged = true
         maxActive = 20
         maxIdle = 20
-        UserName = admin
-        Password = pass
+        UserName = APP
+        Password = APP
     </Resource>
-    <!--<Resource id="hsqldbDataSource" type="javax.sql.DataSource">-->
-    <!--jdbcDriver = org.hsqldb.jdbcDriver-->
-    <!--jdbcUrl = jdbc:hsqldb:file:hsqldb-->
-    <!--jtaManaged = true-->
-    <!--userName = sa-->
-    <!--password =-->
-    <!--</Resource>-->
 </Resources>
