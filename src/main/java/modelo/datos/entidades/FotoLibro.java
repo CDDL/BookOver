@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlType(propOrder = {"id", "foto"})
 @Entity
-@Table(name = "fotoslibros")
 public class FotoLibro {
 
     @Id

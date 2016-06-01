@@ -19,9 +19,6 @@ public class ControladorUsuario implements IControllerUsuario {
     @Inject
     private IDataUsuario mDataUsuario;
 
-    @Inject
-    private ControladorDatosUsuarioIdentificado mControladorDatosUsuarioIdentificado;
-
     @Override
     public boolean existeUsuario(String username) {
         Usuario usuario = mDataUsuario.getByUsername(username);
@@ -41,16 +38,16 @@ public class ControladorUsuario implements IControllerUsuario {
     }
 
     @Override
-    public void editarDatosUsuario(Usuario usuario) {
-        Usuario usuarioIdentificado = mControladorDatosUsuarioIdentificado.getUsuarioIndentificado();
+    public void editarDatosUsuario(int id, Usuario usuario) {
+        Usuario usuarioIdentificado = mDataUsuario.getById(id);
         usuarioIdentificado.setEmail(usuario.getEmail());
         usuarioIdentificado.setPassword(usuario.getPassword());
         usuarioIdentificado.setUbicacion(usuario.getUbicacion());
     }
 
     @Override
-    public void asignarLibro(Libro libro) {
-        Usuario usuarioIdentificado = mControladorDatosUsuarioIdentificado.getUsuarioIndentificado();
+    public void asignarLibro(int id, Libro libro) {
+        Usuario usuarioIdentificado = mDataUsuario.getById(id);
         usuarioIdentificado.getListaLibros().add(libro);
     }
 }

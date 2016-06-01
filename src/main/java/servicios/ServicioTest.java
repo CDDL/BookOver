@@ -23,7 +23,6 @@ public class ServicioTest {
     public Response vaciarDatabase(){
         jpaTest.vaciarDb();
 
-
         return Response.ok().build();
     }
 }

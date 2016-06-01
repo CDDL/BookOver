@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"id", "fecha", "aceptada", "confirmacionDevolucion"})
 @Entity
 @PrimaryKeyJoinColumn(name="id")
-@Table(name = "prestamos")
 public class Prestamo extends Transaccion{
 
     @Column

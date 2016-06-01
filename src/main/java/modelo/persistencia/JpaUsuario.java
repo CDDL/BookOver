@@ -33,4 +33,9 @@ public class JpaUsuario implements IDataUsuario {
     public void addUsuario(Usuario usuario) {
         mEntityManager.persist(usuario);
     }
+
+    @Override
+    public Usuario getById(int id) {
+        return mEntityManager.find(Usuario.class, id);
+    }
 }

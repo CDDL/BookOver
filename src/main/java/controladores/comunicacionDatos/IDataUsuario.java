@@ -9,4 +9,6 @@ public interface IDataUsuario {
     Usuario getByUsername(String username);
 
     void addUsuario(Usuario usuario);
+
+    Usuario getById(int id);
 }

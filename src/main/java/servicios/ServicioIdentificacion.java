@@ -3,7 +3,6 @@ package servicios;
 import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
-import servicios.interceptorSecurity.AuthenticationRequired;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,12 +34,12 @@ public class ServicioIdentificacion {
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response login(Usuario login) {
-        if (!mUserController.existeUsuario(login.getUsername())) return status(UNAUTHORIZED).build();
-        if (!mUserController.isLoginCorrecto(login)) return status(UNAUTHORIZED).build();
+    public Response login(Usuario usuario) {
+        if (!mUserController.existeUsuario(usuario.getUsername())) return status(UNAUTHORIZED).build();
+        if (!mUserController.isLoginCorrecto(usuario)) return status(UNAUTHORIZED).build();
 
         return status(OK)
-                .entity(mTokenController.generarToken(login))
+                .entity(mTokenController.generarToken(usuario))
                 .build();
     }
 
@@ -54,16 +53,5 @@ public class ServicioIdentificacion {
         return status(OK)
                 .build();
 
-    }
-
-    @POST
-    @Path("perfil")
-    @AuthenticationRequired
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response editarPerfil(Usuario usuario) {
-        mUserController.editarDatosUsuario(usuario);
-
-        return status(OK)
-                .build();
     }
 }

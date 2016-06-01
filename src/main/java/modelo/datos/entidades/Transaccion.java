@@ -14,7 +14,6 @@ import java.util.Set;
 @XmlType(propOrder = {"id", "fecha", "aceptada"})
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
-@Table(name = "transacciones")
 public class Transaccion {
 
     @Id

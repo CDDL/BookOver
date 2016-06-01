@@ -41,7 +41,7 @@ public class ControladorToken implements IControllerToken {
 
     @Override
     public boolean existeToken(String token) {
-        return mDataToken.getByToken(token) != null;
+        return token != null && mDataToken.getByToken(token) != null;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ControladorToken implements IControllerToken {
     @Override
     public Usuario getUserFromToken(String tokenString) {
         Token token = mDataToken.getByToken(tokenString);
-        return mDataToken.getUserFromToken(token);
+        return token.getUsuario();
     }
 
 }

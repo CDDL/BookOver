@@ -25,15 +25,30 @@ public class Token {
 
     @ManyToOne
     @JoinColumn
-    @XmlTransient
     private Usuario mUsuario;
 
     public void setToken(String token) {
-        mToken = token;
+        this.mToken = token;
     }
 
     public void setUsuario(Usuario usuario) {
-        mUsuario = usuario;
+        this.mUsuario = usuario;
     }
 
+    public void setId(long id) {
+        this.mId = id;
+    }
+
+    public long getId() {
+        return mId;
+    }
+
+    public String getToken() {
+        return mToken;
+    }
+
+    @XmlTransient
+    public Usuario getUsuario() {
+        return mUsuario;
+    }
 }

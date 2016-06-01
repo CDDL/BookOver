@@ -6,6 +6,7 @@ package modelo.datos.entidades;
 
 
 import modelo.datos.transferencia.DataLogin;
+import modelo.datos.transferencia.DataRegister;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,8 +17,10 @@ import java.util.List;
 @XmlRootElement
 @XmlType(propOrder = {"id", "password", "email", "ubicacion", "username"})
 @Entity
-@Table(name = "usuarios")
-public class Usuario implements DataLogin {
+@NamedQueries(value = {
+        @NamedQuery(name = "Usuario.getByUsername", query = "SELECT p FROM Usuario p WHERE p.username = :username")
+})
+public class Usuario implements DataLogin, DataRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,29 +40,19 @@ public class Usuario implements DataLogin {
 
     @XmlTransient
     @OneToMany(mappedBy = "usuario", targetEntity = Libro.class)
-    private List listaLibros;
+    private List<Libro> listaLibros;
 
     @XmlTransient
     @OneToMany(mappedBy = "usuarioValorado", targetEntity = Valoracion.class)
-    private List listaValoraciones;
-
-    @XmlTransient
-    public List getListaLibros() {
-        return listaLibros;
-    }
-
+    private List<Valoracion> listaValoraciones;
 
     public void setListaLibros(List listaLibros) {
         this.listaLibros = listaLibros;
     }
 
-    public Usuario(String password, String email, String ubicacion, String username) {
-
-        this.password = password;
-        this.email = email;
-        this.ubicacion = ubicacion;
-
-        this.username = username;
+    @XmlTransient
+    public List<Libro> getListaLibros() {
+        return listaLibros;
     }
 
     @XmlTransient
@@ -70,9 +63,6 @@ public class Usuario implements DataLogin {
 
     public void setListaValoraciones(List listaValoraciones) {
         this.listaValoraciones = listaValoraciones;
-    }
-
-    public Usuario() {
     }
 
     public int getId() {

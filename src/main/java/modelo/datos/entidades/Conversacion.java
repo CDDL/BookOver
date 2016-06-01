@@ -14,7 +14,6 @@ import java.util.List;
 @XmlRootElement
 @XmlType(propOrder = {"id", "usuario1", "usuario2"})
 @Entity
-@Table(name = "conversaciones")
 public class Conversacion {
 
     @Id

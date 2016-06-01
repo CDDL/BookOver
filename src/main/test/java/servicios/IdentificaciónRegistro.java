@@ -3,16 +3,11 @@ import org.apache.cxf.jaxrs.client.WebClient;
 
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataRegister;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import utils.DatabaseUtils;
+import utils.DatabaseTest;
 
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static javax.ws.rs.core.Response.Status.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static servicios.Config.URI_APP_BASE;
@@ -20,19 +15,7 @@ import static servicios.Config.URI_APP_BASE;
 /**
  * Created by Demils on 23/05/2016.
  */
-public class IdentificacionRegistro {
-
-    private static DatabaseUtils mDatabaseUtils;
-
-    @BeforeClass
-    public static void setUpTests(){
-        mDatabaseUtils = new DatabaseUtils();
-    }
-
-    @Before
-    public void vaciarDatabase(){
-        mDatabaseUtils.vaciarDB();
-    }
+public class IdentificaciónRegistro extends DatabaseTest {
 
     @Test
     public void registro_usuarioNuevo_respuesta200(){
@@ -45,14 +28,14 @@ public class IdentificacionRegistro {
 
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE+"/register").post(usuarioNuevo);
+        Response response = WebClient.create(URI_APP_BASE+"register").post(usuarioNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
     }
 
     @Test
-    public void registro_usuarioYaExistente_respuesta(){
+    public void registro_usuarioYaExistente_respuesta409(){
         //PRE
         DataRegister usuarioNuevo = new Usuario();
         usuarioNuevo.setUsername("TestUsername");
@@ -62,7 +45,7 @@ public class IdentificacionRegistro {
         WebClient.create(URI_APP_BASE+"/register").post(usuarioNuevo);
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE+"/register").post(usuarioNuevo);
+        Response response = WebClient.create(URI_APP_BASE+"register").post(usuarioNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(409));

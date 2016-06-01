@@ -13,7 +13,6 @@ import java.util.List;
 @XmlRootElement
 @XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
 @Entity
-@Table(name = "libros")
 public class Libro {
 
     @Id

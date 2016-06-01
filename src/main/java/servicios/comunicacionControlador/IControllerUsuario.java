@@ -12,10 +12,9 @@ public interface IControllerUsuario {
 
     boolean isLoginCorrecto(DataLogin login);
 
+    void editarDatosUsuario(int id, Usuario editedData);
+
     void registrarUsuario(Usuario usuario);
 
-    void editarDatosUsuario(Usuario editedData);
-
-    void asignarLibro(Libro libro);
-
+    void asignarLibro(int id, Libro libro);
 }

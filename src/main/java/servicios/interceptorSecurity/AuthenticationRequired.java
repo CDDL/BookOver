@@ -17,4 +17,4 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 @InterceptorBinding
-public @interface AuthenticationRequired { }
+public @interface AuthenticationRequired {}

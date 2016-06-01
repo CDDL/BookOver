@@ -12,7 +12,6 @@ import java.util.Date;
 @XmlRootElement
 @XmlType(propOrder = {"id", "fecha", "mensaje"})
 @Entity
-@Table(name = "mensajes")
 public class Mensaje {
 
     @Id
