@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Libro;
+import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerLibro;
 import servicios.comunicacionControlador.IControllerToken;
 
@@ -38,6 +39,8 @@ public class ServicioLibros {
 
     public Response registrarLibro(@HeaderParam("Authentication") String token, Libro libro) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        libro.setUsuario(usuario);
         mLibroController.registrarLibro(libro);
         return status(OK)
                 .build();
