@@ -46,14 +46,14 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        Response libroResponse = WebClient.create(URI_APP_BASE + "/libros").header("Authentication", token.getToken()).post(libroNuevo);
+        Response libroResponse = WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
         Libro libro = libroResponse.readEntity(Libro.class);
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "/libros/" + libro.getId()).header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/" + libro.getId()).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
@@ -85,14 +85,14 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        Response libroResponse = WebClient.create(URI_APP_BASE + "/libros").header("Authentication", token.getToken()).post(libroNuevo);
+        Response libroResponse = WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
         Libro libro = libroResponse.readEntity(Libro.class);
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "libro/"+ libro.getId()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/"+ libro.getId()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));
@@ -125,7 +125,7 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        WebClient.create(URI_APP_BASE + "/libros").header("Authentication", token.getToken()).post(libroNuevo);
+        WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
 
         //WHEN
         usuarioEnDatabase = new Usuario();
@@ -141,7 +141,7 @@ public class LibroEditar extends DatabaseTest{
         token = loginResponse.readEntity(Token.class);
 
         libroNuevo.setTitulo("Te he hackeado el libro");
-        Response response = WebClient.create(URI_APP_BASE + "libro/"+ libroNuevo.getId()).header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/"+ libroNuevo.getId()).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(403));
@@ -175,7 +175,7 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsVendible(false);
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "libro/"+ libroNuevo.getId()).header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/"+ libroNuevo.getId()).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(404));
