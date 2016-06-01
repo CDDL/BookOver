@@ -8,5 +8,5 @@ import modelo.datos.entidades.Libro;
 public interface IDataLibro {
     void addLibro(Libro libro);
 
-    Libro getLibro(Libro libroEditado);
+    Libro getById(int id);
 }

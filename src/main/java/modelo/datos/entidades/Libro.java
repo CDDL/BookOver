@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
+//@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
 @Entity
 public class Libro {
 

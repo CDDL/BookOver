@@ -4,6 +4,7 @@ import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
@@ -20,6 +21,7 @@ import static javax.ws.rs.core.Response.status;
  * Created by Demils on 31/05/2016.
  */
 @Path("perfil")
+@Stateless
 public class ServicioPerfil {
 
     @Inject

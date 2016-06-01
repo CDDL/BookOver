@@ -48,7 +48,7 @@ public class LibroAñadir extends DatabaseTest {
         libroNuevo.setEsVendible(false);
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "/libro/añadir").header("Authentication", token.getToken()).post(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "/libro/nuevo").header("Authentication", token.getToken()).post(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
@@ -69,9 +69,9 @@ public class LibroAñadir extends DatabaseTest {
         libroNuevo.setEsVendible(false);
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "libro/añadir").post(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libro/nuevo").post(libroNuevo);
 
         //ESPERADO
-        assertThat(response.getStatusInfo().getStatusCode(), is(200));
+        assertThat(response.getStatusInfo().getStatusCode(), is(401));
     }
 }
