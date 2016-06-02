@@ -45,6 +45,16 @@ public class Usuario implements DataLogin, DataRegister {
     @OneToMany(mappedBy = "usuarioValorado", targetEntity = Valoracion.class)
     private List<Valoracion> listaValoraciones;
 
+    @XmlTransient
+    @OneToMany(mappedBy = "usuarioIniciaTransaccion", targetEntity = Transaccion.class)
+    private List<Transaccion> listaTransaccionesIniciadas;
+
+    @XmlTransient
+    @OneToMany(mappedBy = "usuarioRecibeTransaccion", targetEntity = Transaccion.class)
+    private List<Transaccion> listaTransaccionesRecibidas;
+
+
+
     public void setListaLibros(List listaLibros) {
         this.listaLibros = listaLibros;
     }
@@ -102,5 +112,23 @@ public class Usuario implements DataLogin, DataRegister {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @XmlTransient
+    public List<Transaccion> getListaTransaccionesIniciadas() {
+        return listaTransaccionesIniciadas;
+    }
+
+    public void setListaTransaccionesIniciadas(List<Transaccion> listaTransaccionesIniciadas) {
+        this.listaTransaccionesIniciadas = listaTransaccionesIniciadas;
+    }
+
+    @XmlTransient
+    public List<Transaccion> getListaTransaccionesRecibidas() {
+        return listaTransaccionesRecibidas;
+    }
+
+    public void setListaTransaccionesRecibidas(List<Transaccion> listaTransaccionesRecibidas) {
+        this.listaTransaccionesRecibidas = listaTransaccionesRecibidas;
     }
 }

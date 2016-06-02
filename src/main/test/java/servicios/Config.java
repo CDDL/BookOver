@@ -18,5 +18,7 @@ public interface Config {
     String URI_APP_CONFIRMACION_RECEPCION = URI_APP_BASE + "transacciones/";              //PUT
     String URI_APP_VISUALIZAR_MIS_LIBROS = URI_APP_BASE + "libros/mislibros";             //GET
     String URI_APP_BORRAR_LIBRO = URI_APP_BASE + "libros/";                               //DELETE
+    String URI_APP_ENVIAR_MENSAJE = URI_APP_BASE + "conversaciones/mensaje";              //POST
+    String URI_APP_LISTAR_USUARIOS = URI_APP_BASE + "usuarios";                             //GET
 
 }
