@@ -43,7 +43,7 @@ public class UsuarioLogin extends DatabaseTest {
         registerData.setEmail("test@test.com");
         registerData.setUbicacion("madrid");
         registerData.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(registerData);
+        WebClient.create(URI_APP_BASE + "usuarios").post(registerData);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");

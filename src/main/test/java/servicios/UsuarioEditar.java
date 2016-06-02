@@ -26,12 +26,12 @@ public class UsuarioEditar extends DatabaseTest {
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         //WHEN
@@ -39,7 +39,7 @@ public class UsuarioEditar extends DatabaseTest {
         datosEditados.setPassword("123456");
         datosEditados.setEmail("email@valido.com");
         datosEditados.setUbicacion("castellón");
-        Response response = WebClient.create(URI_APP_BASE + "usuario/").header("Authentication", token.getToken()).put(datosEditados);
+        Response response = WebClient.create(URI_APP_BASE + "usuarios/editar").header("Authentication", token.getToken()).post(datosEditados);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
@@ -54,7 +54,7 @@ public class UsuarioEditar extends DatabaseTest {
         datosEditados.setPassword("123456");
         datosEditados.setEmail("email@valido.com");
         datosEditados.setUbicacion("castellón");
-        Response response = WebClient.create(URI_APP_BASE + "perfil/editar").post(datosEditados);
+        Response response = WebClient.create(URI_APP_BASE + "usuarios/editar").post(datosEditados);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));

@@ -30,12 +30,11 @@ public class ServicioUsuario {
 
 
     @POST
-    @Path("{idUsuario}")
+    @Path("editar")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response editarPerfil(@HeaderParam("Authentication") String token,@PathParam("idUsuario") int idUsuario, Usuario usuario) {
+    public Response editarPerfil(@HeaderParam("Authentication") String token, Usuario usuario) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
-        if (mTokenController.getUserFromToken(token).getId() != idUsuario) return status(FORBIDDEN).build();
-        mUserController.editarDatosUsuario(idUsuario, usuario);
+        mUserController.editarDatosUsuario(mTokenController.getUserFromToken(token).getId(), usuario);
 
         return status(OK)
                 .build();
@@ -45,7 +44,7 @@ public class ServicioUsuario {
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response login(DataLogin usuario) {
+    public Response login(Usuario usuario) {
         if (!mUserController.existeUsuario(usuario.getUsername())) return status(UNAUTHORIZED).build();
         if (!mUserController.isLoginCorrecto(usuario)) return status(UNAUTHORIZED).build();
 
@@ -55,14 +54,12 @@ public class ServicioUsuario {
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response register(Usuario usuario) {
         if (mUserController.existeUsuario(usuario.getUsername())) return status(CONFLICT).build();
         mUserController.registrarUsuario(usuario);
 
         return status(OK)
-                .entity(1)
                 .build();
     }
 }
