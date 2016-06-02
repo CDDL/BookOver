@@ -28,12 +28,12 @@ public class LibroNuevo extends DatabaseTest {
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         Libro libroNuevo = new Libro();

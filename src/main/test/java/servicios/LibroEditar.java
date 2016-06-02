@@ -28,12 +28,12 @@ public class LibroEditar extends DatabaseTest{
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         Libro libroNuevo = new Libro();
@@ -47,13 +47,13 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
         Response libroResponse = WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
-        Libro libro = libroResponse.readEntity(Libro.class);
+        int idlibro = libroResponse.readEntity(Integer.class);
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "libros/" + libro.getId()).header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/" + idlibro).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
@@ -67,12 +67,12 @@ public class LibroEditar extends DatabaseTest{
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         Libro libroNuevo = new Libro();
@@ -86,13 +86,14 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
         Response libroResponse = WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
-        Libro libro = libroResponse.readEntity(Libro.class);
+        int idlibro = libroResponse.readEntity(Integer.class);
+
 
 
         //WHEN
         libroNuevo.setTitulo("nipaa");
         libroNuevo.setEstado("Nuevo");
-        Response response = WebClient.create(URI_APP_BASE + "libros/"+ libro.getId()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/"+ idlibro).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));
@@ -107,12 +108,12 @@ public class LibroEditar extends DatabaseTest{
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         Libro libroNuevo = new Libro();
@@ -125,7 +126,8 @@ public class LibroEditar extends DatabaseTest{
         libroNuevo.setEsPrestable(false);
         libroNuevo.setEsIntercambiable(false);
         libroNuevo.setEsVendible(false);
-        WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
+        Response libroResponse = WebClient.create(URI_APP_BASE + "libros").header("Authentication", token.getToken()).post(libroNuevo);
+        int idlibro = libroResponse.readEntity(Integer.class);
 
         //WHEN
         usuarioEnDatabase = new Usuario();
@@ -133,15 +135,15 @@ public class LibroEditar extends DatabaseTest{
         usuarioEnDatabase.setEmail("david@test.com");
         usuarioEnDatabase.setUbicacion("cs");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
         loginData = new Usuario();
         loginData.setUsername("david");
         loginData.setPassword("139123");
-        loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         token = loginResponse.readEntity(Token.class);
 
         libroNuevo.setTitulo("Te he hackeado el libro");
-        Response response = WebClient.create(URI_APP_BASE + "libros/"+ libroNuevo.getId()).header("Authentication", token.getToken()).put(libroNuevo);
+        Response response = WebClient.create(URI_APP_BASE + "libros/"+ idlibro).header("Authentication", token.getToken()).put(libroNuevo);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(403));
@@ -155,12 +157,12 @@ public class LibroEditar extends DatabaseTest{
         usuarioEnDatabase.setEmail("test@test.com");
         usuarioEnDatabase.setUbicacion("madrid");
         usuarioEnDatabase.setPassword("139123");
-        WebClient.create(URI_APP_BASE + "register").post(usuarioEnDatabase);
+        WebClient.create(URI_APP_BASE + "usuarios").post(usuarioEnDatabase);
 
         DataLogin loginData = new Usuario();
         loginData.setUsername("test");
         loginData.setPassword("139123");
-        Response loginResponse = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response loginResponse = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
         Token token = loginResponse.readEntity(Token.class);
 
         Libro libroNuevo = new Libro();

@@ -17,4 +17,25 @@ public class ControladorLibro implements IControllerLibro {
     public void registrarLibro(Libro libro) {
             mDataLibro.addLibro(libro);
     }
+
+    @Override
+    public Libro getLibro(int idlibro) {
+        return mDataLibro.getById(idlibro);
+    }
+
+    @Override
+    public void editarLibro(int idlibro, Libro libro) {
+        Libro miLibro = mDataLibro.getById(idlibro);
+        miLibro.setEditorial(libro.getEditorial());
+        miLibro.setAutor(libro.getAutor());
+        miLibro.setUsuario(libro.getUsuario());
+        miLibro.setEsPrestable(libro.getEsPrestable());
+        miLibro.setEsVendible(libro.getEsVendible());
+        miLibro.setEsIntercambiable(libro.getEsIntercambiable());
+        miLibro.setEstado(libro.getEstado());
+        miLibro.setFotos(libro.getFotos());
+        miLibro.setInfoAdicional(libro.getInfoAdicional());
+        miLibro.setIsbn(libro.getIsbn());
+
+    }
 }

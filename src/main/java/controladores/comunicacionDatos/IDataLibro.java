@@ -9,4 +9,6 @@ public interface IDataLibro {
     void addLibro(Libro libro);
 
     Libro getById(int id);
+
+
 }

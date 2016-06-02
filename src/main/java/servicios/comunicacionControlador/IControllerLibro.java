@@ -9,4 +9,7 @@ public interface IControllerLibro{
 
     void registrarLibro(Libro libro);
 
+    Libro getLibro(int idlibro);
+
+    void editarLibro(int idlibro, Libro libro);
 }
