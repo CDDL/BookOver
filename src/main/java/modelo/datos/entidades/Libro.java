@@ -13,6 +13,9 @@ import java.util.List;
 @XmlRootElement
 //@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
 @Entity
+@NamedQueries(value = {
+        @NamedQuery(name = "Libro.getId", query = "SELECT l FROM Libro l WHERE l.visible = true")
+})
 public class Libro {
 
     @Id
@@ -38,6 +41,9 @@ public class Libro {
     private Boolean esIntercambiable;
     @Column
     private int precio;
+
+    @Column
+    private boolean visible;
 
     @XmlTransient
     @OneToMany(mappedBy = "libro", targetEntity = FotoLibro.class)
@@ -68,6 +74,7 @@ public class Libro {
         this.esIntercambiable = esIntercambiable;
         this.precio = precio;
         this.usuario = usuario;
+        this.visible = true;
     }
 
     public Libro() {
@@ -169,5 +176,13 @@ public class Libro {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

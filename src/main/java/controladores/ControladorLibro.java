@@ -36,6 +36,7 @@ public class ControladorLibro implements IControllerLibro {
         miLibro.setFotos(libro.getFotos());
         miLibro.setInfoAdicional(libro.getInfoAdicional());
         miLibro.setIsbn(libro.getIsbn());
+        miLibro.setVisible(libro.isVisible());
 
     }
 }

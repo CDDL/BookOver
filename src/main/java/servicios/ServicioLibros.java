@@ -43,6 +43,7 @@ public class ServicioLibros {
 
     @PUT
     @Path("{idLibro}")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response editarLibro(@HeaderParam("Authentication") String token,@PathParam("idLibro") int idlibro, Libro libro){
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Usuario usuario = mTokenController.getUserFromToken(token);
@@ -57,6 +58,12 @@ public class ServicioLibros {
 
         return status(OK).build();
 
+    }
+
+    @DELETE
+    @Path("{idLibro}")
+    public Response editarLibro(@HeaderParam("Authentication") String token,@PathParam("idLibro") int idlibro){
+        return null;
     }
 
 }
