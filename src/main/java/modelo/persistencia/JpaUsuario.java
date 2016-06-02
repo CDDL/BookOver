@@ -2,6 +2,7 @@ package modelo.persistencia;
 
 import controladores.comunicacionDatos.IDataUsuario;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListUser;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,5 +38,25 @@ public class JpaUsuario implements IDataUsuario {
     @Override
     public Usuario getById(int id) {
         return mEntityManager.find(Usuario.class, id);
+    }
+
+    @Override
+    public DataListUser[] listaPersonas(Usuario usuario) {
+        //Usuario.getAllWithoutMe
+        TypedQuery<Usuario> query = mEntityManager.createNamedQuery("Usuario.getAllWithoutMe", Usuario.class);
+        query.setParameter("user", usuario);
+        List<Usuario> resultados = query.getResultList();
+        DataListUser[] miResult = new DataListUser[resultados.size()];
+        int contador = 0;
+        for(Usuario user : resultados){
+            DataListUser user_formatted = new DataListUser();
+            user_formatted.setId(user.getId());
+            user_formatted.setNick(user.getUsername());
+            user_formatted.setEmail(user.getEmail());
+            miResult[contador] = user_formatted;
+            contador++;
+        }
+
+        return miResult;
     }
 }

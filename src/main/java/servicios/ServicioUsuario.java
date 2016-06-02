@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
@@ -61,5 +62,14 @@ public class ServicioUsuario {
 
         return status(OK)
                 .build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response list(@HeaderParam("Authentication") String token) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        DataListUser[] personas = mUserController.listaOtrasPersonas(usuario);
+        return Response.ok(personas).build();
     }
 }

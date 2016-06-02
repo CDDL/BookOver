@@ -2,6 +2,7 @@ package servicios.comunicacionControlador;
 
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
 
 /**
@@ -17,4 +18,8 @@ public interface IControllerUsuario {
     void registrarUsuario(Usuario usuario);
 
     void asignarLibro(int id, Libro libro);
+
+    DataListUser[] listaOtrasPersonas(Usuario usuario);
+
+    Usuario getUserById(int para);
 }

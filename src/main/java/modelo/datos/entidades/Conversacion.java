@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,8 +14,11 @@ import java.util.List;
 
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "usuario1", "usuario2"})
+//@XmlType(propOrder = {"id", "usuario1", "usuario2"})
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Conversacion.findByPeople", query = "SELECT p FROM Conversacion p WHERE (p.usuario1 = :user1 AND p.usuario2 = :user2) OR (p.usuario1 = :user2 AND p.usuario2 = :user1)")
+})
 public class Conversacion {
 
     @Id
@@ -35,6 +40,7 @@ public class Conversacion {
     private List mensajes;
 
     public Conversacion() {
+        mensajes = new LinkedList<Mensaje>();
     }
 
     public int getId() {
@@ -67,5 +73,10 @@ public class Conversacion {
 
     public void setMensajes(List mensajes) {
         this.mensajes = mensajes;
+    }
+
+    public void addMensaje(Mensaje mensaje){
+        this.mensajes.add(mensaje);
+        mensaje.setConversacion(this);
     }
 }
