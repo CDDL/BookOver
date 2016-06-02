@@ -19,7 +19,7 @@ import java.util.List;
 public class Libro {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String titulo;
@@ -51,7 +51,7 @@ public class Libro {
 
     @XmlTransient
     @ManyToOne
-    @JoinColumn(name="id_usuario", referencedColumnName = "id")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     public List getFotos() {
@@ -61,26 +61,6 @@ public class Libro {
     public void setFotos(List fotos) {
         this.fotos = fotos;
     }
-
-    public Libro(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esPrestable, Boolean esVendible, Boolean esIntercambiable, int precio, Usuario usuario) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editorial = editorial;
-        this.isbn = isbn;
-        this.estado = estado;
-        this.infoAdicional = infoAdicional;
-        this.esPrestable = esPrestable;
-        this.esVendible = esVendible;
-        this.esIntercambiable = esIntercambiable;
-        this.precio = precio;
-        this.usuario = usuario;
-        this.visible = true;
-    }
-
-    public Libro() {
-    }
-
-
 
     public int getId() {
         return id;

@@ -37,7 +37,8 @@ public class ServicioLibros {
         libro.setUsuario(mTokenController.getUserFromToken(token));
         mLibroController.registrarLibro(libro);
 
-        return status(OK).entity(libro.getId())
+        return status(OK)
+                .entity(libro.getId())
                 .build();
     }
 
@@ -48,15 +49,12 @@ public class ServicioLibros {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Usuario usuario = mTokenController.getUserFromToken(token);
         Libro miLibro = mLibroController.getLibro(idlibro);
-        if(miLibro==null){
-            return status(NOT_FOUND).build();
-        }
-        if(!miLibro.getUsuario().equals(usuario)){
-            return status(FORBIDDEN).build();
-        }
+        if(miLibro==null) return status(NOT_FOUND).build();
+        if(!miLibro.getUsuario().equals(usuario)) return status(FORBIDDEN).build();
         mLibroController.editarLibro(idlibro,libro);
 
-        return status(OK).build();
+        return status(OK)
+                .build();
 
     }
 

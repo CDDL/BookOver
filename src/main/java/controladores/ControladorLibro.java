@@ -15,7 +15,8 @@ public class ControladorLibro implements IControllerLibro {
 
     @Override
     public void registrarLibro(Libro libro) {
-            mDataLibro.addLibro(libro);
+        libro.setVisible(true);
+        mDataLibro.addLibro(libro);
     }
 
     @Override
