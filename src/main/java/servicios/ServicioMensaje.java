@@ -1,0 +1,52 @@
+package servicios;
+
+import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataMensaje;
+import servicios.comunicacionControlador.IControllerMensaje;
+import servicios.comunicacionControlador.IControllerToken;
+import servicios.comunicacionControlador.IControllerUsuario;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+import static javax.ws.rs.core.Response.Status.OK;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static javax.ws.rs.core.Response.status;
+
+/**
+ * Created by David on 02/06/2016.
+ */
+
+@Path("conversaciones")
+@Stateless
+public class ServicioMensaje {
+
+        @Inject
+        IControllerToken mTokenController;
+
+        @Inject
+        IControllerMensaje mMensajeController;
+
+        @Inject
+        IControllerUsuario mUsuarioController;
+
+    @POST
+    @Path("mensaje")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response enviarMensaje(@HeaderParam("Authentication") String token, DataMensaje dataMensaje) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        Usuario otroUser = mUsuarioController.getUserById(dataMensaje.getPara());
+        if(otroUser==null){
+            return status(NOT_FOUND).build();
+        }
+        int idmensaje = mMensajeController.enviarMensaje(dataMensaje,usuario,otroUser);
+        return status(OK).entity(idmensaje).build();
+
+    }
+}

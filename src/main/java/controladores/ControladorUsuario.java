@@ -3,6 +3,7 @@ package controladores;
 import controladores.comunicacionDatos.IDataUsuario;
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
 import servicios.comunicacionControlador.IControllerUsuario;
 
@@ -49,5 +50,15 @@ public class ControladorUsuario implements IControllerUsuario {
     public void asignarLibro(int id, Libro libro) {
         Usuario usuarioIdentificado = mDataUsuario.getById(id);
         usuarioIdentificado.getListaLibros().add(libro);
+    }
+
+    @Override
+    public DataListUser[] listaOtrasPersonas(Usuario usuario) {
+        return mDataUsuario.listaPersonas(usuario);
+    }
+
+    @Override
+    public Usuario getUserById(int para) {
+        return mDataUsuario.getById(para);
     }
 }

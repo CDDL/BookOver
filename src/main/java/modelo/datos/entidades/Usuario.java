@@ -17,7 +17,8 @@ import java.util.List;
 @XmlRootElement
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name = "Usuario.getByUsername", query = "SELECT p FROM Usuario p WHERE p.username = :username")
+        @NamedQuery(name = "Usuario.getByUsername", query = "SELECT p FROM Usuario p WHERE p.username = :username"),
+        @NamedQuery(name = "Usuario.getAllWithoutMe", query = "SELECT p FROM Usuario p WHERE p != :user")
 })
 public class Usuario implements DataLogin, DataRegister {
 
