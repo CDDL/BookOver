@@ -18,7 +18,7 @@ import static servicios.Config.URI_APP_BASE;
 /**
  * Created by Demils on 31/05/2016.
  */
-public class LibroAñadir extends DatabaseTest {
+public class LibroNuevo extends DatabaseTest {
 
     @Test
     public void añadirLibro_libroCorrecto_respueta200() {

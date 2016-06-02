@@ -19,7 +19,7 @@ import static servicios.Config.URI_APP_BASE;
 /**
  * Created by Demils on 23/05/2016.
  */
-public class IdentificaciónLogin extends DatabaseTest {
+public class UsuarioLogin extends DatabaseTest {
 
     @Test
     public void login_datosIncorrectos_respusta401(){
@@ -29,7 +29,7 @@ public class IdentificaciónLogin extends DatabaseTest {
         loginData.setPassword("o2480");
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response response = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(401));
@@ -50,7 +50,7 @@ public class IdentificaciónLogin extends DatabaseTest {
         loginData.setPassword("139123");
 
         //WHEN
-        Response response = WebClient.create(URI_APP_BASE + "login").post(loginData);
+        Response response = WebClient.create(URI_APP_BASE + "usuarios/login").post(loginData);
 
         //ESPERADO
         Token token = response.readEntity(Token.class);

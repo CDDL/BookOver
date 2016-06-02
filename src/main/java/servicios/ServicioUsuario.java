@@ -7,10 +7,7 @@ import servicios.comunicacionControlador.IControllerUsuario;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -21,9 +18,9 @@ import static javax.ws.rs.core.Response.status;
  * Created by David on 24/04/2016.
  */
 
-@Path("")
+@Path("usuarios")
 @Stateless
-public class ServicioIdentificacion {
+public class ServicioUsuario {
 
     @Inject
     IControllerToken mTokenController;
@@ -31,12 +28,24 @@ public class ServicioIdentificacion {
     @Inject
     IControllerUsuario mUserController;
 
+
+    @POST
+    @Path("{idUsuario}")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response editarPerfil(@HeaderParam("Authentication") String token,@PathParam("idUsuario") int idUsuario, Usuario usuario) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        if (mTokenController.getUserFromToken(token).getId() != idUsuario) return status(FORBIDDEN).build();
+        mUserController.editarDatosUsuario(idUsuario, usuario);
+
+        return status(OK)
+                .build();
+    }
+
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response login(Usuario usuario) {
-        System.out.println(usuario.getPassword());
+    public Response login(DataLogin usuario) {
         if (!mUserController.existeUsuario(usuario.getUsername())) return status(UNAUTHORIZED).build();
         if (!mUserController.isLoginCorrecto(usuario)) return status(UNAUTHORIZED).build();
 
@@ -46,14 +55,14 @@ public class ServicioIdentificacion {
     }
 
     @POST
-    @Path("register")
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response register(Usuario usuario) {
         if (mUserController.existeUsuario(usuario.getUsername())) return status(CONFLICT).build();
         mUserController.registrarUsuario(usuario);
 
         return status(OK)
+                .entity(1)
                 .build();
-
     }
 }

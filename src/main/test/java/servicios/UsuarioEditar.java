@@ -16,7 +16,7 @@ import static servicios.Config.URI_APP_BASE;
 /**
  * Created by Demils on 31/05/2016.
  */
-public class PerfilEditar extends DatabaseTest {
+public class UsuarioEditar extends DatabaseTest {
 
     @Test
     public void editarPerfil_edicionSuccess_respuesta200() {
@@ -39,7 +39,7 @@ public class PerfilEditar extends DatabaseTest {
         datosEditados.setPassword("123456");
         datosEditados.setEmail("email@valido.com");
         datosEditados.setUbicacion("castellón");
-        Response response = WebClient.create(URI_APP_BASE + "perfil/editar").header("Authentication", token.getToken()).post(datosEditados);
+        Response response = WebClient.create(URI_APP_BASE + "usuario/").header("Authentication", token.getToken()).put(datosEditados);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));

@@ -28,7 +28,7 @@ import static javax.ws.rs.core.Response.status;
 public class ServicioLibros {
 
     @Inject
-    private IControllerToken mTokenController;
+    IControllerToken mTokenController;
 
     @Inject
     IControllerLibro mLibroController;
