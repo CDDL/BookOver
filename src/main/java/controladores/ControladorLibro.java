@@ -40,4 +40,10 @@ public class ControladorLibro implements IControllerLibro {
         miLibro.setVisible(libro.isVisible());
 
     }
+
+    @Override
+    public void retirarLibro(int idlibro) {
+        Libro miLibro = mDataLibro.getById(idlibro);
+        miLibro.setVisible(false);
+    }
 }

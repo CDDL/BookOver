@@ -60,8 +60,16 @@ public class ServicioLibros {
 
     @DELETE
     @Path("{idLibro}")
-    public Response editarLibro(@HeaderParam("Authentication") String token,@PathParam("idLibro") int idlibro){
-        return null;
+    public Response retirarLibro(@HeaderParam("Authentication") String token,@PathParam("idLibro") int idlibro){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        Libro miLibro = mLibroController.getLibro(idlibro);
+        if(miLibro==null) return status(NOT_FOUND).build();
+        if(!miLibro.getUsuario().equals(usuario)) return status(FORBIDDEN).build();
+        mLibroController.retirarLibro(idlibro);
+
+        return status(OK)
+                .build();
     }
 
 }

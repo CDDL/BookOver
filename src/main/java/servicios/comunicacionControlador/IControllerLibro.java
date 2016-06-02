@@ -12,4 +12,6 @@ public interface IControllerLibro{
     Libro getLibro(int idlibro);
 
     void editarLibro(int idlibro, Libro libro);
+
+    void retirarLibro(int idlibro);
 }
