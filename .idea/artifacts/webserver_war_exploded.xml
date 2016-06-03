@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="webserver:war exploded">
-    <output-path>$PROJECT_DIR$/target/BookOver</output-path>
+    <output-path>$USER_HOME$/IdeaProjects/BookOver/target/BookOver</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -37,7 +37,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/BookOver/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$USER_HOME$/IdeaProjects/BookOver2/BookOver/target/BookOver/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="webserver/web/Web" />
     </root>

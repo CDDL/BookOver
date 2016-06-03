@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="BookOver">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="../js/foto_loader.js"></script>
 </head>
-<body style="background-image: url(../resources/books.jpg);" ng-app="BookOver">
+<body style="background-image: url(../resources/books.jpg);" ng-controller="CtrlLibro as ctrlLibro">
 
 <div id="wrapper">
 
@@ -39,44 +39,44 @@
                         Registra un libro
                     </h1>
 
-                    <div class="panel-body" ng-controller="CtrlLogin as ctrl">
+                    <div class="panel-body">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">
-                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título">
+                                <input type="text" ng-model="titulo" name="titulo" id="titulo" class="form-control" placeholder="Título">
                             </div>
 
                             <div class="form-group">
-                                <input type="text" name="autor" id="autor" class="form-control" placeholder="Autor">
+                                <input type="text" ng-model="autor" name="autor" id="autor" class="form-control" placeholder="Autor">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="editorial" id="editorial" class="form-control" placeholder="Editorial">
+                                <input type="text" ng-model="editorial" name="editorial" id="editorial" class="form-control" placeholder="Editorial">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="isbn10" id="isbn10" class="form-control" placeholder="ISBN">
+                                <input type="text" ng-model="isbn" name="isbn10" id="isbn10" class="form-control" placeholder="ISBN">
                             </div>
                             <div class="form-group">
                                 <label class="texto-form" for="estado1" >Estado del libro</label><br>
 
-                                <span class="texto-form"><input type="radio" name="estado" id="estado1" value="estado" required>Nuevo</span>
+                                <span class="texto-form"><input type="radio" ng-model="estado" name="estado" id="estado1" value="estado" required>Nuevo</span>
 
-                                <span class="texto-form"><input type="radio" name="estado"  id="estado2" value="estado2">Seminuevo</span>
+                                <span class="texto-form"><input type="radio" ng-model="estado" name="estado"  id="estado2" value="estado2">Seminuevo</span>
 
-                                <span class="texto-form"><input type="radio" name="estado"  id="estado3" value="estado3">Usado</span>
+                                <span class="texto-form"><input type="radio" ng-model="estado" name="estado"  id="estado3" value="estado3">Usado</span>
                             </div>
                             <div class="form-group">
                                 <label class="texto-form" for="opcionesLibro1" >¿Qué quieres hacer con el libro?</label><br>
-                                <span class="texto-form"><input class="texto-form" type="checkbox" name="opcionesLibro" id= "opcionesLibro1" value="prestar" />Prestar</span>
-                                <span class="texto-form"><input class="texto-form" type="checkbox" name="opcionesLibro" id= "opcionesLibro2" value="intercambiar" />Intercambiar</span>
-                                <span class="texto-form"><input class="texto-form" type="checkbox" name="opcionesLibro" id= "opcionesLibro3" value="vender" />Vender</span>
+                                <span class="texto-form"><input class="texto-form" type="checkbox" ng-model="esPrestable" name="opcionesLibro" id= "opcionesLibro1" value="prestar" />Prestar</span>
+                                <span class="texto-form"><input class="texto-form" type="checkbox" ng-model="esIntercambiable" name="opcionesLibro" id= "opcionesLibro2" value="intercambiar" />Intercambiar</span>
+                                <span class="texto-form"><input class="texto-form" type="checkbox" ng-model="esVendible" name="opcionesLibro" id= "opcionesLibro3" value="vender" />Vender</span>
                             </div>
-                            <input class="texto-form" type="file" accept="image/*" multiple onchange="loadFile(event)" max-uploads = 2>
+                            <input class="texto-form" type="file" ng-model="fotos" accept="image/*" multiple onchange="loadFile(event)" max-uploads = 2>
                             <div id="fotos"></div>
                             <div class="form-group">
                                 <label class="texto-form" for="infoAdicional">Comentarios</label>
-                                <input type="text" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
+                                <input type="text" ng-model="infoAdicional" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
                             </div>
-                            <input type="submit" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
+                            <input type="submit" ng-click="ctrlLibro.registrarLibr(titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, fotos)" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
                         </form>
 
                     </div>

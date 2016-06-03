@@ -7,7 +7,7 @@ var appBookOver = angular.module('BookOver');
 appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
-    console.log('Content-Range: ' + response.headers('Content-Range'))
+    console.log('Content-Range: ' + response.headers('Content-Range'));
 
     self.login = function (user, password) {
         WebService.login(user, password)
@@ -44,7 +44,7 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             .success(function(data) {
                 $scope.libros = data.libro;
             });
-    }
+    };
 
     self.recuperaLibro = function(idLibro) {
         WebService.recuperaLibro(idLibro)
@@ -52,10 +52,10 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
                 console.log(data);
                 $scope.libroActual = data;
             });
-    }
+    };
 
-    self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
-        var dato = { libro: {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+    self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+        var dato = { libro: {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
 
         WebService.registrarLibro(dato)
             .then(function successCallback(response) {
@@ -64,26 +64,13 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     };
 
     //cmprbr - esta funcion incluye el id
-    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
-        var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+        var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
         //CC
         WebService.editarLibro(dato)
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
             });
     };
-
-    self.cargaFotos = function (event) {
-        document.getElementById("fotos").innerHTML = '';
-        document.getElementById("fotos").appendChild(document.createElement("br"));
-        for (i = 0; i < event.target.files.length; i++) {
-            var elem = document.createElement("img");
-            elem.setAttribute("src", URL.createObjectURL(event.target.files[i]));
-            elem.setAttribute("height", "100");
-            elem.setAttribute("width", "100");
-            document.getElementById("fotos").appendChild(elem);
-        }
-        ;
-    }
 
 }]);

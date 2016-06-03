@@ -63,12 +63,12 @@ appBookOver.service('WebService', ['$http', function ($http) {
         //dataFinal = injectDataUsuario({'nombreLibro': nombreLibro});
 
 
-        return $http.post(appBookOver.registrarLibroURI, dato,  {headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}});
+        return $http.post(appBookOver.registrarLibroURI, dato,  {headers: {'Authorization': token}});
     };
 
     this.editarLibro = function (dato) {
 
-        return $http.post(appBookOver.editarLibroURI, dato, {headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}});
+        return $http.post(appBookOver.editarLibroURI, dato, {headers: {'Authorization': token}});
     };
     //cmprbr lo que hace el update del controler de agenda -> actualiza variable del scope
 
@@ -76,12 +76,12 @@ appBookOver.service('WebService', ['$http', function ($http) {
     this.recuperaTodosLibros = function(idUsuario) {
         var url = appBookOver.baseURI + 'usuario/' + idUsuario; // + ??? cmprbr url
         return $http.get(appBookOver.baseURI);
-    }
+    };
 
     this.recuperaLibro = function(idLibro) {
         var url = appBookOver.baseURI + 'libro/' + idLibro; //+ ?? cmprbr url
         return $http.get(url);
-    }
+    };
     // this.retrieveContact = function(nif) {
     //     var url = appBookOver.baseURI + nif;
     //     return $http.get(url);
