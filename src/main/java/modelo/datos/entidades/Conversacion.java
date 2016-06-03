@@ -18,7 +18,8 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Conversacion.findByPeople", query = "SELECT p FROM Conversacion p WHERE (p.usuario1 = :user1 AND p.usuario2 = :user2) OR (p.usuario1 = :user2 AND p.usuario2 = :user1)"),
-        @NamedQuery(name = "Conversacion.findByUser", query = "SELECT p FROM Conversacion p WHERE p.usuario1 = :user OR p.usuario2 = :user")
+        @NamedQuery(name = "Conversacion.findByUser", query = "SELECT p FROM Conversacion p WHERE p.usuario1 = :user OR p.usuario2 = :user"),
+        @NamedQuery(name = "Conversacion.findByUserAndId", query = "SELECT p FROM Conversacion p WHERE  p.id = :id AND (p.usuario1 = :user OR p.usuario2 = :user)")
 })
 public class Conversacion {
 

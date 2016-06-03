@@ -5,6 +5,7 @@ import controladores.comunicacionDatos.IDataMensaje;
 import modelo.datos.entidades.Conversacion;
 import modelo.datos.entidades.Mensaje;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataConversacion;
 import modelo.datos.transferencia.DataListConversaciones;
 import modelo.datos.transferencia.DataMensaje;
 import servicios.comunicacionControlador.IControllerMensaje;
@@ -40,5 +41,15 @@ public class ControladorMensaje implements IControllerMensaje {
     @Override
     public DataListConversaciones[] findListConversaciones(Usuario usuario) {
         return mDataConversacion.getAllByUser(usuario);
+    }
+
+    @Override
+    public boolean participaUser(Usuario usuario, int idConversacion) {
+        return mDataConversacion.participaUser(usuario, idConversacion);
+    }
+
+    @Override
+    public DataConversacion[] findDataConversacion(int idConversacion) {
+        return mDataConversacion.getMensajes(idConversacion);
     }
 }

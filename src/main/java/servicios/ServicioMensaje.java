@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataConversacion;
 import modelo.datos.transferencia.DataListConversaciones;
 import modelo.datos.transferencia.DataMensaje;
 import servicios.comunicacionControlador.IControllerMensaje;
@@ -58,6 +59,17 @@ public class ServicioMensaje {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Usuario usuario = mTokenController.getUserFromToken(token);
         DataListConversaciones[] resultado = mMensajeController.findListConversaciones(usuario);
+        return status(OK).entity(resultado).build();
+    }
+
+    @GET
+    @Path("{idConversacion}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response showConversacion(@HeaderParam("Authentication") String token, @PathParam("idConversacion") int idConversacion){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        if(!mMensajeController.participaUser(usuario, idConversacion)) return status(UNAUTHORIZED).build();
+        DataConversacion[] resultado = mMensajeController.findDataConversacion(idConversacion);
         return status(OK).entity(resultado).build();
     }
 }

@@ -1,6 +1,7 @@
 package servicios.comunicacionControlador;
 
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataConversacion;
 import modelo.datos.transferencia.DataListConversaciones;
 import modelo.datos.transferencia.DataMensaje;
 
@@ -11,4 +12,8 @@ public interface IControllerMensaje {
     int enviarMensaje(DataMensaje dataMensaje, Usuario usuario, Usuario otroUser);
 
     DataListConversaciones[] findListConversaciones(Usuario usuario);
+
+    boolean participaUser(Usuario usuario, int idConversacion);
+
+    DataConversacion[] findDataConversacion(int idConversacion);
 }

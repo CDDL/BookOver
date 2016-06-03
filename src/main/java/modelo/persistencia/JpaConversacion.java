@@ -2,7 +2,9 @@ package modelo.persistencia;
 
 import controladores.comunicacionDatos.IDataConversacion;
 import modelo.datos.entidades.Conversacion;
+import modelo.datos.entidades.Mensaje;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataConversacion;
 import modelo.datos.transferencia.DataListConversaciones;
 
 import javax.ejb.Stateless;
@@ -57,6 +59,35 @@ public class JpaConversacion implements IDataConversacion {
                 data.setConQuien(conversa.getUsuario2().getUsername());
             }
 
+            resultado[contador] = data;
+            contador++;
+        }
+
+        return resultado;
+    }
+
+    @Override
+    public boolean participaUser(Usuario usuario, int idConversacion) {
+        TypedQuery<Conversacion> query = mEntityManager.createNamedQuery("Conversacion.findByUserAndId", Conversacion.class);
+        query.setParameter("id",idConversacion);
+        query.setParameter("user", usuario);
+        List<Conversacion> resultados = query.getResultList();
+        return resultados.size() > 0;
+    }
+
+    @Override
+    public DataConversacion[] getMensajes(int idConversacion) {
+        TypedQuery<Mensaje> query = mEntityManager.createNamedQuery("Mensaje.findByConversa", Mensaje.class);
+        query.setParameter("id", idConversacion);
+        List<Mensaje> resultados = query.getResultList();
+        DataConversacion[] resultado = new DataConversacion[resultados.size()];
+        int contador = 0;
+        for(Mensaje mensaje : resultados){
+            DataConversacion data = new DataConversacion();
+            data.setId(mensaje.getUsuario().getId());
+            data.setQuien(mensaje.getUsuario().getUsername());
+            data.setMensaje(mensaje.getMensaje());
+            data.setCuando(mensaje.getFecha());
             resultado[contador] = data;
             contador++;
         }
