@@ -6,6 +6,6 @@
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
         bean-discovery-mode="all">
     <interceptors>
-        <class>controlador.filterSecurity.AuthenticationInterceptor</class>
+        <class>servicios.interceptorSecurity.InterceptorAuthentication</class>
     </interceptors>
 </beans>

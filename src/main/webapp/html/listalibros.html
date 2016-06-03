@@ -38,14 +38,14 @@
 
 </head>
 
-<body ng-app="BookOver">
+<body ng-app="BookOver" class="fondo">
 
-<div style="min-height: 92.5vh;background-image: url(../resources/books.jpg);" id="wrapper">
+<div id="wrapper">
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
     <br>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(30%); border-radius: 30px 30px 30px 30px;margin:auto;width: 70em; margin-bottom: 15em;" id="page-wrapper">
 
         <div class="container-fluid">
 
@@ -69,6 +69,7 @@
                                 <th>Intercambiable</th>
                                 <th>Prestable</th>
                                 <th>Vendible</th>
+                                <th>Acciones</th>
                             </tr>
                             </thead>
 
@@ -82,6 +83,7 @@
                                 <td>Data</td>
                                 <td>Data</td>
                                 <td>Data</td>
+                                <td><a href="#" class="btn btn-warning">Retirar</a></td>
 
                             </tr>
                             <tr>
@@ -93,6 +95,7 @@
                                 <td>Data</td>
                                 <td>Data</td>
                                 <td>Data</td>
+                                <td><a href="#" class="btn btn-warning">Retirar</a></td>
                             </tr>
                             </tbody>
                         </table>

@@ -11,13 +11,15 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
+//@XmlType(propOrder = {"id", "titulo", "autor", "editorial", "isbn", "estado", "infoAdicional","esPrestable","esVendible","esIntercambiable","precio"})
 @Entity
-@Table(name = "libros")
+@NamedQueries(value = {
+        @NamedQuery(name = "Libro.getId", query = "SELECT l FROM Libro l WHERE l.visible = true")
+})
 public class Libro {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String titulo;
@@ -40,13 +42,16 @@ public class Libro {
     @Column
     private int precio;
 
+    @Column
+    private boolean visible;
+
     @XmlTransient
     @OneToMany(mappedBy = "libro", targetEntity = FotoLibro.class)
     private List fotos;
 
     @XmlTransient
     @ManyToOne
-    @JoinColumn(name="id_usuario", referencedColumnName = "id")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     public List getFotos() {
@@ -56,25 +61,6 @@ public class Libro {
     public void setFotos(List fotos) {
         this.fotos = fotos;
     }
-
-    public Libro(String titulo, String autor, String editorial, String isbn, String estado, String infoAdicional, Boolean esPrestable, Boolean esVendible, Boolean esIntercambiable, int precio, Usuario usuario) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editorial = editorial;
-        this.isbn = isbn;
-        this.estado = estado;
-        this.infoAdicional = infoAdicional;
-        this.esPrestable = esPrestable;
-        this.esVendible = esVendible;
-        this.esIntercambiable = esIntercambiable;
-        this.precio = precio;
-        this.usuario = usuario;
-    }
-
-    public Libro() {
-    }
-
-
 
     public int getId() {
         return id;
@@ -170,5 +156,13 @@ public class Libro {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

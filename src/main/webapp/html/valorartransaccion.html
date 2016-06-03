@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BookOver - Valorar transaccion</title>
+
+    <link rel="shortcut icon" href="../resources/favicon.ico"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link href="../css/sb-admin.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+    <style>
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(odd)>th {
+            /*background-color: #c8523a;*/
+            background-color: #f58677;
+        }
+        .table-striped>tbody>tr:nth-child(even)>td,
+        .table-striped>tbody>tr:nth-child(even)>th {
+            background-color: #f58677;
+        }
+        .table-striped>thead>tr>th {
+            background-color: #54030A;
+        }
+    </style>
+
+</head>
+
+<body class="fondo" ng-app="BookOver">
+
+<div id="wrapper">
+
+    <ng-include src="'../html/components/navbar.html'"></ng-include>
+    <br>
+
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto; width: 55em; margin-bottom: 15em;;" id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <h1 style="color: #ffffff;" class="page-header">
+                        Valoración de {{username}}
+                    </h1>
+                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
+
+                        <form role="form" action="" method="post" id="login-form" autocomplete="off">
+
+                            <input type="hidden" name="idsuervalora" value="">
+                            <input type="hidden" name="idsuervalorado" value="">
+                            <input type="hidden" name="idtransaccion" value="">
+                            <label for="puntuacion">Puntuacion</label>
+                            <select name="puntuacion" id="puntuacion" style="background-color:#f58677 ">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <br>
+                            <br>
+                            <label for="descripcion">Descripcion</label>
+                            <textarea class="form-control" name="post_content" id="descripcion" cols="30" rows="10">
+
+                             </textarea>
+                            <br>
+                            <button class="btn btn-lg btn-success btn-block enviar"
+                                    ng-click="">Enviar
+                            </button>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<script src="../js/angular.js"></script>
+<script src="../js/angular_apps.js"></script>
+<script src="../js/angular_services.js"></script>
+<script src="../js/angular_controllers.js"></script>
+<script src="../js/angular_directives.js"></script>
+<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="../js/scripts.js"></script>
+</body>
+</html>

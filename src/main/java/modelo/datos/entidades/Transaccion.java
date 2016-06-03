@@ -2,6 +2,7 @@ package modelo.datos.entidades;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 import java.util.Set;
@@ -14,7 +15,6 @@ import java.util.Set;
 @XmlType(propOrder = {"id", "fecha", "aceptada"})
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
-@Table(name = "transacciones")
 public class Transaccion {
 
     @Id
@@ -28,19 +28,15 @@ public class Transaccion {
     @Column
     private Boolean aceptada;
 
-    public Set getUsuarios() {
-        return usuarios;
-    }
+    @XmlTransient
+    @ManyToOne(targetEntity=Usuario.class)
+    @JoinColumn(name = "id_usuario_inicia", referencedColumnName = "id")
+    private Usuario usuarioIniciaTransaccion;
 
-    public void setUsuarios(Set usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    @JoinTable(name = "mantienen",
-            joinColumns = {@JoinColumn(name = "id_transaccion", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_usuario", referencedColumnName = "id")})
-    @ManyToMany(targetEntity=Usuario.class)
-    private Set usuarios;
+    @XmlTransient
+    @ManyToOne(targetEntity=Usuario.class)
+    @JoinColumn(name = "id_usuario_recibe", referencedColumnName = "id")
+    private Usuario usuarioRecibeTransaccion;
 
 
     public Transaccion() {
@@ -78,4 +74,21 @@ public class Transaccion {
         this.aceptada = aceptada;
     }
 
+    @XmlTransient
+    public Usuario getUsuarioIniciaTransaccion() {
+        return usuarioIniciaTransaccion;
+    }
+
+    public void setUsuarioIniciaTransaccion(Usuario usuarioIniciaTransaccion) {
+        this.usuarioIniciaTransaccion = usuarioIniciaTransaccion;
+    }
+
+    @XmlTransient
+    public Usuario getUsuarioRecibeTransaccion() {
+        return usuarioRecibeTransaccion;
+    }
+
+    public void setUsuarioRecibeTransaccion(Usuario usuarioRecibeTransaccion) {
+        this.usuarioRecibeTransaccion = usuarioRecibeTransaccion;
+    }
 }

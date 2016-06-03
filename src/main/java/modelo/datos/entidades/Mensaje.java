@@ -12,7 +12,9 @@ import java.util.Date;
 @XmlRootElement
 @XmlType(propOrder = {"id", "fecha", "mensaje"})
 @Entity
-@Table(name = "mensajes")
+@NamedQueries({
+        @NamedQuery(name = "Mensaje.findByConversa", query = "SELECT m FROM Mensaje m JOIN m.conversacion co WHERE co.id = :id")
+})
 public class Mensaje {
 
     @Id

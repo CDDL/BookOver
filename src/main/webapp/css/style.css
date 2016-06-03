@@ -7,6 +7,10 @@
     color: #ffffff;
 }
 
+.fondo{
+    background-image: url(../resources/books.jpg);
+}
+
 .texto-form{
     color: #ffffff;
 }

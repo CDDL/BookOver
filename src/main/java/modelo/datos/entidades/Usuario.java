@@ -5,7 +5,8 @@ package modelo.datos.entidades;
  */
 
 
-import modelo.datos.transfer.LoginData;
+import modelo.datos.transferencia.DataLogin;
+import modelo.datos.transferencia.DataRegister;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,10 +15,12 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "password", "email", "ubicacion", "username"})
 @Entity
-@Table(name = "usuarios")
-public class Usuario implements LoginData {
+@NamedQueries(value = {
+        @NamedQuery(name = "Usuario.getByUsername", query = "SELECT p FROM Usuario p WHERE p.username = :username"),
+        @NamedQuery(name = "Usuario.getAllWithoutMe", query = "SELECT p FROM Usuario p WHERE p != :user")
+})
+public class Usuario implements DataLogin, DataRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,29 +40,29 @@ public class Usuario implements LoginData {
 
     @XmlTransient
     @OneToMany(mappedBy = "usuario", targetEntity = Libro.class)
-    private List listaLibros;
+    private List<Libro> listaLibros;
 
     @XmlTransient
     @OneToMany(mappedBy = "usuarioValorado", targetEntity = Valoracion.class)
-    private List listaValoraciones;
+    private List<Valoracion> listaValoraciones;
 
     @XmlTransient
-    public List getListaLibros() {
-        return listaLibros;
-    }
+    @OneToMany(mappedBy = "usuarioIniciaTransaccion", targetEntity = Transaccion.class)
+    private List<Transaccion> listaTransaccionesIniciadas;
+
+    @XmlTransient
+    @OneToMany(mappedBy = "usuarioRecibeTransaccion", targetEntity = Transaccion.class)
+    private List<Transaccion> listaTransaccionesRecibidas;
+
 
 
     public void setListaLibros(List listaLibros) {
         this.listaLibros = listaLibros;
     }
 
-    public Usuario(String password, String email, String ubicacion, String username) {
-
-        this.password = password;
-        this.email = email;
-        this.ubicacion = ubicacion;
-
-        this.username = username;
+    @XmlTransient
+    public List<Libro> getListaLibros() {
+        return listaLibros;
     }
 
     @XmlTransient
@@ -70,9 +73,6 @@ public class Usuario implements LoginData {
 
     public void setListaValoraciones(List listaValoraciones) {
         this.listaValoraciones = listaValoraciones;
-    }
-
-    public Usuario() {
     }
 
     public int getId() {
@@ -113,5 +113,23 @@ public class Usuario implements LoginData {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @XmlTransient
+    public List<Transaccion> getListaTransaccionesIniciadas() {
+        return listaTransaccionesIniciadas;
+    }
+
+    public void setListaTransaccionesIniciadas(List<Transaccion> listaTransaccionesIniciadas) {
+        this.listaTransaccionesIniciadas = listaTransaccionesIniciadas;
+    }
+
+    @XmlTransient
+    public List<Transaccion> getListaTransaccionesRecibidas() {
+        return listaTransaccionesRecibidas;
+    }
+
+    public void setListaTransaccionesRecibidas(List<Transaccion> listaTransaccionesRecibidas) {
+        this.listaTransaccionesRecibidas = listaTransaccionesRecibidas;
     }
 }

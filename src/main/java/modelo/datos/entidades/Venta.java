@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
-@Table(name = "ventas")
 public class Venta extends Transaccion{
 
     @Column
