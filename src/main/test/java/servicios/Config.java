@@ -22,4 +22,5 @@ public interface Config {
     String URI_APP_PETICION_PRESTAMO_ACEPTAR = URI_APP_BASE + "transacciones/";           //PUT
     String URI_APP_VISUALIZAR_MIS_LIBROS = URI_APP_BASE + "libros/mislibros";             //GET
     String URI_APP_LISTAR_USUARIOS = URI_APP_BASE + "usuarios";                           //GET
+    String URI_APP_LISTAR_CONVERSACIONES = URI_APP_BASE + "conversaciones/listaConversaciones"; //GET
 }

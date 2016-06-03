@@ -3,6 +3,7 @@ package modelo.persistencia;
 import controladores.comunicacionDatos.IDataConversacion;
 import modelo.datos.entidades.Conversacion;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListConversaciones;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,5 +38,29 @@ public class JpaConversacion implements IDataConversacion {
         conversacion.setUsuario2(otroUser);
         mEntityManager.flush();
         return conversacion;
+    }
+
+    @Override
+    public DataListConversaciones[] getAllByUser(Usuario usuario) {
+        //Conversacion.findByUser
+        TypedQuery<Conversacion> query = mEntityManager.createNamedQuery("Conversacion.findByUser", Conversacion.class);
+        query.setParameter("user", usuario);
+        List<Conversacion> resultados = query.getResultList();
+        DataListConversaciones[] resultado = new DataListConversaciones[resultados.size()];
+        int contador = 0;
+        for(Conversacion conversa : resultados){
+            DataListConversaciones data = new DataListConversaciones();
+            data.setId(conversa.getId());
+            if(conversa.getUsuario1().getId()!=usuario.getId()){
+                data.setConQuien(conversa.getUsuario1().getUsername());
+            }else{
+                data.setConQuien(conversa.getUsuario2().getUsername());
+            }
+
+            resultado[contador] = data;
+            contador++;
+        }
+
+        return resultado;
     }
 }

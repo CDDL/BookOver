@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataListConversaciones;
 import modelo.datos.transferencia.DataMensaje;
 import servicios.comunicacionControlador.IControllerMensaje;
 import servicios.comunicacionControlador.IControllerToken;
@@ -48,5 +49,15 @@ public class ServicioMensaje {
         int idmensaje = mMensajeController.enviarMensaje(dataMensaje,usuario,otroUser);
         return status(OK).entity(idmensaje).build();
 
+    }
+
+    @GET
+    @Path("listaConversaciones")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response showListConversaciones(@HeaderParam("Authentication") String token){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mTokenController.getUserFromToken(token);
+        DataListConversaciones[] resultado = mMensajeController.findListConversaciones(usuario);
+        return status(OK).entity(resultado).build();
     }
 }
