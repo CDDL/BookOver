@@ -2,6 +2,7 @@ package controladores.comunicacionDatos;
 
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataListUser;
+import modelo.datos.transferencia.DataProfileUser;
 
 /**
  * Created by Demils on 11/05/2016.
@@ -16,4 +17,5 @@ public interface IDataUsuario {
     DataListUser[] listaPersonas(Usuario usuario);
 
     void actualizar(Usuario usuario);
+
 }

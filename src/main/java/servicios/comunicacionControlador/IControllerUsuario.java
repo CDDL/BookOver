@@ -4,6 +4,7 @@ import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
+import modelo.datos.transferencia.DataProfileUser;
 
 /**
  * Created by Demils on 11/05/2016.
@@ -22,4 +23,6 @@ public interface IControllerUsuario {
     DataListUser[] listaOtrasPersonas(Usuario usuario);
 
     Usuario getUserById(int para);
+
+    DataProfileUser visualizaUser(Usuario usuario);
 }

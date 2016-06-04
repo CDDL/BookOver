@@ -5,6 +5,7 @@ import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
+import modelo.datos.transferencia.DataProfileUser;
 import servicios.comunicacionControlador.IControllerUsuario;
 
 import javax.ejb.Stateful;
@@ -61,5 +62,14 @@ public class ControladorUsuario implements IControllerUsuario {
     @Override
     public Usuario getUserById(int para) {
         return mDataUsuario.getById(para);
+    }
+
+    @Override
+    public DataProfileUser visualizaUser(Usuario usuario) {
+        DataProfileUser resultado = new DataProfileUser();
+        resultado.setEmail(usuario.getEmail());
+        resultado.setUbicacion(usuario.getUbicacion());
+        resultado.setUsername(usuario.getUsername());
+        return resultado;
     }
 }
