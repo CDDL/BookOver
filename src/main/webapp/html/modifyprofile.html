@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-lg-12 ">
                     <h1 style="color: #ffffff;" class="page-header">
-                        Modificar perfil
+                        Editar perfil {{miPerfil.DataProfileUser.username}}
                     </h1>
                     <div ng-controller="CtrlProfile as ctrl">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
@@ -60,16 +60,16 @@
                                        value="" type="password" required>
                             </div>
                             <div class="form-group">
-                                <input ng-model="email" type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                <input ng-model="miPerfil.DataProfileUser.email" type="email" name="email" id="email" class="form-control" placeholder="Email"
                                        required>
                             </div>
                             <div class="form-group">
-                                <input ng-model="localization" type="text" name="ubicacion" id="ubicacion" class="form-control"
-                                       placeholder="Ubicación" required>
+                                <input ng-model="miPerfil.DataProfileUser.ubicacion" type="text" name="ubicacion" id="ubicacion" class="form-control"
+                                       placeholder="email@gmail.com" required>
                             </div>
 
                             <button class="btn btn-lg btn-success btn-block enviar"
-                                    ng-click="ctrl.editar(passwd, passwd_check, email, localization)">Enviar
+                                    ng-click="ctrl.editar(passwd, passwd_check, miPerfil.DataProfileUser.email, miPerfil.DataProfileUser.ubicacion)">Enviar
                             </button>
                         </form>
                     </div>

@@ -72,11 +72,25 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
         console.log(dato); //borrar
         $rootScope.token="x";   //borrar
         return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token}} );
+        //
 
         //codigo final
         //return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token.token}} );
 
     };
+
+    this.getPerfil = function (dato) {
+        //codigo final
+            //url=BaseURL+"usuarios/dato";
+            //
+        ///////
+        //codigo para probar
+            url="pefil.json";
+        //
+        return $http.get(url);
+
+    };
+
 
     this.registrarLibro = function (dato) {
         //dataFinal = injectDataUsuario({'nombreLibro': nombreLibro});
