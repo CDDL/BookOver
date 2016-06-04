@@ -7,8 +7,6 @@ var appBookOver = angular.module('BookOver');
 appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
-    console.log('Content-Range: ' + response.headers('Content-Range'));
-
     self.login = function (user, password) {
         WebService.login(user, password)
             .then(function (jsonObject) {
@@ -73,4 +71,12 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             });
     };
 
+    self.retirarLibro = function(idLibro){
+        WebService.retirarLibro(idLibro)
+            .then(function successCallback(response) {
+                console.log("Libro retirado correctamente");
+            })
+    };
+    
+    
 }]);
