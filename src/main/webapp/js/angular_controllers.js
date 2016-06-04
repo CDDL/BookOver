@@ -2,19 +2,22 @@
 * Created by Demils on 24/04/2016.
 */
 
+
 var appBookOver = angular.module('BookOver');
 
 appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
-    console.log('Content-Range: ' + response.headers('Content-Range'))
 
     self.login = function (user, password) {
         WebService.login(user, password)
             .then(function (jsonObject) {
                 console.log("Login success");
-                token = response.headers('Authorization');
-                console.log('Authorization: ' + response.headers('Authorization'))
+
+                //console.log(jsonObject);
+                token = jsonObject.data.token;
+                WebService.setToken(token);
+                //console.log('Authorization: ' + jsonObject.headers('Authorization'))
             }, function errorCallBack(response){
                 console.log("Login failed");
             });
@@ -33,6 +36,22 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
     };
 }]);
 
+appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope, WebService) {
+    var self = this;
+
+    self.editar = function (password, password_check, email, localization) {
+        var dato={'usuario': { 'password': password,'email': email, 'ubicacion':localization}};
+        console.log(dato);
+        console.log(WebService.getToken());
+        if (password != password_check) console.log("Error contraseñas");
+        else WebService.editarPerfil(dato)
+            .then(function successCallback(response) {
+                console.log("Editado");
+            });
+    };
+}]);
+
+
 appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
@@ -44,7 +63,7 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             .success(function(data) {
                 $scope.libros = data.libro;
             });
-    }
+    };
 
     self.recuperaLibro = function(idLibro) {
         WebService.recuperaLibro(idLibro)
@@ -52,10 +71,10 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
                 console.log(data);
                 $scope.libroActual = data;
             });
-    }
+    };
 
-    self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
-        var dato = { libro: {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+    self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+        var dato = { 'libro': {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
 
         WebService.registrarLibro(dato)
             .then(function successCallback(response) {
@@ -64,26 +83,13 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     };
 
     //cmprbr - esta funcion incluye el id
-    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, usuario, fotos) {
-        var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, 'usuario': usuario, 'fotos': fotos}}
+    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+        var dato = { 'libro': {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
         //CC
         WebService.editarLibro(dato)
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
             });
     };
-
-    self.cargaFotos = function (event) {
-        document.getElementById("fotos").innerHTML = '';
-        document.getElementById("fotos").appendChild(document.createElement("br"));
-        for (i = 0; i < event.target.files.length; i++) {
-            var elem = document.createElement("img");
-            elem.setAttribute("src", URL.createObjectURL(event.target.files[i]));
-            elem.setAttribute("height", "100");
-            elem.setAttribute("width", "100");
-            document.getElementById("fotos").appendChild(elem);
-        }
-        ;
-    }
 
 }]);

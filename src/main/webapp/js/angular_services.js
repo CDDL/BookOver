@@ -7,8 +7,9 @@ var appBookOver = angular.module('BookOver');
 
 appBookOver.baseURI = 'http://localhost:8080/BookOver/';
 
-appBookOver.loginURI = appBookOver.baseURI + "login";
-appBookOver.registerURI = appBookOver.baseURI + "register";
+appBookOver.loginURI = appBookOver.baseURI + "usuarios/login";
+appBookOver.registerURI = appBookOver.baseURI + "usuarios";
+appBookOver.editarPerfilURI = appBookOver.baseURI + "usuarios/editar";
 appBookOver.registrarLibroURI = appBookOver.baseURI + "registrarLibro";
 appBookOver.editarLibroURI = appBookOver.baseURI + "editarLibro";
 
@@ -39,36 +40,52 @@ appBookOver.editarLibroURI = appBookOver.baseURI + "editarLibro";
 //     };
 // }]);
 
-appBookOver.service('WebService', ['$http', function ($http) {
+appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $rootScope) {
     // this.create = function(nombre, apellidos, nif) {
     //     dato = {'persona': {'nombre': nombre, 'apellidos': apellidos, 'nif': nif}};
     //     var url = appBookOver.baseURI + nif;
     //     return $http.put(url, dato);
     // }
 
-    var token = '';
 
+    this.setToken=function (tkn){
+        console.log($rootScope);
+        $rootScope.token=tkn;
+        console.log($rootScope);
+    };
+    
+    this.getToken=function () {
+        return($rootScope);
+    };
+    
     this.login = function (user, password) {
-        return $http.post(appBookOver.loginURI,
-            {'loginData':{'username': user, 'password': password}});
+        var dato={'usuario':{'username': user, 'password': password}};
+        console.log(dato);
+        return $http.post(appBookOver.loginURI,dato);
     };
 
     this.register = function (user, password, email, localization) {
-        return $http.post(appBookOver.registerURI,
-            {'user': user, 'password': password, 'email': email, 'localization':localization});
+        var dato={'usuario': {'username': user, 'email': email, 'password': password, 'ubicacion':localization}}
+        //console.log(dato);
+        return $http.post(appBookOver.registerURI,dato);
+
     };
 
+    this.editarPerfil = function (dato) {
+        //return $http.post(appBookOver.editarPerfilURI,dato);
+
+    };
 
     this.registrarLibro = function (dato) {
         //dataFinal = injectDataUsuario({'nombreLibro': nombreLibro});
 
 
-        return $http.post(appBookOver.registrarLibroURI, dato,  {headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}});
+        return $http.post(appBookOver.registrarLibroURI, dato,  {headers: {'Authorization': token}});
     };
 
     this.editarLibro = function (dato) {
 
-        return $http.post(appBookOver.editarLibroURI, dato, {headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}});
+        return $http.post(appBookOver.editarLibroURI, dato, {headers: {'Authorization': token}});
     };
     //cmprbr lo que hace el update del controler de agenda -> actualiza variable del scope
 
@@ -76,12 +93,12 @@ appBookOver.service('WebService', ['$http', function ($http) {
     this.recuperaTodosLibros = function(idUsuario) {
         var url = appBookOver.baseURI + 'usuario/' + idUsuario; // + ??? cmprbr url
         return $http.get(appBookOver.baseURI);
-    }
+    };
 
     this.recuperaLibro = function(idLibro) {
         var url = appBookOver.baseURI + 'libro/' + idLibro; //+ ?? cmprbr url
         return $http.get(url);
-    }
+    };
     // this.retrieveContact = function(nif) {
     //     var url = appBookOver.baseURI + nif;
     //     return $http.get(url);
