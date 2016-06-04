@@ -29,4 +29,9 @@ public class JpaLibro implements IDataLibro {
         List<Libro> resultados = query.getResultList();
         return resultados.size() == 0 ? null : resultados.get(0);
     }
+
+    @Override
+    public void actualizar(Libro libro) {
+        mEntityManager.merge(libro);
+    }
 }

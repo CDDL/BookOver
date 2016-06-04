@@ -3,6 +3,7 @@ package servicios;
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataListUser;
 import modelo.datos.transferencia.DataLogin;
+import modelo.datos.transferencia.DataProfileUser;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
 
@@ -54,6 +55,15 @@ public class ServicioUsuario {
                 .build();
     }
 
+    @DELETE
+    @Path("login")
+    public Response logout(@HeaderParam("Authentication") String token) {
+        mTokenController.deleteToken(token);
+
+        return status(OK)
+                .build();
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response register(Usuario usuario) {
@@ -71,5 +81,20 @@ public class ServicioUsuario {
         Usuario usuario = mTokenController.getUserFromToken(token);
         DataListUser[] personas = mUserController.listaOtrasPersonas(usuario);
         return Response.ok(personas).build();
+    }
+
+    @GET
+    @Path("{idusuario}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response showUserProfile(@HeaderParam("Authentication") String token,@PathParam("idusuario") String idusuario){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario;
+        if (idusuario == null) {
+            usuario = mTokenController.getUserFromToken(token);
+        }else{
+            usuario = mUserController.getUserById(Integer.parseInt(idusuario));
+        }
+        DataProfileUser data = mUserController.visualizaUser(usuario);
+        return Response.ok(data).build();
     }
 }

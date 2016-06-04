@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+import java.util.Objects;
 
 @XmlRootElement
 @Entity
@@ -21,6 +22,13 @@ import java.util.List;
         @NamedQuery(name = "Usuario.getAllWithoutMe", query = "SELECT p FROM Usuario p WHERE p != :user")
 })
 public class Usuario implements DataLogin, DataRegister {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return id == usuario.id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

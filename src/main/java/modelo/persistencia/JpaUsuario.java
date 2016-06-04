@@ -3,6 +3,7 @@ package modelo.persistencia;
 import controladores.comunicacionDatos.IDataUsuario;
 import modelo.datos.entidades.Usuario;
 import modelo.datos.transferencia.DataListUser;
+import modelo.datos.transferencia.DataProfileUser;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -59,4 +60,11 @@ public class JpaUsuario implements IDataUsuario {
 
         return miResult;
     }
+
+    @Override
+    public void actualizar(Usuario usuario) {
+        mEntityManager.merge(usuario);
+    }
+
+
 }

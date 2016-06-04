@@ -11,4 +11,5 @@ public interface IDataLibro {
     Libro getById(int id);
 
 
+    void actualizar(Libro miLibro);
 }

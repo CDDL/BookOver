@@ -14,4 +14,6 @@ public interface IDataToken {
     void test();
 
     Usuario getUserFromToken(Token token);
+
+    void removeToken(Token tokenId);
 }

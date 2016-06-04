@@ -16,4 +16,5 @@ public interface IControllerToken {
 
     Usuario getUserFromToken(String token);
 
+    void deleteToken(String token);
 }
