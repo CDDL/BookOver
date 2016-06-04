@@ -43,7 +43,7 @@
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:10em; width:60em" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:15em; width:60em" id="page-wrapper">
 
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-lg-12 ">
                     <h1 style="color: #ffffff;" class="page-header">
-                        Perfil del usuario
+                        Perfil del usuario    <a href="modifyprofile.html" style="color: white"><i class="glyphicon glyphicon-edit"></i></a>
                     </h1>
 
                     <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
@@ -87,7 +87,7 @@
                                 </tr>
                                 </thead>
 
-                                <tbody id="content">
+                                <tbody id="contentLibros">
                                 <tr>
                                     <td>Data</td>
                                     <td>Data</td>
@@ -112,7 +112,48 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        <h1>Lista de transacciones</h1>
+                        <div class="table-responsive">
+                            <table class="records_list col-lg-12 table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Autor</th>
+                                    <th>Editorial</th>
+                                    <th>ISBN</th>
+                                    <th>Estado</th>
+                                    <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
+                                    <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
+                                    <th><img src="../resources/compra.png" style="width: 2em;"></th>
+                                </tr>
+                                </thead>
 
+                                <tbody id="contentTransaccion">
+                                <tr>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td>Data</td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
 

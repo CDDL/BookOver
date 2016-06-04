@@ -13,7 +13,7 @@ appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, W
         WebService.login(user, password)
             .then(function (jsonObject) {
                 console.log("Login success");
-
+                location = "profilepage.html";
                 //console.log(jsonObject);
                 token = jsonObject.data.token;
                 WebService.setToken(token);
@@ -32,13 +32,14 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
         else WebService.register(user, password, email, localization)
             .then(function successCallback(response) {
                 console.log("Registrado");
+                location = "loginPage.html";
             });
     };
 }]);
 
 appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
-
+    
     self.editar = function (password, password_check, email, localization) {
         var dato={'usuario': { 'password': password,'email': email, 'ubicacion':localization}};
         console.log(dato);
@@ -51,12 +52,10 @@ appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope,
     };
 }]);
 
-
 appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
     // $scope.usuario ?? cmprbr
-    
 
     self.recuperaTodosLibros = function (idUsuario){
         WebService.recuperaTodosLibros(idUsuario)
@@ -90,6 +89,12 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
             });
+    };
+
+    self.retirarLibro = function(idLibro) {
+        WebService.retirarLibro(idLibro).then(function successCallback(response){
+            console.log("Libro retirado");
+        });
     };
 
 }]);
