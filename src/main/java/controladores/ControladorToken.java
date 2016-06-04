@@ -52,7 +52,13 @@ public class ControladorToken implements IControllerToken {
     @Override
     public Usuario getUserFromToken(String tokenString) {
         Token token = mDataToken.getByToken(tokenString);
-        return token.getUsuario();
+        return token == null? null: token.getUsuario();
     }
 
+    @Override
+    public void deleteToken(String tokenString) {
+        if(tokenString == null || tokenString.length()==0) return;
+        Token token = mDataToken.getByToken(tokenString);
+        mDataToken.removeToken(token);
+    }
 }

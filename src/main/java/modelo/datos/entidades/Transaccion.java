@@ -12,7 +12,6 @@ import java.util.Set;
  */
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "fecha", "aceptada"})
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
 public class Transaccion {
@@ -38,49 +37,36 @@ public class Transaccion {
     @JoinColumn(name = "id_usuario_recibe", referencedColumnName = "id")
     private Usuario usuarioRecibeTransaccion;
 
-
-    public Transaccion() {
-
-    }
-
-    public Transaccion(Date fecha, Boolean aceptada) {
-
-        this.fecha = fecha;
-        this.aceptada = aceptada;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Date getFecha() {
-        return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public Boolean getAceptada() {
-        return aceptada;
-    }
-
     public void setAceptada(Boolean aceptada) {
         this.aceptada = aceptada;
     }
 
-    @XmlTransient
-    public Usuario getUsuarioIniciaTransaccion() {
-        return usuarioIniciaTransaccion;
-    }
-
     public void setUsuarioIniciaTransaccion(Usuario usuarioIniciaTransaccion) {
         this.usuarioIniciaTransaccion = usuarioIniciaTransaccion;
+    }
+
+    public void setUsuarioRecibeTransaccion(Usuario usuarioRecibeTransaccion) {
+        this.usuarioRecibeTransaccion = usuarioRecibeTransaccion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public Boolean getAceptada() {
+        return aceptada;
     }
 
     @XmlTransient
@@ -88,7 +74,8 @@ public class Transaccion {
         return usuarioRecibeTransaccion;
     }
 
-    public void setUsuarioRecibeTransaccion(Usuario usuarioRecibeTransaccion) {
-        this.usuarioRecibeTransaccion = usuarioRecibeTransaccion;
+    @XmlTransient
+    public Usuario getUsuarioIniciaTransaccion() {
+        return usuarioIniciaTransaccion;
     }
 }

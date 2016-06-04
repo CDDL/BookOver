@@ -10,13 +10,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "fecha", "aceptada", "confirmacionDevolucion"})
 @Entity
 @PrimaryKeyJoinColumn(name="id")
 public class Prestamo extends Transaccion{
 
     @Column
-    private Boolean confirmacionDevolucion;
+    private boolean confirmacionDevolucion;
+
+    @Column
+    private boolean mLibroRecibido;
+
+    @Column
+    private boolean mLibroDevuelto;
 
     @XmlTransient
     @ManyToOne
@@ -31,7 +36,7 @@ public class Prestamo extends Transaccion{
     public Prestamo() {
     }
 
-    public Boolean getConfirmacionDevolucion() {
+    public boolean getConfirmacionDevolucion() {
         return confirmacionDevolucion;
     }
 
@@ -45,5 +50,21 @@ public class Prestamo extends Transaccion{
 
     public void setLibro(Libro libro) {
         this.libro = libro;
+    }
+
+    public boolean getLibroRecibido() {
+        return mLibroRecibido;
+    }
+
+    public void setLibroRecibido(boolean libroRecibido) {
+        mLibroRecibido = libroRecibido;
+    }
+
+    public void setLibroDevuelto(boolean libroDevuelto) {
+        mLibroDevuelto = libroDevuelto;
+    }
+
+    public boolean getLibroDevuelto() {
+        return mLibroDevuelto;
     }
 }

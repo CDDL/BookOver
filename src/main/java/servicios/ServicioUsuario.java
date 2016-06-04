@@ -54,6 +54,15 @@ public class ServicioUsuario {
                 .build();
     }
 
+    @DELETE
+    @Path("login")
+    public Response logout(@HeaderParam("Authentication") String token) {
+        mTokenController.deleteToken(token);
+
+        return status(OK)
+                .build();
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response register(Usuario usuario) {

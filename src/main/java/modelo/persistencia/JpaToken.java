@@ -43,6 +43,11 @@ public class JpaToken implements IDataToken {
 
     @Override
     public Usuario getUserFromToken(Token token) {
-        return null;
+        return token.getUsuario();
+    }
+
+    @Override
+    public void removeToken(Token token) {
+        mEntityManager.remove(token);
     }
 }

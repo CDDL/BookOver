@@ -20,10 +20,10 @@ public class JpaTest {
         mEntityManager.createQuery("DELETE FROM Conversacion m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM FotoLibro m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Intercambio m").executeUpdate();
-        mEntityManager.createQuery("DELETE FROM Libro m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Prestamo m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Token m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Transaccion m").executeUpdate();
+        mEntityManager.createQuery("DELETE FROM Libro m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Usuario m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Valoracion m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Venta m").executeUpdate();

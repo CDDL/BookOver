@@ -44,6 +44,7 @@ public class ControladorUsuario implements IControllerUsuario {
         usuarioIdentificado.setEmail(usuario.getEmail());
         usuarioIdentificado.setPassword(usuario.getPassword());
         usuarioIdentificado.setUbicacion(usuario.getUbicacion());
+        mDataUsuario.actualizar(usuarioIdentificado);
     }
 
     @Override

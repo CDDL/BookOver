@@ -59,4 +59,9 @@ public class JpaUsuario implements IDataUsuario {
 
         return miResult;
     }
+
+    @Override
+    public void actualizar(Usuario usuario) {
+        mEntityManager.merge(usuario);
+    }
 }

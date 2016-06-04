@@ -14,4 +14,6 @@ public interface IDataUsuario {
     Usuario getById(int id);
 
     DataListUser[] listaPersonas(Usuario usuario);
+
+    void actualizar(Usuario usuario);
 }

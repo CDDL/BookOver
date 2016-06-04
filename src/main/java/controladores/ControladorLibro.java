@@ -2,6 +2,7 @@ package controladores;
 
 import controladores.comunicacionDatos.IDataLibro;
 import modelo.datos.entidades.Libro;
+import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerLibro;
 
 import javax.inject.Inject;
@@ -39,6 +40,7 @@ public class ControladorLibro implements IControllerLibro {
         miLibro.setInfoAdicional(libro.getInfoAdicional());
         miLibro.setIsbn(libro.getIsbn());
         miLibro.setVisible(libro.isVisible());
+        mDataLibro.actualizar(miLibro);
 
     }
 
@@ -46,5 +48,15 @@ public class ControladorLibro implements IControllerLibro {
     public void retirarLibro(int idlibro) {
         Libro miLibro = mDataLibro.getById(idlibro);
         miLibro.setVisible(false);
+    }
+
+    @Override
+    public Usuario getUserFromLibro(Libro libro) {
+        return libro.getUsuario();
+    }
+
+    @Override
+    public boolean existeLibroId(int idLibro) {
+        return mDataLibro.getById(idLibro) != null;
     }
 }
