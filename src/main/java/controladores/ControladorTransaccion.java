@@ -3,6 +3,7 @@ package controladores;
 import controladores.comunicacionDatos.IDataPrestamo;
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Prestamo;
+import modelo.datos.entidades.Transaccion;
 import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerTransaccion;
 
@@ -28,11 +29,13 @@ public class ControladorTransaccion implements IControllerTransaccion {
         prestamo.setUsuarioRecibeTransaccion(libroSolicitado.getUsuario());
         prestamo.setLibro(libroSolicitado);
         prestamo.setAceptada(false);
+        prestamo.setLibroDevuelto(false);
+        prestamo.setLibroRecibido(false);
         return mDataPrestamos.addPrestamo(prestamo);
     }
 
     @Override
-    public void actualizar(Prestamo transaccionPrestamo) {
+    public void actualizar(Transaccion transaccionPrestamo) {
         mDataPrestamos.actualizar(transaccionPrestamo);
     }
 }

@@ -77,13 +77,14 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
 
 
     @Test
-    public void prestamoRecibido_libroYaPrestado_respuesta409() {
+    public void prestamoRecibido_libroYaRecibido_respuesta409() {
         //PRE
         String token1 = mTestUtils.logInUser1();
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
         mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO
         Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token1).put(null);
@@ -91,6 +92,4 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(409));
     }
-
-
 }

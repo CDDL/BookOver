@@ -2,6 +2,7 @@ package modelo.persistencia;
 
 import controladores.comunicacionDatos.IDataPrestamo;
 import modelo.datos.entidades.Prestamo;
+import modelo.datos.entidades.Transaccion;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,7 +31,7 @@ public class JpaPrestamos implements IDataPrestamo {
     }
 
     @Override
-    public void actualizar(Prestamo transaccionPrestamo) {
+    public void actualizar(Transaccion transaccionPrestamo) {
         mEntityManager.merge(transaccionPrestamo);
     }
 }

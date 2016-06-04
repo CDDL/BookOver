@@ -32,6 +32,8 @@ public class TestUtils {
         login.setUsername("test");
         login.setPassword("139123");
         Response loginResponse = WebClient.create(URI_APP_LOGIN).post(login);
+        if (loginResponse.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Login de user 1 ha fallado");
         return loginResponse.readEntity(Token.class).getToken();
     }
 
@@ -47,6 +49,8 @@ public class TestUtils {
         login.setUsername("test2");
         login.setPassword("139123");
         Response loginResponse = WebClient.create(URI_APP_LOGIN).post(login);
+        if (loginResponse.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Login de user 2 ha fallado");
         return loginResponse.readEntity(Token.class).getToken();
     }
 
@@ -62,6 +66,8 @@ public class TestUtils {
         login.setUsername("test3");
         login.setPassword("139123");
         Response loginResponse = WebClient.create(URI_APP_LOGIN).post(login);
+        if (loginResponse.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Login de user 3 ha fallado");
         return loginResponse.readEntity(Token.class).getToken();
     }
 
@@ -76,13 +82,18 @@ public class TestUtils {
         libroPrestable.setEsPrestable(true);
         libroPrestable.setEsIntercambiable(false);
         libroPrestable.setEsVendible(false);
-        return WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable).readEntity(Integer.class);
+        Response response = WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable);
+        if (response.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Registrar libro prestable fallido.");
+        return response.readEntity(Integer.class);
     }
 
     public int solicitarPrestamos(String token, int idLibro) {
         Libro libroASolicitar = new Libro();
         libroASolicitar.setId(idLibro);
-        return WebClient.create(URI_APP_PETICION_PRESTAMO).header("Authentication", token).post(libroASolicitar).readEntity(Integer.class);
+        Response response = WebClient.create(URI_APP_PETICION_PRESTAMO).header("Authentication", token).post(libroASolicitar);
+        if (response.getStatusInfo().getStatusCode() != 200) throw new RuntimeException("Solicitar prestamo fallido.");
+        return response.readEntity(Integer.class);
     }
 
     public int registerBookNoPrestableIntercambiableVendible(String token) {
@@ -96,10 +107,24 @@ public class TestUtils {
         libroPrestable.setEsPrestable(false);
         libroPrestable.setEsIntercambiable(false);
         libroPrestable.setEsVendible(false);
-        return WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable).readEntity(Integer.class);
+        Response response = WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable);
+        if (response.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Registrar libro no prestable/intercambiable/vendible fallido.");
+        return response.readEntity(Integer.class);
     }
 
-    public void aceptarPrestamo(String token1, int idTransaccion) {
-        WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token1).put(null);
+    public void aceptarPrestamo(String token, int idTransaccion) {
+        if (WebClient.create(URI_APP_PETICION_PRESTAMO_ACEPTAR + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Aceptar prestamo fallido.");
+    }
+
+    public void confirmarPrestamoRecibido(String token, int idTransaccion) {
+        if (WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Confirmar prestamo fallido.");
+    }
+
+    public void confirmarPrestamoDevuelto(String token, int idTransaccion) {
+        if (WebClient.create(URI_APP_PETICION_PRESTAMO_DEVUELTO + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Confirmar devolucion fallido.");
     }
 }

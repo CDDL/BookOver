@@ -39,10 +39,11 @@ public class ServicioTransacciones {
 
         if(usuarioQuePresta == null) return status(UNAUTHORIZED).build();
         if(transaccionPrestamo == null) return status(NOT_FOUND).build();
-        if(!transaccionPrestamo.getUsuarioRecibeTransaccion().equals(usuarioQuePresta)) status(FORBIDDEN).build();
+        if(!transaccionPrestamo.getUsuarioRecibeTransaccion().equals(usuarioQuePresta)) return status(FORBIDDEN).build();
         if(transaccionPrestamo.getAceptada()) return status(CONFLICT).build();
 
         transaccionPrestamo.setAceptada(true);
+        mControllerTransaccion.actualizar(transaccionPrestamo);
 
         return status(OK)
                 .build();

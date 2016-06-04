@@ -2,6 +2,7 @@ package servicios.comunicacionControlador;
 
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Prestamo;
+import modelo.datos.entidades.Transaccion;
 import modelo.datos.entidades.Usuario;
 
 /**
@@ -13,5 +14,5 @@ public interface IControllerTransaccion {
 
     int nuevaSolicitudPrestamos(Usuario usuarioQueSolicita, Libro libroSolicitado);
 
-    void actualizar(Prestamo transaccionPrestamo);
+    void actualizar(Transaccion transaccionPrestamo);
 }
