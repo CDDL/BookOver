@@ -32,7 +32,7 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
         else WebService.register(user, password, email, localization)
             .then(function successCallback(response) {
                 console.log("Registrado");
-                location = "loginPage.html";
+                //location = "loginPage.html";
             });
     };
 }]);
@@ -42,8 +42,7 @@ appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope,
     
     self.editar = function (password, password_check, email, localization) {
         var dato={'usuario': { 'password': password,'email': email, 'ubicacion':localization}};
-        console.log(dato);
-        console.log(WebService.getToken());
+        //console.log(WebService.getToken());//borrar
         if (password != password_check) console.log("Error contraseñas");
         else WebService.editarPerfil(dato)
             .then(function successCallback(response) {
@@ -74,11 +73,11 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
 
     self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
         var dato = { 'libro': {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
-
-        WebService.registrarLibro(dato)
+        console.log(dato);
+/*        WebService.registrarLibro(dato)
             .then(function successCallback(response) {
                 console.log("Libro registrado");
-            });
+            });*/
     };
 
     //cmprbr - esta funcion incluye el id

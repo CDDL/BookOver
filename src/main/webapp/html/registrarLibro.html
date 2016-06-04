@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="BookOver">
+<html lang="es">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="../js/foto_loader.js"></script>
 </head>
-<body  class="fondo" ng-controller="CtrlLibro as ctrlLibro">
+<body  class="fondo" ng-app="BookOver">
 
 <div id="wrapper">
 
@@ -39,7 +39,7 @@
                         Registra un libro
                     </h1>
 
-                    <div class="panel-body">
+                    <div class="panel-body" ng-controller="CtrlLibro as ctrlLibro">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">
@@ -76,7 +76,7 @@
                                 <label class="texto-form" for="infoAdicional">Comentarios</label>
                                 <input type="text" ng-model="infoAdicional" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
                             </div>
-                            <input type="submit" ng-click="ctrlLibro.registrarLibr(titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, fotos)" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
+                            <input type="submit" ng-click="ctrlLibro.registrarLibro(titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, fotos)" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
                         </form>
 
                     </div>

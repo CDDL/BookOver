@@ -67,18 +67,26 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
     };
 
     this.editarPerfil = function (dato) {
-        return $http.post(appBookOver.editarPerfilURI,dato);
+
+        //codigo para probar
+        console.log(dato); //borrar
+        $rootScope.token="x";   //borrar
+        return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token}} );
+
+        //codigo final
+        //return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token.token}} );
+
     };
 
     this.registrarLibro = function (dato) {
         //dataFinal = injectDataUsuario({'nombreLibro': nombreLibro});
 
-        return $http.post(appBookOver.registrarLibroURI, dato,  {headers: {'Authorization': token}});
+        return $http.post(appBookOver.registrarLibroURI, dato,  {'headers': {'Authorization': $rootScope.token}});
     };
 
     this.editarLibro = function (dato) {
         var idlibro = dato.libro.id;
-        return $http.post(appBookOver.editarLibroURI + idlibro, dato, {headers: {'Authorization': token}});
+        return $http.post(appBookOver.editarLibroURI + idlibro, dato, {'headers': {'Authorization': $rootScope.token}});
     };
     //cmprbr lo que hace el update del controler de agenda -> actualiza variable del scope
     
