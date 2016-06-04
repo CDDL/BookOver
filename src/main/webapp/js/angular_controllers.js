@@ -39,7 +39,15 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
 
 appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
-    
+
+
+    WebService.getPerfil("").then(function (response) {
+        console.log(response);
+        $scope.miPerfil=response.data;
+    }, function errorCallBack(response){
+        console.log("get profile failed");
+    });
+
     self.editar = function (password, password_check, email, localization) {
         var dato={'usuario': { 'password': password,'email': email, 'ubicacion':localization}};
         //console.log(WebService.getToken());//borrar

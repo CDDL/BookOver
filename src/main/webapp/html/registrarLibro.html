@@ -91,7 +91,7 @@
                                 <label class="texto-form" for="infoAdicional">Comentarios</label>
                                 <input type="text" ng-model="infoAdicional" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
                             </div>
-                            <input type="submit" ng-click="ctrlLibro.registrarLibro(titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, fotos)" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
+                            <input ng-click="ctrlLibro.registrarLibro(titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, fotos)" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
                         </form>
 
                     </div>
