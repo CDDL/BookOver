@@ -2,17 +2,22 @@
 * Created by Demils on 24/04/2016.
 */
 
+
 var appBookOver = angular.module('BookOver');
 
 appBookOver.controller('CtrlLogin', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
+
     self.login = function (user, password) {
         WebService.login(user, password)
             .then(function (jsonObject) {
                 console.log("Login success");
-                token = response.headers('Authorization');
-                console.log('Authorization: ' + response.headers('Authorization'))
+
+                //console.log(jsonObject);
+                token = jsonObject.data.token;
+                WebService.setToken(token);
+                //console.log('Authorization: ' + jsonObject.headers('Authorization'))
             }, function errorCallBack(response){
                 console.log("Login failed");
             });
@@ -30,6 +35,22 @@ appBookOver.controller('CtrlRegister', ['$scope', 'WebService', function ($scope
             });
     };
 }]);
+
+appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope, WebService) {
+    var self = this;
+
+    self.editar = function (password, password_check, email, localization) {
+        var dato={'usuario': { 'password': password,'email': email, 'ubicacion':localization}};
+        console.log(dato);
+        console.log(WebService.getToken());
+        if (password != password_check) console.log("Error contraseñas");
+        else WebService.editarPerfil(dato)
+            .then(function successCallback(response) {
+                console.log("Editado");
+            });
+    };
+}]);
+
 
 appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
@@ -53,7 +74,7 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     };
 
     self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
-        var dato = { libro: {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
+        var dato = { 'libro': {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
 
         WebService.registrarLibro(dato)
             .then(function successCallback(response) {
@@ -63,7 +84,7 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
 
     //cmprbr - esta funcion incluye el id
     self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
-        var dato = { libro: {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
+        var dato = { 'libro': {'id': id, 'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
         //CC
         WebService.editarLibro(dato)
             .then(function successCallback(response) {
@@ -71,12 +92,4 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             });
     };
 
-    self.retirarLibro = function(idLibro){
-        WebService.retirarLibro(idLibro)
-            .then(function successCallback(response) {
-                console.log("Libro retirado correctamente");
-            })
-    };
-    
-    
 }]);
