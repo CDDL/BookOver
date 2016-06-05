@@ -12,9 +12,6 @@ appBookOver.registerURI = appBookOver.baseURI + "usuarios";
 appBookOver.editarPerfilURI = appBookOver.baseURI + "usuarios/editar";
 appBookOver.registrarLibroURI = appBookOver.baseURI + "libros";
 
-appBookOver.editarLibroURI = appBookOver.baseURI + "libros/";
-appBookOver.retirarLibroURI = appBookOver.baseURI + "libros/";
-
 appBookOver.listarConversacionesURI = appBookOver.baseURI + "conversaciones/listaConversaciones";
 appBookOver.enviarMensajeURI = appBookOver.baseURI + "conversaciones/mensaje";
 
@@ -44,20 +41,13 @@ appBookOver.enviarMensajeURI = appBookOver.baseURI + "conversaciones/mensaje";
 //     };
 // }]);
 
-appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $rootScope) {
+appBookOver.service('WebService', ['$http', '$window', function ($http, $window) {
     // this.create = function(nombre, apellidos, nif) {
     //     dato = {'persona': {'nombre': nombre, 'apellidos': apellidos, 'nif': nif}};
     //     var url = appBookOver.baseURI + nif;
     //     return $http.put(url, dato);
     // }
-    
-    this.setToken=function (tkn){
-        $rootScope.token=tkn;
-    };
-    
-    this.getToken=function () {
-        return($rootScope);
-    };
+
     
     this.login = function (user, password) {
         var dato={'usuario':{'username': user, 'password': password}};
@@ -74,12 +64,11 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
 
         //codigo para probar
         console.log(dato); //borrar
-        $rootScope.token="x";   //borrar
-        return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token}} );
+       //console.log($http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}}) );
         //
 
         //codigo final
-        //return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $rootScope.token.token}} );
+        return $http.post(appBookOver.editarPerfilURI,dato, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}} );
 
     };
 
@@ -97,35 +86,26 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
 
 
     this.registrarLibro = function (dato) {
-
-        //codigo para probar
-        console.log(dato); //borrar
-        $rootScope.token="x";   //borrar
-        return $http.post(appBookOver.registrarLibroURI,dato, {'headers': {'Authorization': $rootScope.token}});
-        //
-
         //codigo final
-       // return $http.post(appBookOver.registrarLibroURI, dato,  {'headers': {'Authorization': $rootScope.token.token}});
-        //
+        console.log(dato); //borrar
+        return $http.post(appBookOver.registrarLibroURI,dato,  {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
     };
 
-    this.editarLibro = function (dato) {
-        var idlibro = dato.libro.id;
-        return $http.post(appBookOver.editarLibroURI + idlibro, dato, {'headers': {'Authorization': $rootScope.token}});
+    this.editarLibro = function (dato, idLibro) {
+        url=appBookOver.editarLibroURI + idLibro;
+        return $http.put(url, dato, {'headers': {'Authorization': $rootScope.token}});
     };
 
     this.recuperaTodosLibros = function(idUsuario) {
 
        //codigo final
         //var url = appBookOver.baseURI + 'libros/lista/' + idUsuario; //
-        
+        //return $http.get(url, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
         //
         //codigo de prueba
         url="libros.json";
-        //
-        
-        
         return $http.get(url);
+        //
     };
 
     this.recuperaLibro = function(idLibro) {
@@ -151,15 +131,20 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
     };
     
     this.mostrarConversacion = function(idConversacion) {
-        var url = appBookOver.baseURI + "conversaciones/" + idConversacion;
+        //codigo de prueba
+        var url = "conversacion.json";
+        //
+        //codigo final
+        //var url = appBookOver.baseURI + "conversaciones/" + idConversacion;
+        //
         return $http.get(url);
     };
 
     this.enviarMensaje = function(dato){
- 
- 
+        console.log(dato);
+        
         var url = appBookOver.enviarMensajeURI;
-        return $http.post(url, dato,  {'headers': {'Authorization': $rootScope.token.token}});
+        return $http.post(url, dato,  {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
     };
 
 }]);

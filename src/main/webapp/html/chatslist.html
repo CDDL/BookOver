@@ -68,7 +68,7 @@
 
                                 <tbody id="content">
                                 <tr ng-repeat="conversacion in misConversaciones">
-                                    <td><a href="userschat.html" ng-click="ctrl.mostrarConversacion(conversacion.id)">{{conversacion.conQuien}}</a></td>
+                                    <td><a href="userschat.html" ng-click="ctrl.setConversacion(conversacion.id, conversacion.conQuien)">{{conversacion.conQuien}}</a></td>
                                     <!--<td>{{conversacion.mensaje}}   ng-click="ctrl.prueba(conversacion}})"</td>-->
                                 </tr>
                                 </tbody>
