@@ -2,6 +2,7 @@ package modelo.persistencia;
 
 import controladores.comunicacionDatos.IDataLibro;
 import modelo.datos.entidades.Libro;
+import modelo.datos.entidades.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,5 +34,15 @@ public class JpaLibro implements IDataLibro {
     @Override
     public void actualizar(Libro libro) {
         mEntityManager.merge(libro);
+    }
+
+    @Override
+    public Libro[] getLibros(Usuario usuario) {
+        TypedQuery<Libro> query = mEntityManager.createNamedQuery("Libro.getLista", Libro.class);
+        query.setParameter("user", usuario);
+        List<Libro> resultados = query.getResultList();
+        Libro[] resultado = new Libro[resultados.size()];
+        resultado = resultados.toArray(resultado);
+        return resultado;
     }
 }
