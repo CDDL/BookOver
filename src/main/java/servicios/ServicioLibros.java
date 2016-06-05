@@ -79,9 +79,15 @@ public class ServicioLibros {
     @GET
     @Path("lista/{idUsuario}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response visualizarLibro(@HeaderParam("Authentication") String token,@PathParam("idUsuario") int idUsuario) {
+    public Response visualizarLibro(@HeaderParam("Authentication") String token,@PathParam("idUsuario") String idUsuario) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
-        Usuario usuario = mUserController.getUserById(idUsuario);
+       Usuario usuario;
+        if(idUsuario==null){
+            usuario = mTokenController.getUserFromToken(token);
+        }else{
+            usuario = mUserController.getUserById(Integer.parseInt(idUsuario));
+        }
+
         if(usuario==null) return status(NOT_FOUND).build();
         Libro[] libros = mLibroController.getLibrosUser(usuario);
         return status(OK).entity(libros).build();
