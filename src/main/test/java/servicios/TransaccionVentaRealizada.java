@@ -64,7 +64,7 @@ public class TransaccionVentaRealizada extends DatabaseTest {
         Response response = WebClient.create(URI_APP_PETICION_VENTA_REALIZADA + idTransaccion).header("Authentication", token3).put(null);
 
         //ESPERADO
-        assertThat(response.getStatusInfo().getStatusCode(), is(200));
+        assertThat(response.getStatusInfo().getStatusCode(), is(403));
     }
 
     @Test

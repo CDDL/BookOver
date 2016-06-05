@@ -22,9 +22,10 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
 
         //DADO
-        Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token1).put(null);
+        Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token2).put(null);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));
@@ -60,7 +61,7 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
         Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token3).put(null);
 
         //ESPERADO
-        assertThat(response.getStatusInfo().getStatusCode(), is(200));
+        assertThat(response.getStatusInfo().getStatusCode(), is(403));
     }
 
     @Test
@@ -87,7 +88,7 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO
-        Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token1).put(null);
+        Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_RECIBIDO + idTransaccion).header("Authentication", token2).put(null);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(409));

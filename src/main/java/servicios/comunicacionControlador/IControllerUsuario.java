@@ -25,4 +25,6 @@ public interface IControllerUsuario {
     Usuario getUserById(int para);
 
     DataProfileUser visualizaUser(Usuario usuario);
+
+    DataProfileUser getUserLibro(Libro libro);
 }

@@ -61,7 +61,7 @@ public class ServicioTransaccionesPrestamo {
 
         if(usuarioAlQueSePresta == null) return status(UNAUTHORIZED).build();
         if(transaccionPrestamo == null) return status(NOT_FOUND).build();
-        if(!transaccionPrestamo.getUsuarioIniciaTransaccion().equals(usuarioAlQueSePresta)) status(FORBIDDEN).build();
+        if(!transaccionPrestamo.getUsuarioIniciaTransaccion().equals(usuarioAlQueSePresta)) return status(FORBIDDEN).build();
         if(transaccionPrestamo.getLibroRecibido()) return status(CONFLICT).build();
 
         transaccionPrestamo.setLibroRecibido(true);
@@ -82,8 +82,6 @@ public class ServicioTransaccionesPrestamo {
         if(usuarioQuePresta == null) return status(UNAUTHORIZED).build();
         if(transaccionPrestamo == null) return status(NOT_FOUND).build();
         if(!transaccionPrestamo.getUsuarioRecibeTransaccion().equals(usuarioQuePresta)) return status(FORBIDDEN).build();
-        System.out.println(transaccionPrestamo.getLibroDevuelto());
-        System.out.println(transaccionPrestamo.getAceptada());
         if(transaccionPrestamo.getLibroDevuelto()) return status(CONFLICT).build();
         if(!transaccionPrestamo.getAceptada()) return status(CONFLICT).build();
 

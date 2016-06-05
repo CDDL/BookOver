@@ -31,6 +31,9 @@ public class Intercambio extends Transaccion {
     @JoinColumn(name="id_libro2", referencedColumnName = "id")
     private Libro libroBuscado;
 
+    @Column
+    private boolean mIntercambioRealizado;
+
     public Intercambio(boolean confirmacionUser1, boolean confirmacionUser2, Libro libroOfrecido, Libro libroBuscado) {
         this.confirmacionUser1 = confirmacionUser1;
         this.confirmacionUser2 = confirmacionUser2;
@@ -71,5 +74,13 @@ public class Intercambio extends Transaccion {
 
     public void setLibroBuscado(Libro libroBuscado) {
         this.libroBuscado = libroBuscado;
+    }
+
+    public boolean getIntercambioRealizado() {
+        return mIntercambioRealizado;
+    }
+
+    public void setIntercambioRealizado(boolean intercambioRealizado) {
+        mIntercambioRealizado = intercambioRealizado;
     }
 }

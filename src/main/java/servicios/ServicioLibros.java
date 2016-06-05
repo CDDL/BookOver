@@ -2,6 +2,7 @@ package servicios;
 
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataProfileUser;
 import servicios.comunicacionControlador.IControllerLibro;
 import servicios.comunicacionControlador.IControllerToken;
 import servicios.comunicacionControlador.IControllerUsuario;
@@ -101,6 +102,17 @@ public class ServicioLibros {
         Libro[] libros = mLibroController.getLibrosTitulo(query);
         return status(OK).entity(libros).build();
 
+    }
+
+    @GET
+    @Path("user/{idLibro}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findOwnerLibro(@HeaderParam("Authentication") String token, @PathParam("idLibro") int idLibro){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Libro libro = mLibroController.getLibro(idLibro);
+        if(libro==null) return status(NOT_FOUND).build();
+        DataProfileUser data = mUserController.getUserLibro(libro);
+        return status(OK).entity(data).build();
     }
 
 }
