@@ -11,7 +11,6 @@ public interface Config {
     String URI_APP_REGISTER = URI_APP_BASE + "usuarios";                                            //POST
     String URI_APP_EDITAR_PERFIL = URI_APP_BASE + "usuarios/editar";                                //POST
     String URI_APP_NUEVO_LIBRO = URI_APP_BASE + "libros";                                           //POST
-    String URI_APP_BUSCAR_LIBRO = URI_APP_BASE + "libros/buscar/";                                  //POST
     String URI_APP_PETICION_INTERCAMBIO = URI_APP_BASE + "transacciones/intercambio";               //POST
     String URI_APP_PETICION_PRESTAMO = URI_APP_BASE + "transacciones/prestamo";                     //POST
     String URI_APP_PETICION_COMPRA = URI_APP_BASE + "transacciones/compra/";                        //POST
@@ -29,4 +28,5 @@ public interface Config {
     String URI_APP_LISTAR_CONVERSACIONES = URI_APP_BASE + "conversaciones/listaConversaciones";     //GET
     String URI_APP_VISUALIZAR_CONVERSACION = URI_APP_BASE + "conversaciones/";                      //GET
     String URI_APP_VISUALIZAR_LIBROS = URI_APP_BASE + "libros/lista/";                              //GET
+    String URI_APP_BUSCAR_LIBRO = URI_APP_BASE + "libros/buscar/";                                  //GET
 }
