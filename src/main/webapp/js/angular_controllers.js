@@ -41,8 +41,8 @@ appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope,
     var self = this;
 
 
-    WebService.getPerfil("").then(function (response) {
-        console.log(response);
+    WebService.getPerfil("").then(function successCallback(response) {
+        console.log(response); //borrar
         $scope.miPerfil=response.data;
     }, function errorCallBack(response){
         console.log("get profile failed");
@@ -59,19 +59,64 @@ appBookOver.controller('CtrlProfile', ['$scope', 'WebService', function ($scope,
     };
 }]);
 
-appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
+
+
+appBookOver.controller('CtrlChat', ['$scope', 'WebService', function ($scope, WebService) {
     var self = this;
 
+    WebService.listarConversaciones().then(function successCallback(response) { //carga tus conversaciones en misConversaciones
+        console.log(response); //borrar
+        $scope.misConversaciones=response.data;
+    }, function errorCallBack(response){
+        console.log("get conversations failed");
+    });
+    
+    self.prueba= function(dato){
+        $scope.prueba=dato;
+    };
+    
+    self.mostarConversacion = function(conversacion){
+        WebService.mostrarConversacion(conversacion).then(function successCallback(response) {
+            console.log(response); //borrar
+            $scope.conversacion=response.data;
+        }, function errorCallBack(response){
+            console.log("get conversation failed");
+        });
+    };
+
+    self.enviarMensaje = function(dato){
+        WebService.enviarMensaje(dato).then(function successCallback(response) {
+            console.log(response); //borrar
+        }, function errorCallBack(response){
+            console.log("enviar mensaje failed");
+        });
+    };
+
+}]);
+
+appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
+    var self = this;
+    console.log("se inicia");
     // $scope.usuario ?? cmprbr
 
-    self.recuperaTodosLibros = function (idUsuario){
+    self.recuperaTodosLibros = function (idUsuario){ //recupera los libros de un usuario
         WebService.recuperaTodosLibros(idUsuario)
             .success(function(data) {
                 $scope.libros = data.libro;
             });
     };
 
-    self.recuperaLibro = function(idLibro) {
+ 
+    WebService.recuperaTodosLibros("")      //guarda tus propios libros en misLibros
+            .then(function successCallback(response) {
+                console.log(response); //borrar
+                $scope.misLibros=response.data;
+            }, function errorCallBack(response){
+                console.log("get profile failed");
+            });
+ 
+    
+    self.recuperaLibro = function(idLibro) { //recupera un libro a partir de su id
         WebService.recuperaLibro(idLibro)
             .success(function(data) {
                 console.log(data);
@@ -80,12 +125,26 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     };
 
     self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+
+        if (typeof esVendible === 'undefined') {
+            esVendible=false;
+        }
+        if (typeof esIntercambiable === 'undefined') {
+            esIntercambiable=false;
+        }
+        if (typeof esPrestable === 'undefined') {
+            esPrestable=false;
+        }
+        if (typeof precio === 'undefined') {
+            precio=0.0;
+        }
         var dato = { 'libro': {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
-        console.log(dato);
-/*        WebService.registrarLibro(dato)
+        
+        console.log(dato); //borrar
+        WebService.registrarLibro(dato)
             .then(function successCallback(response) {
                 console.log("Libro registrado");
-            });*/
+            });
     };
 
     //cmprbr - esta funcion incluye el id

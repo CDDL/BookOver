@@ -11,8 +11,12 @@ appBookOver.loginURI = appBookOver.baseURI + "usuarios/login";
 appBookOver.registerURI = appBookOver.baseURI + "usuarios";
 appBookOver.editarPerfilURI = appBookOver.baseURI + "usuarios/editar";
 appBookOver.registrarLibroURI = appBookOver.baseURI + "libros";
+
 appBookOver.editarLibroURI = appBookOver.baseURI + "libros/";
 appBookOver.retirarLibroURI = appBookOver.baseURI + "libros/";
+
+appBookOver.listarConversacionesURI = appBookOver.baseURI + "conversaciones/listaConversaciones";
+appBookOver.enviarMensajeURI = appBookOver.baseURI + "conversaciones/mensaje";
 
 // appBookOver.service('IdentificationService', [function () {
 //
@@ -93,19 +97,34 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
 
 
     this.registrarLibro = function (dato) {
-        //dataFinal = injectDataUsuario({'nombreLibro': nombreLibro});
 
-        return $http.post(appBookOver.registrarLibroURI, dato,  {'headers': {'Authorization': $rootScope.token}});
+        //codigo para probar
+        console.log(dato); //borrar
+        $rootScope.token="x";   //borrar
+        return $http.post(appBookOver.registrarLibroURI,dato, {'headers': {'Authorization': $rootScope.token}});
+        //
+
+        //codigo final
+       // return $http.post(appBookOver.registrarLibroURI, dato,  {'headers': {'Authorization': $rootScope.token.token}});
+        //
     };
 
     this.editarLibro = function (dato) {
         var idlibro = dato.libro.id;
         return $http.post(appBookOver.editarLibroURI + idlibro, dato, {'headers': {'Authorization': $rootScope.token}});
     };
-    //cmprbr lo que hace el update del controler de agenda -> actualiza variable del scope
-    
+
     this.recuperaTodosLibros = function(idUsuario) {
-        var url = appBookOver.baseURI + 'usuarios/' + idUsuario; // + ??? cmprbr url
+
+       //codigo final
+        //var url = appBookOver.baseURI + 'libros/lista/' + idUsuario; //
+        
+        //
+        //codigo de prueba
+        url="libros.json";
+        //
+        
+        
         return $http.get(url);
     };
 
@@ -118,20 +137,29 @@ appBookOver.service('WebService', ['$http', '$rootScope', function ($http, $root
         var url = appBookOver.retirarLibroURI + idLibro; //+ ?? cmprbr url
         return $http.delete(url, idLibro, {headers: {'Authorization': token}});
     };
+
     
-    // this.retrieveContact = function(nif) {
-    //     var url = appBookOver.baseURI + nif;
-    //     return $http.get(url);
-    // }
-    //
-    // this.delete = function(nif) {
-    //     var url = appBookOver.baseURI + nif;
-    //     var dato = {'nif': nif}
-    //     return $http.delete(url, dato);
-    // }
-    //
-    // this.update = function (persona) {
-    //     var url = appBookOver.baseURI + persona.persona.nif;
-    //     return $http.put(url, persona);
-    // }
+    //conversaciones
+    this.listarConversaciones = function() {
+        //codigo de prueba
+        var url="conversaciones.json";
+        //
+        //codigo final
+        //var url = appBookOver.listarConversacionesURI;
+        //
+        return $http.get(url);
+    };
+    
+    this.mostrarConversacion = function(idConversacion) {
+        var url = appBookOver.baseURI + "conversaciones/" + idConversacion;
+        return $http.get(url);
+    };
+
+    this.enviarMensaje = function(dato){
+ 
+ 
+        var url = appBookOver.enviarMensajeURI;
+        return $http.post(url, dato,  {'headers': {'Authorization': $rootScope.token.token}});
+    };
+
 }]);

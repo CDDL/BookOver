@@ -50,68 +50,62 @@
 
             <div class="row">
                 <div class="col-lg-12 ">
+                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlProfile as ctrl">
                     <h1 style="color: #ffffff;" class="page-header">
                         Perfil del usuario    <a href="modifyprofile.html" style="color: white"><i class="glyphicon glyphicon-edit"></i></a>
                     </h1>
 
-                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
+
                         <div class="table-responsive">
                         <table style="width:100%">
                             <tr id="username">
-                                <td>Nombre de usuario: {{username}}</td>
+                                <td>Nombre de usuario: {{miPerfil.DataProfileUser.username}}</td>
                             </tr>
                             <tr id="email">
-                                <td>Email: {{email}}</td>
+                                <td>Email: {{miPerfil.DataProfileUser.email}}</td>
                             </tr>
                             <tr id="ubicacion">
-                                <td>Ubicación: {{ubicacion}}</td>
+                                <td>Ubicación: {{miPerfil.DataProfileUser.ubicacion}}</td>
                             </tr>
                         </table>
                             </div>
+                    </div>
+                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlLibro as ctrl">
+                         <br>
+                         <h1>Lista de libros</h1>
+                         <div class="table-responsive">
+                             <table class="records_list col-lg-12 table table-striped">
+                                 <thead>
+                                 <tr>
+                                     <th>Título</th>
+                                     <th>Autor</th>
+                                     <th>Editorial</th>
+                                     <th>ISBN</th>
+                                     <th>Estado</th>
+                                     <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
+                                     <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
+                                     <th><img src="../resources/compra.png" style="width: 2em;"></th>
+                                 </tr>
+                                 </thead>
 
+                                 <tbody id="contentLibros">
+                                 <tr ng-repeat="libro in misLibros">
+                                     <td>{{libro.titulo}}</td>
+                                     <td>{{libro.autor}}</td>
+                                     <td>{{libro.editorial}}</td>
+                                     <td>{{libro.isbn}}</td>
+                                     <td>{{libro.estado}}</td>
+                                     <td ng-if="libro.esVendible"><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                     <td ng-if="!libro.esVendible"><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                     <td ng-if="libro.esIntercambiable"><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                     <td ng-if="!libro.esIntercambiable"><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                     <td ng-if="libro.esPrestable"><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                     <td ng-if="!libro.esPrestable"><img src="../resources/x.png" style="width: 1.5em;"></td>
 
-                        <br>
-                        <h1>Lista de libros</h1>
-                        <div class="table-responsive">
-                            <table class="records_list col-lg-12 table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Título</th>
-                                    <th>Autor</th>
-                                    <th>Editorial</th>
-                                    <th>ISBN</th>
-                                    <th>Estado</th>
-                                    <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
-                                    <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
-                                    <th><img src="../resources/compra.png" style="width: 2em;"></th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="contentLibros">
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-
-                                </tr>
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                 </tr>
+                                 </tbody>
+                             </table>
+                         </div>
                         <br>
                         <h1>Lista de transacciones</h1>
                         <div class="table-responsive">

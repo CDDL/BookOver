@@ -56,20 +56,20 @@
                     <h1 style="color: #ffffff;" class="page-header">
                         Lista de conversaciones
                     </h1>
-                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
+                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlChat as ctrl">
                         <div class="table-responsive">
                             <table class="records_list col-lg-12 table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Username</th>
-                                    <th>Mensaje</th>
+                                    <!--<th>Mensaje</th>-->
                                 </tr>
                                 </thead>
 
                                 <tbody id="content">
-                                <tr ng-repeat="item in data">
-                                    <td>{{conversacion.conQuien}}</td>
-                                    <td>{{conversacion.mensaje}}</td>
+                                <tr ng-repeat="conversacion in misConversaciones">
+                                    <td><a href="userschat.html" ng-click="ctrl.mostrarConversacion(conversacion.id)">{{conversacion.conQuien}}</a></td>
+                                    <!--<td>{{conversacion.mensaje}}   ng-click="ctrl.prueba(conversacion}})"</td>-->
                                 </tr>
                                 </tbody>
                             </table>
