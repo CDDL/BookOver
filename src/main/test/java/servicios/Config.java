@@ -27,5 +27,5 @@ public interface Config {
     String URI_APP_VISUALIZAR_USUARIO = URI_APP_BASE + "usuarios/";                                 //GET
     String URI_APP_LISTAR_CONVERSACIONES = URI_APP_BASE + "conversaciones/listaConversaciones";     //GET
     String URI_APP_VISUALIZAR_CONVERSACION = URI_APP_BASE + "conversaciones/";                      //GET
-    String URI_APP_VISUALIZAR_LIBRO = URI_APP_BASE + "libros/lista/";                               //GET
+    String URI_APP_VISUALIZAR_LIBROS = URI_APP_BASE + "libros/lista/";                               //GET
 }
