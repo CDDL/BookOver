@@ -4,6 +4,7 @@ import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerLibro;
 import servicios.comunicacionControlador.IControllerToken;
+import servicios.comunicacionControlador.IControllerUsuario;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -28,6 +29,9 @@ public class ServicioLibros {
 
     @Inject
     IControllerLibro mLibroController;
+
+    @Inject
+    IControllerUsuario mUserController;
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -70,6 +74,17 @@ public class ServicioLibros {
 
         return status(OK)
                 .build();
+    }
+
+    @GET
+    @Path("lista/{idUsuario}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response visualizarLibro(@HeaderParam("Authentication") String token,@PathParam("idUsuario") int idUsuario) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario = mUserController.getUserById(idUsuario);
+        if(usuario==null) return status(NOT_FOUND).build();
+        Libro[] libros = mLibroController.getLibrosUser(usuario);
+        return status(OK).entity(libros).build();
     }
 
 }

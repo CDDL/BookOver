@@ -19,4 +19,6 @@ public interface IControllerLibro{
     Usuario getUserFromLibro(Libro libro);
 
     boolean existeLibroId(int idLibro);
+
+    Libro[] getLibrosUser(Usuario usuario);
 }

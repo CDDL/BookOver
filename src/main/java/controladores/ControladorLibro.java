@@ -60,4 +60,10 @@ public class ControladorLibro implements IControllerLibro {
     public boolean existeLibroId(int idLibro) {
         return mDataLibro.getById(idLibro) != null;
     }
+
+    @Override
+    public Libro[] getLibrosUser(Usuario usuario) {
+
+        return mDataLibro.getLibros(usuario);
+    }
 }
