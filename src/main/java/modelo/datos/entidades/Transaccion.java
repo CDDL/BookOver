@@ -16,6 +16,11 @@ import java.util.Set;
 @Inheritance(strategy =InheritanceType.JOINED)
 public class Transaccion {
 
+    public static final int TIPO_TRANSACCION_PRESTAR = 1;
+    public static final int TIPO_TRANSACCION_VENTA = 0;
+    public static final int TIPO_TRANSACCION_INTERCAMBIO = 2;
+    public static final int TIPO_TRANSACCION_DEVOLVER_PRESTAMO = 4;
+    public static final int TIPO_TRANSACCION_COMPRA = 3;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;

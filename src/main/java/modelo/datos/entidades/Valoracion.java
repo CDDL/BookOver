@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlType;
  */
 
 @XmlRootElement
-@XmlType(propOrder = {"id", "descripcion", "puntuacion"})
 @Entity
 public class Valoracion {
 

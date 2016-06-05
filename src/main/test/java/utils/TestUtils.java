@@ -3,6 +3,7 @@ package utils;
 import modelo.datos.entidades.Libro;
 import modelo.datos.entidades.Token;
 import modelo.datos.entidades.Usuario;
+import modelo.datos.transferencia.DataIntercambio;
 import modelo.datos.transferencia.DataLogin;
 import org.apache.cxf.jaxrs.client.WebClient;
 
@@ -141,7 +142,7 @@ public class TestUtils {
         libroPrestable.setEsVendible(true);
         Response response = WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable);
         if (response.getStatusInfo().getStatusCode() != 200)
-            throw new RuntimeException("Registrar libro prestable fallido.");
+            throw new RuntimeException("Registrar libro vendible fallido.");
         return response.readEntity(Integer.class);
     }
 
@@ -157,5 +158,38 @@ public class TestUtils {
         if (WebClient.create(URI_APP_PETICION_VENTA_REALIZADA + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
             throw new RuntimeException("Confirmar venta realizada fallido");
 
+    }
+
+    public int registerBookIntercambiable(String token) {
+        Libro libroPrestable = new Libro();
+        libroPrestable.setTitulo("Libro custom");
+        libroPrestable.setAutor("yoMismo");
+        libroPrestable.setEditorial("Editorial rara");
+        libroPrestable.setIsbn("ISBNRANDOM");
+        libroPrestable.setEstado("Roto");
+        libroPrestable.setInfoAdicional("Lo encontre en la calle");
+        libroPrestable.setEsPrestable(false);
+        libroPrestable.setEsIntercambiable(true);
+        libroPrestable.setEsVendible(false);
+        Response response = WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable);
+        if (response.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Registrar libro intercambiable fallido.");
+        return response.readEntity(Integer.class);
+    }
+
+    public int solicitarIntercambio(String token, int idLibro1, int idLibro2) {
+        DataIntercambio dataIntercambio = new DataIntercambio();
+        dataIntercambio.setLibroSolicitante(idLibro1);
+        dataIntercambio.setLibroSolicitado(idLibro2);
+
+        Response response = WebClient.create(URI_APP_PETICION_INTERCAMBIO).header("Authentication", token).post(dataIntercambio);
+        if (response.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Solicitar intercambio fallido.");
+        return response.readEntity(Integer.class);
+    }
+
+    public void confirmarIntercambioRealizado(String token, int idTransaccion) {
+        if (WebClient.create(URI_APP_PETICION_INTERCAMBIO_REALIZADO + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Confirmar intercambio fallido");
     }
 }

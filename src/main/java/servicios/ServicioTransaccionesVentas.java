@@ -60,7 +60,7 @@ public class ServicioTransaccionesVentas {
 
         if(usuarioQueVende == null) return status(UNAUTHORIZED).build();
         if(transaccionVenta == null) return status(NOT_FOUND).build();
-        if(!transaccionVenta.getUsuarioRecibeTransaccion().equals(usuarioQueVende)) status(FORBIDDEN).build();
+        if(!transaccionVenta.getUsuarioRecibeTransaccion().equals(usuarioQueVende)) return status(FORBIDDEN).build();
         if(!transaccionVenta.getAceptada()) return status(CONFLICT).build();
         if(transaccionVenta.getLibroVendido()) return status(CONFLICT).build();
 

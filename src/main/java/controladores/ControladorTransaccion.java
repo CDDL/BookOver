@@ -1,12 +1,13 @@
 package controladores;
 
-import controladores.comunicacionDatos.IDataPrestamo;
-import controladores.comunicacionDatos.IDataTransaccion;
-import controladores.comunicacionDatos.IDataVenta;
+import controladores.comunicacionDatos.*;
 import modelo.datos.entidades.*;
+import modelo.datos.transferencia.DataTransacciones;
 import servicios.comunicacionControlador.IControllerTransaccion;
 
 import javax.inject.Inject;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Demils on 02/06/2016.
@@ -21,6 +22,12 @@ public class ControladorTransaccion implements IControllerTransaccion {
 
     @Inject
     private IDataTransaccion mDataTransaccion;
+
+    @Inject
+    private IDataIntercambios mDataIntercambios;
+
+    @Inject
+    private IDataValoraciones mDataValoraciones;
 
     @Override
     public Prestamo getPrestamo(int idTransaccion) {
@@ -63,6 +70,94 @@ public class ControladorTransaccion implements IControllerTransaccion {
     @Override
     public Transaccion getTransaccion(int idTransaccion) {
         return mDataTransaccion.getTransaccion(idTransaccion);
+    }
+
+    @Override
+    public int nuevaSolicitudIntercambio(Usuario usuarioSolicitante, Libro libroDelSolicitante, Libro libroDelSolicitado) {
+        Intercambio intercambio = new Intercambio();
+        intercambio.setUsuarioIniciaTransaccion(usuarioSolicitante);
+        intercambio.setUsuarioRecibeTransaccion(libroDelSolicitado.getUsuario());
+        intercambio.setLibroOfrecido(libroDelSolicitante);
+        intercambio.setLibroBuscado(libroDelSolicitado);
+        intercambio.setAceptada(false);
+        intercambio.setIntercambioRealizado(false);
+        return mDataIntercambios.addIntercambio(intercambio);
+    }
+
+    @Override
+    public Intercambio getIntercambio(int idTransaccion) {
+        return mDataIntercambios.getIntercambio(idTransaccion);
+    }
+
+    @Override
+    public void addValoracion(int idTransaccion, Valoracion valoracion) {
+        Transaccion transaccion = mDataTransaccion.getTransaccion(idTransaccion);
+        valoracion.setTransaccion(transaccion);
+        mDataValoraciones.addValoracion(valoracion);
+    }
+
+    @Override
+    public List<DataTransacciones> getListaTransacciones(Usuario usuarioSolicitado) {
+        List<Transaccion> listaTransaccionesRecibidas = usuarioSolicitado.getListaTransaccionesRecibidas();
+        List<Transaccion> listaTransaccionesRealizadas = usuarioSolicitado.getListaTransaccionesIniciadas();
+
+        List<DataTransacciones> listaTransaccioneFormateadas = new LinkedList<>();
+
+        for (Transaccion transaccion:listaTransaccionesRealizadas) {
+            DataTransacciones dataTransacciones = new DataTransacciones();
+            dataTransacciones.setId(transaccion.getId());
+            dataTransacciones.setTipoTransaccion(getTipoTransaccionRealizada(transaccion));
+            dataTransacciones.setConQuien(transaccion.getUsuarioRecibeTransaccion().getUsername());
+            listaTransaccioneFormateadas.add(dataTransacciones);
+        }
+
+        for (Transaccion transaccion:listaTransaccionesRecibidas) {
+            DataTransacciones dataTransacciones = new DataTransacciones();
+            dataTransacciones.setId(transaccion.getId());
+            dataTransacciones.setTipoTransaccion(getTipoTransaccionRecibida(transaccion));
+            dataTransacciones.setConQuien(transaccion.getUsuarioIniciaTransaccion().getUsername());
+            listaTransaccioneFormateadas.add(dataTransacciones);
+        }
+
+        return null;
+    }
+
+    private int getTipoTransaccionRealizada(Transaccion transaccion) {
+        if(transaccion instanceof Prestamo){
+            Prestamo prestamo = (Prestamo) transaccion;
+            if(prestamo.getLibroRecibido()) return Transaccion.TIPO_TRANSACCION_PRESTAR;
+        }
+
+        if(transaccion instanceof Venta){
+            Venta venta = (Venta) transaccion;
+            if(venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_VENTA;
+
+        }
+        if(transaccion instanceof Intercambio){
+            Intercambio intercambio = (Intercambio) transaccion;
+            if(intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
+
+        }
+        return -1;
+    }
+
+    private int getTipoTransaccionRecibida( Transaccion transaccion) {
+        if(transaccion instanceof Prestamo){
+            Prestamo prestamo = (Prestamo) transaccion;
+            if(prestamo.getLibroDevuelto()) return Transaccion.TIPO_TRANSACCION_DEVOLVER_PRESTAMO;
+        }
+
+        if(transaccion instanceof Venta){
+            Venta venta = (Venta) transaccion;
+            if(venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_COMPRA;
+
+        }
+        if(transaccion instanceof Intercambio){
+            Intercambio intercambio = (Intercambio) transaccion;
+            if(intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
+        }
+        return -1;
+
     }
 
 }
