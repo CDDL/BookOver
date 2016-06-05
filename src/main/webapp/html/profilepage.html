@@ -82,9 +82,11 @@
                                      <th>Editorial</th>
                                      <th>ISBN</th>
                                      <th>Estado</th>
-                                     <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
+                                     <th>Permisos</th>
+                                     <th>Acciones</th>
+                                     <!--<th><img src="../resources/prestamo.png" style="width: 2em;"></th>
                                      <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
-                                     <th><img src="../resources/compra.png" style="width: 2em;"></th>
+                                     <th><img src="../resources/compra.png" style="width: 2em;"></th>-->
                                  </tr>
                                  </thead>
 
@@ -95,13 +97,18 @@
                                      <td>{{libro.editorial}}</td>
                                      <td>{{libro.isbn}}</td>
                                      <td>{{libro.estado}}</td>
-                                     <td ng-if="libro.esVendible"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esVendible"><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                     <td ng-if="libro.esIntercambiable"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esIntercambiable"><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                     <td ng-if="libro.esPrestable"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esPrestable"><img src="../resources/x.png" style="width: 1.5em;"></td>
-
+                                     <td>
+                                         <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esIntercambiable"><img src="../resources/intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esIntercambiable"><img src="../resources/no_intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
+                                     </td>
+                                     <td>
+                                         <a href="modificarLibro.html" class="btn btn-success">Editar</a>
+                                         <a href="#" class="btn btn-danger">Retirar</a>
+                                     </td>
                                  </tr>
                                  </tbody>
                              </table>
