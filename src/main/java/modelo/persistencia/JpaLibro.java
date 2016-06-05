@@ -27,6 +27,7 @@ public class JpaLibro implements IDataLibro {
     public Libro getById(int id) {
         //return mEntityManager.find(Libro.class,id);
         TypedQuery<Libro> query = mEntityManager.createNamedQuery("Libro.getId", Libro.class);
+        query.setParameter("id", id);
         List<Libro> resultados = query.getResultList();
         return resultados.size() == 0 ? null : resultados.get(0);
     }
