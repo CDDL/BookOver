@@ -66,4 +66,9 @@ public class ControladorLibro implements IControllerLibro {
 
         return mDataLibro.getLibros(usuario);
     }
+
+    @Override
+    public Libro[] getLibrosTitulo(String query) {
+        return mDataLibro.getLibrosTitulo(query);
+    }
 }

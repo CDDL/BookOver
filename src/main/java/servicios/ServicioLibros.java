@@ -87,4 +87,14 @@ public class ServicioLibros {
         return status(OK).entity(libros).build();
     }
 
+    @GET
+    @Path("buscar/{query}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarLibro(@HeaderParam("Authentication") String token, @PathParam("query") String query){
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Libro[] libros = mLibroController.getLibrosTitulo(query);
+        return status(OK).entity(libros).build();
+
+    }
+
 }

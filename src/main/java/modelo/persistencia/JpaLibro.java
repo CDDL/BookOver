@@ -45,4 +45,15 @@ public class JpaLibro implements IDataLibro {
         resultado = resultados.toArray(resultado);
         return resultado;
     }
+
+    @Override
+    public Libro[] getLibrosTitulo(String titulo) {
+        //Libro.getByTitulo
+        TypedQuery<Libro> query = mEntityManager.createNamedQuery("Libro.getByTitulo", Libro.class);
+        query.setParameter("titulo", "%" + titulo + "%");
+        List<Libro> resultados = query.getResultList();
+        Libro[] resultado = new Libro[resultados.size()];
+        resultado = resultados.toArray(resultado);
+        return resultado;
+    }
 }

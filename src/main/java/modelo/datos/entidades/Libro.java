@@ -15,7 +15,8 @@ import java.util.List;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Libro.getId", query = "SELECT l FROM Libro l WHERE l.visible = true"),
-        @NamedQuery(name = "Libro.getLista", query = "SELECT l FROM Libro l JOIN l.usuario u WHERE l.visible = true AND u = :user")
+        @NamedQuery(name = "Libro.getLista", query = "SELECT l FROM Libro l JOIN l.usuario u WHERE l.visible = true AND u = :user"),
+        @NamedQuery(name = "Libro.getByTitulo", query = "SELECT l FROM Libro l WHERE l.visible = true AND lower(l.titulo) LIKE lower(:titulo)")
 })
 public class Libro {
 

@@ -15,4 +15,6 @@ public interface IDataLibro {
     void actualizar(Libro miLibro);
 
     Libro[] getLibros(Usuario usuario);
+
+    Libro[] getLibrosTitulo(String query);
 }
