@@ -67,13 +67,9 @@
                                 </thead>
 
                                 <tbody id="content">
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                </tr>
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
+                                <tr ng-repeat="item in data">
+                                    <td>{{conversacion.conQuien}}</td>
+                                    <td>{{conversacion.mensaje}}</td>
                                 </tr>
                                 </tbody>
                             </table>

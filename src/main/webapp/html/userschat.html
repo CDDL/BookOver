@@ -60,18 +60,18 @@
                     <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
                         <div id="logchats">
                             <div class="table-responsive">
-                                <table class="records_list col-lg-12 table table-striped">
+                                <table ng-repeat="item in data" class="records_list col-lg-12 table table-striped">
                                     <thead>
                                     <tr>
-                                        <th>{{username}}</th>
-                                        <th style = "text-align: right">{{fecha}}</th>
+                                        <th>{{mensaje.username}}</th>
+                                        <th style = "text-align: right">{{mensaje.fecha}}</th>
                                     </tr>
                                     </thead>
 
                                     <tbody id="content">
 
                                     <tr>
-                                        <td colspan="2">{{message}}</td>
+                                        <td colspan="2">{{mensaje.texto}}</td>
 
                                     </tr>
                                     </tbody>
@@ -84,7 +84,7 @@
 
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
-                            <textarea class="form-control" name="post_content" id="" cols="30" rows="10">
+                            <textarea class="form-control" name="post_content" id="texto" cols="30" rows="10">
 
                              </textarea>
                             <br>
