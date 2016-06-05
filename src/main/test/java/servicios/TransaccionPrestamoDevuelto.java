@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static servicios.Config.URI_APP_PETICION_PRESTAMO_DEVUELTO;
-import static servicios.Config.URI_APP_PETICION_PRESTAMO_RECIBIDO;
 
 /**
  * Created by Demils on 02/06/2016.
@@ -23,7 +22,7 @@ public class TransaccionPrestamoDevuelto extends DatabaseTest {
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO
@@ -41,7 +40,7 @@ public class TransaccionPrestamoDevuelto extends DatabaseTest {
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO
@@ -59,7 +58,7 @@ public class TransaccionPrestamoDevuelto extends DatabaseTest {
         String token3 = mTestUtils.logInUser3();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO
@@ -104,7 +103,7 @@ public class TransaccionPrestamoDevuelto extends DatabaseTest {
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
         mTestUtils.confirmarPrestamoDevuelto(token1, idTransaccion);
 

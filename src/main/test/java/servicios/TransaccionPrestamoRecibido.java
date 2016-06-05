@@ -83,7 +83,7 @@ public class TransaccionPrestamoRecibido extends DatabaseTest {
         String token2 = mTestUtils.logInUser2();
         int idLibro1 = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro1);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
         mTestUtils.confirmarPrestamoRecibido(token2, idTransaccion);
 
         //DADO

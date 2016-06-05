@@ -1,11 +1,6 @@
 package servicios;
 
-import modelo.datos.entidades.Libro;
-import modelo.datos.entidades.Token;
-import modelo.datos.entidades.Usuario;
-import modelo.datos.transferencia.DataLogin;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.hsqldb.Database;
 import org.junit.Test;
 import utils.DatabaseTest;
 
@@ -86,7 +81,7 @@ public class TransaccionAceptar  extends DatabaseTest{
         String token2 = mTestUtils.logInUser2();
         int idLibro = mTestUtils.registerBookPrestable(token1);
         int idTransaccion = mTestUtils.solicitarPrestamos(token2, idLibro);
-        mTestUtils.aceptarPrestamo(token1, idTransaccion);
+        mTestUtils.aceptarTransaccion(token1, idTransaccion);
 
         //DADO
         Response response = WebClient.create(URI_APP_PETICION_PRESTAMO_ACEPTAR + idTransaccion).header("Authentication", token1).put(null);

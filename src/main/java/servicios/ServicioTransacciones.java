@@ -1,6 +1,7 @@
 package servicios;
 
 import modelo.datos.entidades.Prestamo;
+import modelo.datos.entidades.Transaccion;
 import modelo.datos.entidades.Usuario;
 import servicios.comunicacionControlador.IControllerLibro;
 import servicios.comunicacionControlador.IControllerToken;
@@ -35,15 +36,15 @@ public class ServicioTransacciones {
     @Produces(MediaType.TEXT_PLAIN)
     public Response confirmarSolicitud(@HeaderParam("Authentication") String token, @PathParam("idTransaccion") int idTransaccion) {
         Usuario usuarioQuePresta = mControllerToken.getUserFromToken(token);
-        Prestamo transaccionPrestamo = mControllerTransaccion.getPrestamo(idTransaccion);
+        Transaccion transaccion = mControllerTransaccion.getTransaccion(idTransaccion);
 
         if(usuarioQuePresta == null) return status(UNAUTHORIZED).build();
-        if(transaccionPrestamo == null) return status(NOT_FOUND).build();
-        if(!transaccionPrestamo.getUsuarioRecibeTransaccion().equals(usuarioQuePresta)) return status(FORBIDDEN).build();
-        if(transaccionPrestamo.getAceptada()) return status(CONFLICT).build();
+        if(transaccion == null) return status(NOT_FOUND).build();
+        if(!transaccion.getUsuarioRecibeTransaccion().equals(usuarioQuePresta)) return status(FORBIDDEN).build();
+        if(transaccion.getAceptada()) return status(CONFLICT).build();
 
-        transaccionPrestamo.setAceptada(true);
-        mControllerTransaccion.actualizar(transaccionPrestamo);
+        transaccion.setAceptada(true);
+        mControllerTransaccion.actualizar(transaccion);
 
         return status(OK)
                 .build();

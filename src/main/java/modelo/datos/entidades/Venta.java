@@ -24,6 +24,9 @@ public class Venta extends Transaccion{
     @JoinColumn(name="id_libro", referencedColumnName = "id")
     private Libro libro;
 
+    @Column
+    private boolean mLibroVendido;
+
     public Venta(Boolean confirmacion, Libro libro) {
         this.confirmacion = confirmacion;
         this.libro = libro;
@@ -46,5 +49,13 @@ public class Venta extends Transaccion{
 
     public void setLibro(Libro libro) {
         this.libro = libro;
+    }
+
+    public void setLibroVendido(boolean libroVendido) {
+        mLibroVendido = libroVendido;
+    }
+
+    public boolean getLibroVendido() {
+        return mLibroVendido;
     }
 }
