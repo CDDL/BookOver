@@ -4,7 +4,7 @@
 }
 .enviar:hover{
     background-color: #148D52;
-    color: #ffffff;
+    color: #ffffff;!important;
 }
 
 .fondo{
@@ -57,3 +57,8 @@
     background:transparent;
 }
 
+.titulo{
+    color: #fff;
+    font-weight:bold;
+    font-size:50px;
+}

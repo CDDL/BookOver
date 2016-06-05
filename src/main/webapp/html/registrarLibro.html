@@ -73,7 +73,7 @@
 
                                 <span class="texto-form"><input type="radio" ng-model="estado" name="estado"  id="estado2" value="Seminuevo">Seminuevo</span>
 
-                                <span class="texto-form"><input type="radio" ng-model="estado" name="estado"  id="estado3" value="Usado">Usado</span>
+                                <span class="texto-form"><input type="radio" ng-model="estado" name="estado"  id="estado3" value="Usado" checked>Usado</span>
                             </div>
                             <div class="form-group">
                                 <label class="texto-form" for="opcionesLibro1" >¿Qué quieres hacer con el libro?</label><br>
@@ -81,7 +81,7 @@
                                 <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="esIntercambiable" name="opcionesLibro" id= "opcionesLibro2" value="intercambiar"/>Intercambiar</span>
                                 <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="esVendible" name="opcionesLibro" id= "opcionesLibro3" onchange="precioVisible(this)" value="vender"/>Vender</span>
                                 <span class="texto-form misma-fila"><input style="visibility: hidden" type="text"
-                                                                           onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                           onkeypress='return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 8))'
                                                                            ng-model="precio" name="precio" id="precio" class="form-control"
                                                                            placeholder="Precio en €"/></span>
                             </div>
