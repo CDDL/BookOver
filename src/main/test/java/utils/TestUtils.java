@@ -113,7 +113,7 @@ public class TestUtils {
         return response.readEntity(Integer.class);
     }
 
-    public void aceptarPrestamo(String token, int idTransaccion) {
+    public void aceptarTransaccion(String token, int idTransaccion) {
         if (WebClient.create(URI_APP_PETICION_PRESTAMO_ACEPTAR + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
             throw new RuntimeException("Aceptar prestamo fallido.");
     }
@@ -126,5 +126,36 @@ public class TestUtils {
     public void confirmarPrestamoDevuelto(String token, int idTransaccion) {
         if (WebClient.create(URI_APP_PETICION_PRESTAMO_DEVUELTO + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
             throw new RuntimeException("Confirmar devolucion fallido.");
+    }
+
+    public int registerBookVendible(String token) {
+        Libro libroPrestable = new Libro();
+        libroPrestable.setTitulo("Libro custom");
+        libroPrestable.setAutor("yoMismo");
+        libroPrestable.setEditorial("Editorial rara");
+        libroPrestable.setIsbn("ISBNRANDOM");
+        libroPrestable.setEstado("Roto");
+        libroPrestable.setInfoAdicional("Lo encontre en la calle");
+        libroPrestable.setEsPrestable(false);
+        libroPrestable.setEsIntercambiable(false);
+        libroPrestable.setEsVendible(true);
+        Response response = WebClient.create(URI_APP_NUEVO_LIBRO).header("Authentication", token).post(libroPrestable);
+        if (response.getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Registrar libro prestable fallido.");
+        return response.readEntity(Integer.class);
+    }
+
+    public int solicitarCompra(String token, int idLibro) {
+        Libro libroASolicitar = new Libro();
+        libroASolicitar.setId(idLibro);
+        Response response = WebClient.create(URI_APP_PETICION_COMPRA).header("Authentication", token).post(libroASolicitar);
+        if (response.getStatusInfo().getStatusCode() != 200) throw new RuntimeException("Solicitar compra fallido.");
+        return response.readEntity(Integer.class);
+    }
+
+    public void confirmarVentaRealizada(String token, int idTransaccion) {
+        if (WebClient.create(URI_APP_PETICION_VENTA_REALIZADA + idTransaccion).header("Authentication", token).put(null).getStatusInfo().getStatusCode() != 200)
+            throw new RuntimeException("Confirmar venta realizada fallido");
+
     }
 }

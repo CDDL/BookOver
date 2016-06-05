@@ -1,6 +1,7 @@
 package controladores.comunicacionDatos;
 
 import modelo.datos.entidades.Libro;
+import modelo.datos.entidades.Usuario;
 
 /**
  * Created by Demils on 16/05/2016.
@@ -12,4 +13,8 @@ public interface IDataLibro {
 
 
     void actualizar(Libro miLibro);
+
+    Libro[] getLibros(Usuario usuario);
+
+    Libro[] getLibrosTitulo(String query);
 }

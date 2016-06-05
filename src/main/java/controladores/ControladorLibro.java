@@ -40,6 +40,7 @@ public class ControladorLibro implements IControllerLibro {
         miLibro.setInfoAdicional(libro.getInfoAdicional());
         miLibro.setIsbn(libro.getIsbn());
         miLibro.setVisible(libro.isVisible());
+        miLibro.setPrecio(libro.getPrecio());
         mDataLibro.actualizar(miLibro);
 
     }
@@ -58,5 +59,16 @@ public class ControladorLibro implements IControllerLibro {
     @Override
     public boolean existeLibroId(int idLibro) {
         return mDataLibro.getById(idLibro) != null;
+    }
+
+    @Override
+    public Libro[] getLibrosUser(Usuario usuario) {
+
+        return mDataLibro.getLibros(usuario);
+    }
+
+    @Override
+    public Libro[] getLibrosTitulo(String query) {
+        return mDataLibro.getLibrosTitulo(query);
     }
 }

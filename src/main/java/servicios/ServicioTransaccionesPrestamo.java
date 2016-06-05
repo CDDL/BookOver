@@ -22,7 +22,7 @@ import static javax.ws.rs.core.Response.status;
  */
 
 @Path("transacciones/prestamo")
-public class ServicioTransaccionePrestamo {
+public class ServicioTransaccionesPrestamo {
 
     @Inject
     IControllerTransaccion mControllerTransaccion;

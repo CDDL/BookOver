@@ -1,10 +1,9 @@
 package controladores;
 
 import controladores.comunicacionDatos.IDataPrestamo;
-import modelo.datos.entidades.Libro;
-import modelo.datos.entidades.Prestamo;
-import modelo.datos.entidades.Transaccion;
-import modelo.datos.entidades.Usuario;
+import controladores.comunicacionDatos.IDataTransaccion;
+import controladores.comunicacionDatos.IDataVenta;
+import modelo.datos.entidades.*;
 import servicios.comunicacionControlador.IControllerTransaccion;
 
 import javax.inject.Inject;
@@ -16,6 +15,12 @@ public class ControladorTransaccion implements IControllerTransaccion {
 
     @Inject
     private IDataPrestamo mDataPrestamos;
+
+    @Inject
+    private IDataVenta mDataVentas;
+
+    @Inject
+    private IDataTransaccion mDataTransaccion;
 
     @Override
     public Prestamo getPrestamo(int idTransaccion) {
@@ -38,4 +43,26 @@ public class ControladorTransaccion implements IControllerTransaccion {
     public void actualizar(Transaccion transaccionPrestamo) {
         mDataPrestamos.actualizar(transaccionPrestamo);
     }
+
+    @Override
+    public int nuevaSolicitudCompra(Usuario usuarioQueSolicita, Libro libroSolicitado) {
+        Venta venta = new Venta();
+        venta.setUsuarioIniciaTransaccion(usuarioQueSolicita);
+        venta.setUsuarioRecibeTransaccion(libroSolicitado.getUsuario());
+        venta.setLibro(libroSolicitado);
+        venta.setAceptada(false);
+        venta.setLibroVendido(false);
+        return mDataVentas.addVenta(venta);
+    }
+
+    @Override
+    public Venta getVenta(int idTransaccion) {
+        return mDataVentas.getVenta(idTransaccion);
+    }
+
+    @Override
+    public Transaccion getTransaccion(int idTransaccion) {
+        return mDataTransaccion.getTransaccion(idTransaccion);
+    }
+
 }
