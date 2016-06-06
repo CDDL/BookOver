@@ -95,6 +95,20 @@ public class ServicioLibros {
     }
 
     @GET
+    @Path("lista")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response visualizarLibro(@HeaderParam("Authentication") String token) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario;
+        usuario = mTokenController.getUserFromToken(token);
+
+
+        if(usuario==null) return status(NOT_FOUND).build();
+        Libro[] libros = mLibroController.getLibrosUser(usuario);
+        return status(OK).entity(libros).build();
+    }
+
+    @GET
     @Path("buscar/{query}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response buscarLibro(@HeaderParam("Authentication") String token, @PathParam("query") String query){

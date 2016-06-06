@@ -25,12 +25,15 @@ public interface Config {
     String URI_APP_PETICION_INTERCAMBIO_REALIZADO = URI_APP_BASE + "transacciones/intercambio/realizado/";  //PUT
     String URI_APP_TRANSACCION_VALORAR = URI_APP_BASE + "transacciones/valorar/";                           //PUT
     String URI_APP_TRANSACCION_LISTAR = URI_APP_BASE + "transacciones/listaTransacciones/";                 //PUT
-    String URI_APP_VISUALIZAR_MIS_LIBROS = URI_APP_BASE + "libros/mislibros";                               //GET
+    String URI_APP_VISUALIZAR_MIS_LIBROS = URI_APP_BASE + "libros/lista";                               //GET
     String URI_APP_LISTAR_USUARIOS = URI_APP_BASE + "usuarios";                                             //GET
-    String URI_APP_VISUALIZAR_USUARIO = URI_APP_BASE + "usuarios/";                                         //GET
+    String URI_APP_VISUALIZAR_USUARIO = URI_APP_BASE + "usuarios/profile/";                                         //GET
+    String URI_APP_VISUALIZAR_MI_USUARIO = URI_APP_BASE + "usuarios/profile";                                         //GET
     String URI_APP_LISTAR_CONVERSACIONES = URI_APP_BASE + "conversaciones/listaConversaciones";             //GET
     String URI_APP_VISUALIZAR_CONVERSACION = URI_APP_BASE + "conversaciones/";                              //GET
     String URI_APP_VISUALIZAR_LIBROS = URI_APP_BASE + "libros/lista/";                                      //GET
+
+
     String URI_APP_BUSCAR_LIBRO = URI_APP_BASE + "libros/buscar/";                                          //GET
     String URI_APP_OWNER_LIBRO = URI_APP_BASE + "libros/user/";                                             //GET
 }
