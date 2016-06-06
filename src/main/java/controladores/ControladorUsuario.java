@@ -83,4 +83,10 @@ public class ControladorUsuario implements IControllerUsuario {
         return resultado;
 
     }
+
+    @Override
+    public int getIduserLibro(Libro libro) {
+        Usuario usuario = libro.getUsuario();
+        return usuario.getId();
+    }
 }

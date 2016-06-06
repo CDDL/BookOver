@@ -27,4 +27,6 @@ public interface IControllerUsuario {
     DataProfileUser visualizaUser(Usuario usuario);
 
     DataProfileUser getUserLibro(Libro libro);
+
+    int getIduserLibro(Libro libro);
 }

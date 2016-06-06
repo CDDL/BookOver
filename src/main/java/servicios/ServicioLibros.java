@@ -111,8 +111,9 @@ public class ServicioLibros {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Libro libro = mLibroController.getLibro(idLibro);
         if(libro==null) return status(NOT_FOUND).build();
-        DataProfileUser data = mUserController.getUserLibro(libro);
-        return status(OK).entity(data).build();
+        //DataProfileUser data = mUserController.getUserLibro(libro);
+        int idusuario = mUserController.getIduserLibro(libro);
+        return status(OK).entity(idusuario).build();
     }
 
 }
