@@ -16,6 +16,7 @@ public class JpaTest {
     private EntityManager mEntityManager;
 
     public void vaciarDb() {
+        mEntityManager.createQuery("DELETE FROM Valoracion m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Mensaje m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Conversacion m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM FotoLibro m").executeUpdate();
@@ -25,7 +26,7 @@ public class JpaTest {
         mEntityManager.createQuery("DELETE FROM Transaccion m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Libro m").executeUpdate();
         mEntityManager.createQuery("DELETE FROM Usuario m").executeUpdate();
-        mEntityManager.createQuery("DELETE FROM Valoracion m").executeUpdate();
+
         mEntityManager.createQuery("DELETE FROM Venta m").executeUpdate();
     }
 

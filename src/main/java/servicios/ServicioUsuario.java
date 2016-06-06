@@ -82,7 +82,7 @@ public class ServicioUsuario {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Usuario usuario = mTokenController.getUserFromToken(token);
         DataListUser[] personas = mUserController.listaOtrasPersonas(usuario);
-        return Response.ok(personas).build();
+        return status(OK).entity(personas).build();
     }
 
     @GET
@@ -97,7 +97,7 @@ public class ServicioUsuario {
             usuario = mUserController.getUserById(Integer.parseInt(idusuario));
         }
         DataProfileUser data = mUserController.visualizaUser(usuario);
-        return Response.ok(data).build();
+        return status(OK).entity(data).build();
     }
 
     @GET
@@ -109,7 +109,7 @@ public class ServicioUsuario {
         usuario = mTokenController.getUserFromToken(token);
 
         DataProfileUser data = mUserController.visualizaUser(usuario);
-        return Response.ok(data).build();
+        return status(OK).entity(data).build();
     }
 
     @GET
@@ -125,7 +125,7 @@ public class ServicioUsuario {
 
         List listaValoraciones = usuarioIdentificado.getListaValoraciones();
 
-        return status(200)
+        return status(OK)
                 .entity(listaValoraciones)
                 .build();
     }
