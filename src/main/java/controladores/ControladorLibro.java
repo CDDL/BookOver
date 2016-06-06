@@ -28,20 +28,21 @@ public class ControladorLibro implements IControllerLibro {
 
     @Override
     public void editarLibro(int idlibro, Libro libro) {
-        Libro miLibro = mDataLibro.getById(idlibro);
-        miLibro.setEditorial(libro.getEditorial());
-        miLibro.setAutor(libro.getAutor());
-        //miLibro.setUsuario(libro.getUsuario()); xmltransient well played
-        miLibro.setEsPrestable(libro.getEsPrestable());
-        miLibro.setEsVendible(libro.getEsVendible());
-        miLibro.setEsIntercambiable(libro.getEsIntercambiable());
-        miLibro.setEstado(libro.getEstado());
-        miLibro.setFotos(libro.getFotos());
-        miLibro.setInfoAdicional(libro.getInfoAdicional());
-        miLibro.setIsbn(libro.getIsbn());
-        miLibro.setVisible(libro.isVisible());
-        miLibro.setPrecio(libro.getPrecio());
-        mDataLibro.actualizar(miLibro);
+//        Libro miLibro = mDataLibro.getById(idlibro);
+
+        //miLibro.setUsuario(libro.getUsuario()); xmltransient well
+//        miLibro.setEditorial(libro.getEditorial());
+//        miLibro.setAutor(libro.getAutor());
+//        miLibro.setEsPrestable(libro.getEsPrestable());
+//        miLibro.setEsVendible(libro.getEsVendible());
+//        miLibro.setEsIntercambiable(libro.getEsIntercambiable());
+//        miLibro.setEstado(libro.getEstado());
+//        miLibro.setFotos(libro.getFotos());
+//        miLibro.setInfoAdicional(libro.getInfoAdicional());
+//        miLibro.setIsbn(libro.getIsbn());
+//        miLibro.setVisible(libro.isVisible());
+//        miLibro.setPrecio(libro.getPrecio());
+        mDataLibro.actualizar(libro);
 
     }
 
