@@ -70,7 +70,7 @@ public class ServicioTransacciones {
         if(!transaccion.getUsuarioRecibeTransaccion().equals(usuario) && !transaccion.getUsuarioIniciaTransaccion().equals(usuario)) return status(FORBIDDEN).build();
         if(!transaccion.getAceptada()) return status(CONFLICT).build();
 
-        mControllerTransaccion.addValoracion(idTransaccion, valoracion);
+        mControllerTransaccion.addValoracion(usuario, idTransaccion, valoracion);
 
         return status(OK)
                 .build();

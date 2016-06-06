@@ -56,7 +56,6 @@ public class LibroOwner extends DatabaseTest {
 
         //WHEN
         Response response = WebClient.create(URI_APP_OWNER_LIBRO + idLibro).header("Authentication", token2).get();
-        DataProfileUser resultado = response.readEntity(DataProfileUser.class);
 
         //ESPERADO
         assertThat(response.getStatusInfo().getStatusCode(), is(200));

@@ -26,7 +26,7 @@ public interface IControllerTransaccion {
 
     Intercambio getIntercambio(int idTransaccion);
 
-    void addValoracion(int idTransaccion, Valoracion valoracion);
+    void addValoracion(Usuario usuario, int idTransaccion, Valoracion valoracion);
 
     List<DataTransacciones> getListaTransacciones(Usuario usuarioSolicitado);
 }
