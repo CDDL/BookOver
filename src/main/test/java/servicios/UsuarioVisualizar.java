@@ -9,9 +9,7 @@ import javax.ws.rs.core.Response;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static servicios.Config.URI_APP_LISTAR_USUARIOS;
-import static servicios.Config.URI_APP_VISUALIZAR_CONVERSACION;
-import static servicios.Config.URI_APP_VISUALIZAR_USUARIO;
+import static servicios.Config.*;
 
 /**
  * Created by David on 04/06/2016.
@@ -62,7 +60,7 @@ public class UsuarioVisualizar extends DatabaseTest {
 
 
         //WHEN
-        Response response = WebClient.create(URI_APP_VISUALIZAR_USUARIO).header("Authentication", token).get();
+        Response response = WebClient.create(URI_APP_VISUALIZAR_MI_USUARIO).header("Authentication", token).get();
 
 
         //ESPERADO

@@ -86,7 +86,7 @@ public class ServicioUsuario {
     }
 
     @GET
-    @Path("{idusuario}")
+    @Path("profile/{idusuario}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response showUserProfile(@HeaderParam("Authentication") String token, @PathParam("idusuario") String idusuario) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
@@ -96,6 +96,18 @@ public class ServicioUsuario {
         } else {
             usuario = mUserController.getUserById(Integer.parseInt(idusuario));
         }
+        DataProfileUser data = mUserController.visualizaUser(usuario);
+        return Response.ok(data).build();
+    }
+
+    @GET
+    @Path("profile")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response showUserProfile(@HeaderParam("Authentication") String token) {
+        if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
+        Usuario usuario;
+        usuario = mTokenController.getUserFromToken(token);
+
         DataProfileUser data = mUserController.visualizaUser(usuario);
         return Response.ok(data).build();
     }

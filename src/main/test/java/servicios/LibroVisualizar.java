@@ -10,9 +10,7 @@ import javax.ws.rs.core.Response;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static servicios.Config.URI_APP_BORRAR_LIBRO;
-import static servicios.Config.URI_APP_LISTAR_USUARIOS;
-import static servicios.Config.URI_APP_VISUALIZAR_LIBROS;
+import static servicios.Config.*;
 
 /**
  * Created by David on 05/06/2016.
@@ -64,6 +62,23 @@ public class LibroVisualizar extends DatabaseTest {
 
         //WHEN
         Response response = WebClient.create(URI_APP_VISUALIZAR_LIBROS + iduser).header("Authentication", token).get();
+        Libro[] miListaLibros =  response.readEntity(Libro[].class);
+
+        //ESPERADO
+        assertThat(response.getStatusInfo().getStatusCode(), is(200));
+        assertThat(miListaLibros.length, is(1));
+
+    }
+
+    @Test
+    public void visualizarLibro_successMiLibro_response200(){
+        String token = mTestUtils.logInUser1();
+        //String token2 = mTestUtils.logInUser2();
+        int idlibro = mTestUtils.registerBookNoPrestableIntercambiableVendible(token);
+
+
+        //WHEN
+        Response response = WebClient.create(URI_APP_VISUALIZAR_MIS_LIBROS).header("Authentication", token).get();
         Libro[] miListaLibros =  response.readEntity(Libro[].class);
 
         //ESPERADO
