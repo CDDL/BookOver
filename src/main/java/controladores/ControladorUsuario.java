@@ -72,4 +72,21 @@ public class ControladorUsuario implements IControllerUsuario {
         resultado.setUsername(usuario.getUsername());
         return resultado;
     }
+
+    @Override
+    public DataProfileUser getUserLibro(Libro libro) {
+        DataProfileUser resultado = new DataProfileUser();
+        Usuario usuario = libro.getUsuario();
+        resultado.setEmail(usuario.getEmail());
+        resultado.setUbicacion(usuario.getUbicacion());
+        resultado.setUsername(usuario.getUsername());
+        return resultado;
+
+    }
+
+    @Override
+    public int getIduserLibro(Libro libro) {
+        Usuario usuario = libro.getUsuario();
+        return usuario.getId();
+    }
 }

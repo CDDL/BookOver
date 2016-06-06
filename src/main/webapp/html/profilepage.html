@@ -43,7 +43,7 @@
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(20%); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:15em; width:60em" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(100px); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:15em; width:60em" id="page-wrapper">
 
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -72,7 +72,7 @@
                     </div>
                     <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlLibro as ctrl">
                          <br>
-                         <h1>Lista de libros</h1>
+                         <h1>Lista de libros <a href="registrarLibro.html" style="color: white"><img src="../resources/añadir_libro.png" style="height: 45px; padding-bottom: 9px"></a></h1>
                          <div class="table-responsive">
                              <table class="records_list col-lg-12 table table-striped">
                                  <thead>
@@ -82,9 +82,12 @@
                                      <th>Editorial</th>
                                      <th>ISBN</th>
                                      <th>Estado</th>
-                                     <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
+                                     <th>Permisos</th>
+                                     <th>Acciones</th>
+                                     <th>Precio</th>
+                                     <!--<th><img src="../resources/prestamo.png" style="width: 2em;"></th>
                                      <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
-                                     <th><img src="../resources/compra.png" style="width: 2em;"></th>
+                                     <th><img src="../resources/compra.png" style="width: 2em;"></th>-->
                                  </tr>
                                  </thead>
 
@@ -95,13 +98,21 @@
                                      <td>{{libro.editorial}}</td>
                                      <td>{{libro.isbn}}</td>
                                      <td>{{libro.estado}}</td>
-                                     <td ng-if="libro.esVendible"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esVendible"><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                     <td ng-if="libro.esIntercambiable"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esIntercambiable"><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                     <td ng-if="libro.esPrestable"><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                     <td ng-if="!libro.esPrestable"><img src="../resources/x.png" style="width: 1.5em;"></td>
-
+                                     <td>
+                                         <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esIntercambiable"><img src="../resources/intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esIntercambiable"><img src="../resources/no_intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
+                                     </td>
+                                     <td ng-if="libro.precio==0"> </td>
+                                     <td ng-if="libro.precio!=0">{{libro.precio}}</td>
+                                     <td>
+                                         <a href="modificarLibro.html" ng-click="ctrl.setLibroActual(libro.id)"
+                                         class="btn btn-success">Editar</a>
+                                         <a href="#" class="btn btn-danger"  ng-click="ctrl.retirarLibro(libro.id)">Retirar</a>
+                                     </td>
                                  </tr>
                                  </tbody>
                              </table>
@@ -112,14 +123,17 @@
                             <table class="records_list col-lg-12 table table-striped">
                                 <thead>
                                 <tr>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Comentario</th>
                                     <th>Título</th>
                                     <th>Autor</th>
-                                    <th>Editorial</th>
-                                    <th>ISBN</th>
                                     <th>Estado</th>
-                                    <th><img src="../resources/prestamo.png" style="width: 2em;"></th>
-                                    <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
-                                    <th><img src="../resources/compra.png" style="width: 2em;"></th>
+                                    <th>Tipo</th>
+                                    <th>Fecha</th>
+                                    <th>Aceptada</th>
+                                    <th>Acciones</th>
+                                </tr>
                                 </tr>
                                 </thead>
 
@@ -130,20 +144,23 @@
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
+                                    <td><img src="../resources/prestamo.png" style="width: 2em;"></td>
+                                    <td>Data</td>
                                     <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-
+                                    <td></td>
                                 </tr>
+                                <tr>
                                 <tr>
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
                                     <td>Data</td>
+                                    <td><img src="../resources/intercambio.png" style="width: 2em;"></td>
+                                    <td>Data</td>
                                     <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/v.png" style="width: 1.5em;"></td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                    <td><a href="#" class="btn btn-success">Valorar</a></td> <!--Hacer aparecer si la transaccion ha sido confirmada ¿Y si la transaccion no tiene valoracion del user maybe?-->
+                                </tr>
                                 </tr>
                                 </tbody>
                             </table>

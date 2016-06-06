@@ -45,54 +45,57 @@
             <!-- Page Heading -->
 
             <div class="row">
-                <div class="col-lg-12 ">
+                <div class="col-lg-12 " ng-controller="CtrlLibro as ctrl">
                     <h1 style="color: #ffffff;" class="page-header">
-                        Modifica un libro
+                        Modificar {{libroActual.titulo}}
                     </h1>
 
-                    <div class="panel-body" ng-controller="CtrlLogin as ctrl">
+                    <div class="panel-body">
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">
-                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título">
+                                <input ng-model="libroActual.titulo" type="text" name="titulo" id="titulo" class="form-control" placeholder="Título">
                             </div>
 
                             <div class="form-group">
-                                <input type="text" name="autor" id="autor" class="form-control" placeholder="Autor">
+                                <input ng-model="libroActual.autor" type="text" name="autor" id="autor" class="form-control" placeholder="Autor">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="editorial" id="editorial" class="form-control" placeholder="Editorial">
+                                <input ng-model="libroActual.editorial" type="text" name="editorial" id="editorial" class="form-control" placeholder="Editorial">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="isbn10" id="isbn10" class="form-control" placeholder="ISBN">
+                                <input ng-model="libroActual.isbn" type="text" name="isbn10" id="isbn10" class="form-control" placeholder="ISBN">
                             </div>
                             <div class="form-group">
                                 <label class="texto-form" for="estado1" >Estado del libro</label><br>
 
-                                <span class="texto-form"><input type="radio" name="estado" id="estado1" value="Nuevo" required>Nuevo</span>
+                                <span class="texto-form"><input type="radio" ng-model="libroActual.estado" name="estado" id="estado1" value="Nuevo" required>Nuevo</span>
 
-                                <span class="texto-form"><input type="radio" name="estado"  id="estado2" value="Seminuevo">Seminuevo</span>
+                                <span class="texto-form"><input type="radio" ng-model="libroActual.estado" name="estado"  id="estado2" value="Seminuevo">Seminuevo</span>
 
-                                <span class="texto-form"><input type="radio" name="estado"  id="estado3" value="Usado">Usado</span>
+                                <span class="texto-form"><input type="radio" ng-model="libroActual.estado" name="estado"  id="estado3" value="Usado">Usado</span>
                             </div>
                             <div class="form-group">
                                 <label class="texto-form" for="opcionesLibro1" >¿Qué quieres hacer con el libro?</label><br>
-                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="esPrestable" name="opcionesLibro" id= "opcionesLibro1" value="prestar"/>Prestar</span>
-                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="esIntercambiable" name="opcionesLibro" id= "opcionesLibro2" value="intercambiar"/>Intercambiar</span>
-                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="esVendible" name="opcionesLibro" id= "opcionesLibro3" onchange="precioVisible(this)" value="vender"/>Vender</span>
+                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="libroActual.esPrestable" name="opcionesLibro" id= "opcionesLibro1" value="prestar"/>Prestar</span>
+                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="libroActual.esIntercambiable" name="opcionesLibro" id= "opcionesLibro2" value="intercambiar"/>Intercambiar</span>
+                                <span class="texto-form misma-fila"><input class="texto-form" type="checkbox" ng-model="libroActual.esVendible" name="opcionesLibro" id= "opcionesLibro3" onchange="precioVisible(this)" value="vender"/>Vender</span>
                                 <span class="texto-form misma-fila"><input style="visibility: hidden" type="text"
                                                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                                                                           ng-model="precio" name="precio" id="precio" class="form-control"
+                                                                           ng-model="libroActual.precio" name="precio" id="precio" class="form-control"
                                                                            placeholder="Precio en €"/></span>
                             </div>
-                            <input class="texto-form" type="file" accept="image/*" multiple onchange="loadFile(event)" max-uploads = 2>
+                            <input class="texto-form" ng-model="libroActual.fotos"  type="file" accept="image/*" multiple onchange="loadFile(event)" max-uploads = 2>
                             <div id="fotos"></div>
                             <div class="form-group">
                                 <label class="texto-form" for="infoAdicional">Comentarios</label>
-                                <input type="text" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
+                                <input type="text" ng-model="libroActual.infoAdicional" name="infoAdicional" id="infoAdicional" class="form-control" placeholder="¿Algo más que decir sobre el libro?">
                             </div>
-                            <input type="submit" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro">
                         </form>
+                            <input type="submit" name="submit" id="btn-login" class="btn btn-lg btn-success btn-block enviar" value="Registrar Libro"
+                                   ng-click="ctrl.editarLibro(libroActual.id, libroActual.titulo, libroActual.autor, libroActual.editorial, libroActual.isbn, libroActual.estado, libroActual.infoAdicional, libroActual.esPrestable, libroActual.esVendible, libroActual.esIntercambiable, libroActual.precio, libroActual.fotos)"
+                            >
+
 
                     </div>
 
