@@ -13,6 +13,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.List;
+
 import static javax.ws.rs.core.Response.Status.*;
 import static javax.ws.rs.core.Response.status;
 
@@ -86,15 +88,33 @@ public class ServicioUsuario {
     @GET
     @Path("{idusuario}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response showUserProfile(@HeaderParam("Authentication") String token,@PathParam("idusuario") String idusuario){
+    public Response showUserProfile(@HeaderParam("Authentication") String token, @PathParam("idusuario") String idusuario) {
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Usuario usuario;
         if (idusuario == null) {
             usuario = mTokenController.getUserFromToken(token);
-        }else{
+        } else {
             usuario = mUserController.getUserById(Integer.parseInt(idusuario));
         }
         DataProfileUser data = mUserController.visualizaUser(usuario);
         return Response.ok(data).build();
+    }
+
+    @GET
+    @Path("valoraciones/{idusuario}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getListaValoraciones(@HeaderParam("Authentication") String token, @PathParam("idusuario") int idusuario) {
+        Usuario usuarioIdentificado = mTokenController.getUserFromToken(token);
+        Usuario usuarioTarget = mUserController.getUserById(idusuario);
+
+
+        if (usuarioIdentificado == null) return status(UNAUTHORIZED).build();
+        if (usuarioTarget == null) status(NOT_FOUND).build();
+
+        List listaValoraciones = usuarioIdentificado.getListaValoraciones();
+
+        return status(200)
+                .entity(listaValoraciones)
+                .build();
     }
 }

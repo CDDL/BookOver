@@ -2,11 +2,17 @@ package servicios;
 
 import modelo.datos.entidades.Valoracion;
 import modelo.datos.transferencia.DataIntercambio;
+import modelo.datos.transferencia.DataTransacciones;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.junit.Test;
+import sun.net.www.protocol.http.HttpURLConnection;
 import utils.DatabaseTest;
 
 import javax.ws.rs.core.Response;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,7 +26,7 @@ import static servicios.Config.URI_APP_TRANSACCION_VALORAR;
 public class TransaccionListaTransacciones extends DatabaseTest{
 
     @Test
-    public void listaTransacciones_peticionCorrecta_respuesta200() {
+    public void listaTransacciones_peticionCorrecta_respuesta200() throws IOException {
         //PRE
         String token1 = mTestUtils.logInUser1();
         String token2 = mTestUtils.logInUser2();
@@ -40,7 +46,7 @@ public class TransaccionListaTransacciones extends DatabaseTest{
 
     @Test
     public void listaTransacciones_usuarioNoIdentificado_respuesta401() {
-        //PRE        //PRE
+        //PRE
         String token1 = mTestUtils.logInUser1();
         String token2 = mTestUtils.logInUser2();
         int idLibro = mTestUtils.registerBookPrestable(token1);

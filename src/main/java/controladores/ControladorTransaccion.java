@@ -90,9 +90,11 @@ public class ControladorTransaccion implements IControllerTransaccion {
     }
 
     @Override
-    public void addValoracion(int idTransaccion, Valoracion valoracion) {
+    public void addValoracion(Usuario usuario, int idTransaccion, Valoracion valoracion) {
         Transaccion transaccion = mDataTransaccion.getTransaccion(idTransaccion);
         valoracion.setTransaccion(transaccion);
+        valoracion.setUsuarioRealiza(usuario);
+        valoracion.setUsuarioValorado(transaccion.getUsuarioIniciaTransaccion().equals(usuario) ? transaccion.getUsuarioRecibeTransaccion() : transaccion.getUsuarioRecibeTransaccion());
         mDataValoraciones.addValoracion(valoracion);
     }
 
@@ -103,7 +105,7 @@ public class ControladorTransaccion implements IControllerTransaccion {
 
         List<DataTransacciones> listaTransaccioneFormateadas = new LinkedList<>();
 
-        for (Transaccion transaccion:listaTransaccionesRealizadas) {
+        for (Transaccion transaccion : listaTransaccionesRealizadas) {
             DataTransacciones dataTransacciones = new DataTransacciones();
             dataTransacciones.setId(transaccion.getId());
             dataTransacciones.setTipoTransaccion(getTipoTransaccionRealizada(transaccion));
@@ -111,7 +113,7 @@ public class ControladorTransaccion implements IControllerTransaccion {
             listaTransaccioneFormateadas.add(dataTransacciones);
         }
 
-        for (Transaccion transaccion:listaTransaccionesRecibidas) {
+        for (Transaccion transaccion : listaTransaccionesRecibidas) {
             DataTransacciones dataTransacciones = new DataTransacciones();
             dataTransacciones.setId(transaccion.getId());
             dataTransacciones.setTipoTransaccion(getTipoTransaccionRecibida(transaccion));
@@ -123,38 +125,38 @@ public class ControladorTransaccion implements IControllerTransaccion {
     }
 
     private int getTipoTransaccionRealizada(Transaccion transaccion) {
-        if(transaccion instanceof Prestamo){
+        if (transaccion instanceof Prestamo) {
             Prestamo prestamo = (Prestamo) transaccion;
-            if(prestamo.getLibroRecibido()) return Transaccion.TIPO_TRANSACCION_PRESTAR;
+            if (prestamo.getLibroRecibido()) return Transaccion.TIPO_TRANSACCION_PRESTAR;
         }
 
-        if(transaccion instanceof Venta){
+        if (transaccion instanceof Venta) {
             Venta venta = (Venta) transaccion;
-            if(venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_VENTA;
+            if (venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_VENTA;
 
         }
-        if(transaccion instanceof Intercambio){
+        if (transaccion instanceof Intercambio) {
             Intercambio intercambio = (Intercambio) transaccion;
-            if(intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
+            if (intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
 
         }
         return -1;
     }
 
-    private int getTipoTransaccionRecibida( Transaccion transaccion) {
-        if(transaccion instanceof Prestamo){
+    private int getTipoTransaccionRecibida(Transaccion transaccion) {
+        if (transaccion instanceof Prestamo) {
             Prestamo prestamo = (Prestamo) transaccion;
-            if(prestamo.getLibroDevuelto()) return Transaccion.TIPO_TRANSACCION_DEVOLVER_PRESTAMO;
+            if (prestamo.getLibroDevuelto()) return Transaccion.TIPO_TRANSACCION_DEVOLVER_PRESTAMO;
         }
 
-        if(transaccion instanceof Venta){
+        if (transaccion instanceof Venta) {
             Venta venta = (Venta) transaccion;
-            if(venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_COMPRA;
+            if (venta.getConfirmacion()) return Transaccion.TIPO_TRANSACCION_COMPRA;
 
         }
-        if(transaccion instanceof Intercambio){
+        if (transaccion instanceof Intercambio) {
             Intercambio intercambio = (Intercambio) transaccion;
-            if(intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
+            if (intercambio.getIntercambioRealizado()) return Transaccion.TIPO_TRANSACCION_INTERCAMBIO;
         }
         return -1;
 
