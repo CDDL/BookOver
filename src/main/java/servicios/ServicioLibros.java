@@ -106,7 +106,6 @@ public class ServicioLibros {
 
     @GET
     @Path("user/{idLibro}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response findOwnerLibro(@HeaderParam("Authentication") String token, @PathParam("idLibro") int idLibro){
         if (!mTokenController.existeToken(token)) return status(UNAUTHORIZED).build();
         Libro libro = mLibroController.getLibro(idLibro);
