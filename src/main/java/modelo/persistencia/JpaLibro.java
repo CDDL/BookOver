@@ -34,20 +34,7 @@ public class JpaLibro implements IDataLibro {
 
     @Override
     public void actualizar(Libro libro) {
-        Libro miLibro = this.getById(libro.getId());
-        miLibro.setEditorial(libro.getEditorial());
-        miLibro.setAutor(libro.getAutor());
-        miLibro.setEsPrestable(libro.getEsPrestable());
-        miLibro.setEsVendible(libro.getEsVendible());
-        miLibro.setEsIntercambiable(libro.getEsIntercambiable());
-        miLibro.setEstado(libro.getEstado());
-        miLibro.setFotos(libro.getFotos());
-        miLibro.setInfoAdicional(libro.getInfoAdicional());
-        miLibro.setIsbn(libro.getIsbn());
-        miLibro.setVisible(libro.isVisible());
-        miLibro.setPrecio(libro.getPrecio());
-        //mEntityManager.merge(libro);
-        mEntityManager.merge(miLibro);
+        mEntityManager.merge(libro);
     }
 
     @Override
