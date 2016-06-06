@@ -37,12 +37,19 @@
         }
     </style>
 
+    <!-- MODAL -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+    <script>$('#myModal').on('hidden.bs.modal', function () { $(this).removeData('bs.modal'); });</script>
+    <script>$(function(){ $("#myModal").load("components/modal.html"); });</script>
+
 </head>
 
 <body class="fondo" ng-app="BookOver">
 
 <div id="wrapper">
 
+    <div id="myModal" class="modal fade"></div>
     <ng-include src="'../html/components/navbar.html'"></ng-include>
     <br>
 
