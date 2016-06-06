@@ -31,7 +31,7 @@ public class ControladorLibro implements IControllerLibro {
         Libro miLibro = mDataLibro.getById(idlibro);
         miLibro.setEditorial(libro.getEditorial());
         miLibro.setAutor(libro.getAutor());
-        miLibro.setUsuario(libro.getUsuario());
+        //miLibro.setUsuario(libro.getUsuario()); xmltransient well played
         miLibro.setEsPrestable(libro.getEsPrestable());
         miLibro.setEsVendible(libro.getEsVendible());
         miLibro.setEsIntercambiable(libro.getEsIntercambiable());
