@@ -19,6 +19,8 @@ appBookOver.controller('CtrlLogin', ['$scope', '$window', 'WebService', function
 
                 $window.sessionStorage.setItem('conversacion', 'null');
                 $window.sessionStorage.setItem('libroActual', 'null');
+                $window.sessionStorage.setItem('busqueda', 'null');
+                $window.sessionStorage.setItem('usuarioActual', 'null');
 
                 token = jsonObject.data.token;
                 console.log(token);
@@ -111,9 +113,10 @@ appBookOver.controller('CtrlChat', ['$scope', '$window', 'WebService', function 
 
 }]);
 
-appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, WebService) {
+appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function ($scope, $window, WebService) {
     var self = this;
 
+    console.log($window.sessionStorage.getItem('usuarioActual'));
     self.recuperaTodosLibros = function (idUsuario){ //recupera los libros de un usuario
         WebService.recuperaTodosLibros(idUsuario)
             .success(function(data) {
@@ -121,7 +124,55 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             });
     };
 
- 
+    if($window.sessionStorage.getItem('libroActual') != 'null'){
+        WebService.getLibro(parseInt($window.sessionStorage.getItem('libroActual'))).then(function successCallback(response) {
+            //console.log("libroActual: ");
+            //console.log(response); //borrar
+            $scope.libroActual = response.data.libro;
+        }, function errorCallBack(response) {
+            console.log("get conversation failed");
+        });
+    }
+    self.setLibroActual = function(id, titulo){
+        $window.sessionStorage.setItem('libroActual', id.toString());
+    };
+    if($window.sessionStorage.getItem('busqueda') != 'null'){
+        WebService.buscaLibros($window.sessionStorage.getItem('busqueda')).then(function successCallback(response) {
+            //console.log("libroActual: ");
+            //console.log(response); //borrar
+            console.log("definiendola");
+            $scope.listaLibrosBusqueda = response.data;
+        }, function errorCallBack(response) {
+            console.log("busqueda failed");
+        });
+    }
+
+    if($window.sessionStorage.getItem('usuarioActual') != 'null' && $window.sessionStorage.getItem('usuarioActual') != null){
+        var item=JSON.parse(($window.sessionStorage.getItem('usuarioActual')));
+        $scope.usuarioActual=item;
+        console.log($scope.usuarioActual);
+        WebService.buscaLibros(item.username).then(function successCallback(response) { //codigo de prueba: deberia ser id no username
+            $scope.listaLibrosUsuario = response.data;
+        }, function errorCallBack(response) {
+            console.log("busqueda failed");
+        });
+    }
+    
+    self.setUsuarioActual= function(idLibro){
+                WebService.getPropietario(idLibro).then(function successCallback(response) {
+                    $window.sessionStorage.setItem('usuarioActual',  JSON.stringify(response.data.DataProfileUser));
+                }, function errorCallBack(response) {
+                    console.log("obtener propietario failed");
+                });
+
+
+    };
+
+    self.setBusqueda = function(txt){
+        $window.sessionStorage.setItem('busqueda', txt);
+        location = "listalibros.html";
+    };
+    
     WebService.recuperaTodosLibros("")      //guarda tus propios libros en misLibros
             .then(function successCallback(response) {
                 console.log(response); //borrar
@@ -129,15 +180,8 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
             }, function errorCallBack(response){
                 console.log("get profile failed");
             });
- 
-    
-    self.recuperaLibro = function(idLibro) { //recupera un libro a partir de su id
-        WebService.recuperaLibro(idLibro)
-            .success(function(data) {
-                console.log(data);
-                $scope.libroActual = data;
-            });
-    };
+
+
 
     self.registrarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
 
@@ -163,10 +207,25 @@ appBookOver.controller('CtrlLibro', ['$scope', 'WebService', function ($scope, W
     };
 
 
-    self.editarLibro = function (titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+    self.editarLibro = function (id, titulo, autor, editorial, isbn, estado, infoAdicional, esPrestable, esVendible, esIntercambiable, precio, /* 'usuario': usuario,*/ fotos) {
+
+        if (typeof esVendible === 'undefined') {
+            esVendible=false;
+        }
+        if (typeof esIntercambiable === 'undefined') {
+            esIntercambiable=false;
+        }
+        if (typeof esPrestable === 'undefined') {
+            esPrestable=false;
+        }
+        if (typeof precio === 'undefined') {
+            precio="0";
+        }
+        precio=parseFloat(precio);
+
         var dato = { 'libro': {'titulo': titulo , 'autor': autor, 'editorial': editorial , 'isbn': isbn, 'estado': estado, 'infoAdicional': infoAdicional, 'esPrestable': esPrestable, 'esVendible': esVendible, 'esIntercambiable': esIntercambiable, 'precio': precio, /* 'usuario': usuario,*/ 'fotos': fotos}};
         //CC
-        WebService.editarLibro(dato)
+        WebService.editarLibro(dato, id)
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
             });

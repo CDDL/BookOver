@@ -43,121 +43,125 @@
 
     <ng-include src="'../html/components/navbar.html'"></ng-include>
 
-    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(100px); border-radius: 30px 30px 30px 30px;margin:auto; width:60em; margin-bottom: 10em" id="page-wrapper">
+    <div style="background: rgba(200, 54, 54, 0.8); position: relative; transform: translateY(100px); border-radius: 30px 30px 30px 30px;margin:auto;margin-bottom:15em; width:60em" id="page-wrapper">
 
         <div class="container-fluid">
             <!-- Page Heading -->
 
             <div class="row">
-                <div class="col-lg-12 ">
-                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlProfile as ctrl">
-                    <h1 style="color: #ffffff;" class="page-header">
-                        Mostrar perfil     <a href="userschat.html" style="color: white"><img src="../resources/mail.png" style="height: 40px; padding-bottom: 9px"></a>
-                    </h1>
+                <div class="col-lg-12 " ng-controller="CtrlLibro as ctrl">
+                    <div class="panel-body" style="margin:auto; color: #ffffff;">
+                        <h1 style="color: #ffffff;" class="page-header">
+                            Perfil del usuario {{usuarioActual.username}}   <a href="modifyprofile.html" style="color: white"><i class="glyphicon glyphicon-edit"></i></a>
+                        </h1>
 
-                    <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
+
                         <div class="table-responsive">
                             <table style="width:100%">
                                 <tr id="username">
-                                    <td>Nombre de usuario: {{username}}</td>
+                                    <td>Nombre de usuario: {{usuarioActual.username}}</td>
                                 </tr>
                                 <tr id="email">
-                                    <td>Email: {{email}}</td>
+                                    <td>Email: {{usuarioActual.email}}</td>
                                 </tr>
                                 <tr id="ubicacion">
-                                    <td>Ubicación: {{ubicacion}}</td>
+                                    <td>Ubicación: {{usuarioActual.ubicacion}}</td>
                                 </tr>
                             </table>
                         </div>
-
-                        <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlLibro as ctrl">
-                            <br>
-                            <h1>Lista de libros</h1>
-                            <div class="table-responsive">
-                                <table class="records_list col-lg-12 table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Título</th>
-                                        <th>Autor</th>
-                                        <th>Editorial</th>
-                                        <th>ISBN</th>
-                                        <th>Estado</th>
-                                        <th>Permisos</th>
-                                        <th>Acciones</th>
-                                        <!--<th><img src="../resources/prestamo.png" style="width: 2em;"></th>
-                                        <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
-                                        <th><img src="../resources/compra.png" style="width: 2em;"></th>-->
-                                    </tr>
-                                    </thead>
-
-                                    <tbody id="contentLibros">
-                                    <tr ng-repeat="libro in misLibros">
-                                        <td>{{libro.titulo}}</td>
-                                        <td>{{libro.autor}}</td>
-                                        <td>{{libro.editorial}}</td>
-                                        <td>{{libro.isbn}}</td>
-                                        <td>{{libro.estado}}</td>
-                                        <td>
-                                            <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
-                                            <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
-                                            <span ng-if="libro.esIntercambiable"><img src="../resources/intercambio.png" style="width: 1.5em;"></span>
-                                            <span ng-if="!libro.esIntercambiable"><img src="../resources/no_intercambio.png" style="width: 1.5em;"></span>
-                                            <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
-                                            <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
-                                        </td>
-                                        <td>
-                                            <a href="modificarLibro.html" class="btn btn-success">Editar</a>
-                                            <a href="#" class="btn btn-danger">Retirar</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        <br>
-                        <h1>Lista de libros</h1>
-                        <div class="table-responsive">
-                            <table class="records_list col-lg-12 table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Usuario</th>
-                                    <th>Comentario</th>
-                                    <th>Título</th>
-                                    <th>Autor</th>
-                                    <th>Estado</th>
-                                    <th>Tipo</th>
-                                    <th>Fecha</th>
-                                    <th>Aceptada</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="content">
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/prestamo.png" style="width: 2em;"></td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                </tr>
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/prestamo.png" style="width: 2em;"></td>
-                                    <td>Data</td>
-                                    <td><img src="../resources/x.png" style="width: 1.5em;"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-
                     </div>
+                    < <div class="panel-body" style="margin:auto; color: #ffffff;">
+                         <br>
+                         <h1>Lista de libros</h1>
+                         <div class="table-responsive">
+                             <table class="records_list col-lg-12 table table-striped">
+                                 <thead>
+                                 <tr>
+                                     <th>Título</th>
+                                     <th>Autor</th>
+                                     <th>Editorial</th>
+                                     <th>ISBN</th>
+                                     <th>Estado</th>
+                                     <th>Permisos</th>
+                                     <th>Precio</th>
+                                     <!--&lt;!&ndash;<th><img src="../resources/prestamo.png" style="width: 2em;"></th>-->
+                                     <!--<th><img src="../resources/intercambio.png" style="width: 2em;"></th>-->
+                                     <!--<th><img src="../resources/compra.png" style="width: 2em;"></th>&ndash;&gt;-->
+                                 </tr>
+                                 </thead>
+
+                                 <tbody id="contentLibros">
+                                 <tr ng-repeat="libro in listaLibrosUsuario">
+                                     <td>{{libro.titulo}}</td>
+                                     <td>{{libro.autor}}</td>
+                                     <td>{{libro.editorial}}</td>
+                                     <td>{{libro.isbn}}</td>
+                                     <td>{{libro.estado}}</td>
+                                     <td>
+                                         <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esIntercambiable"><img src="../resources/intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esIntercambiable"><img src="../resources/no_intercambio.png" style="width: 1.5em;"></span>
+                                         <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
+                                         <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
+                                     </td>
+                                     <td ng-if="libro.precio==0"> </td>
+                                     <td ng-if="libro.precio!=0">{{libro.precio}}</td>
+
+                                 </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <br>
+                         <h1>Lista de transacciones</h1>
+                         <div class="table-responsive">
+                             <table class="records_list col-lg-12 table table-striped">
+                                 <thead>
+                                 <tr>
+                                 <tr>
+                                     <th>Usuario</th>
+                                     <th>Comentario</th>
+                                     <th>Título</th>
+                                     <th>Autor</th>
+                                     <th>Estado</th>
+                                     <th>Tipo</th>
+                                     <th>Fecha</th>
+                                     <th>Aceptada</th>
+                                     <th>Acciones</th>
+                                 </tr>
+                                 </tr>
+                                 </thead>
+
+                                 <tbody id="contentTransaccion">
+                                 <tr>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td><img src="../resources/prestamo.png" style="width: 2em;"></td>
+                                     <td>Data</td>
+                                     <td><img src="../resources/x.png" style="width: 1.5em;"></td>
+                                     <td></td>
+                                 </tr>
+                                 <tr>
+                                 <tr>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td>Data</td>
+                                     <td><img src="../resources/intercambio.png" style="width: 2em;"></td>
+                                     <td>Data</td>
+                                     <td><img src="../resources/v.png" style="width: 1.5em;"></td>
+                                     <td><a href="#" class="btn btn-success">Valorar</a></td> &lt;!&ndash;Hacer aparecer si la transaccion ha sido confirmada ¿Y si la transaccion no tiene valoracion del user maybe?&ndash;&gt;
+                                 </tr>
+                                 </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+
+                     </div>
 
                 </div>
             </div>

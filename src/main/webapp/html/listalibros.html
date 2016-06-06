@@ -54,9 +54,9 @@
             <div class="row">
                 <div class="col-lg-12 ">
                     <h1 style="color: #ffffff;" class="page-header">
-                        Lista de libros
+                        Resultados de la busqueda
                     </h1>
-                <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="">
+                <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlLibro as ctrl">
                     <div class="table-responsive">
                         <table class="records_list col-lg-12 table table-striped">
                             <thead>
@@ -67,16 +67,17 @@
                                 <th>ISBN</th>
                                 <th>Estado</th>
                                 <th>Permisos</th>
+                                <th>Precio</th>
                             </tr>
                             </thead>
 
                             <tbody id="content">
-                            <tr>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
+                            <tr ng-repeat="libro in listaLibrosBusqueda">
+                                <td><a href="showuserprofile.html" ng-click="ctrl.setUsuarioActual(libro.id)">{{libro.titulo}}</a></td>
+                                <td>{{libro.autor}}</td>
+                                <td>{{libro.editorial}}</td>
+                                <td>{{libro.isbn}}</td>
+                                <td>{{libro.estado}}</td>
                                 <td>
                                     <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
                                     <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
@@ -85,21 +86,8 @@
                                     <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
                                     <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>Data</td>
-                                <td>
-                                    <span ng-if="libro.esVendible"><img src="../resources/compra.png" style="width: 1.5em;"></span>
-                                    <span ng-if="!libro.esVendible"><img src="../resources/no_compra.png" style="width: 1.5em;"></span>
-                                    <span ng-if="libro.esIntercambiable"><img src="../resources/intercambio.png" style="width: 1.5em;"></span>
-                                    <span ng-if="!libro.esIntercambiable"><img src="../resources/no_intercambio.png" style="width: 1.5em;"></span>
-                                    <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
-                                    <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
-                                </td>
+                                <td ng-if="libro.precio==0"> </td>
+                                <td ng-if="libro.precio!=0">{{libro.precio}}</td>
                             </tr>
                             </tbody>
                         </table>

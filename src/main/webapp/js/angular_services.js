@@ -78,22 +78,23 @@ appBookOver.service('WebService', ['$http', '$window', function ($http, $window)
             //
         ///////
         //codigo para probar
-            url="pefil.json";
+            url="perfil.json";
         //
         return $http.get(url);
 
     };
 
 
-    this.registrarLibro = function (dato) {
+    this.registrarLibro = function (dato) { //ok
         //codigo final
         console.log(dato); //borrar
         return $http.post(appBookOver.registrarLibroURI,dato,  {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
     };
 
-    this.editarLibro = function (dato, idLibro) {
-        url=appBookOver.editarLibroURI + idLibro;
-        return $http.put(url, dato, {'headers': {'Authorization': $rootScope.token}});
+    this.editarLibro = function (dato, idLibro) {  //ok
+        url=appBookOver.baseURI + "libros/" + idLibro;
+        //console.log($http.put(url, dato, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}}));
+        return $http.put(url, dato, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
     };
 
     this.recuperaTodosLibros = function(idUsuario) {
@@ -108,18 +109,45 @@ appBookOver.service('WebService', ['$http', '$window', function ($http, $window)
         //
     };
 
-    this.recuperaLibro = function(idLibro) {
-        var url = appBookOver.baseURI + 'libros/' + idLibro; //+ ?? cmprbr url
+    this.getLibro = function(idLibro) {
+        //codigo final
+        //var url = appBookOver.baseURI + 'libros/' + idLibro; //+ ?? cmprbr url
+        //return $http.get(url, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
+
+        //codigo de prueba
+        url="libro.json";
         return $http.get(url);
     };
 
+    this.getPropietario = function(idLibro) {
+        //codigo final
+        //var url = appBookOver.baseURI + /libros/user/ + idLibro
+        //return $http.get(url, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
+
+        //codigo de prueba
+        url="perfil.json";
+        return $http.get(url);
+    };
+
+    this.buscaLibros=function(txt){
+        //codigo final
+        //var url = appBookOver.baseURI + 'libros/buscar/' + txt; //
+        //return $http.get(url, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
+        //
+        //codigo de prueba
+        url="libros.json";
+        return $http.get(url);
+        //
+    };
+
     this.retirarLibro = function(idLibro) {
-        var url = appBookOver.retirarLibroURI + idLibro; //+ ?? cmprbr url
-        return $http.delete(url, idLibro, {headers: {'Authorization': token}});
+        var url = appBookOver.baseURI + "libros/" + idLibro;
+        console.log(url);
+        return $http.delete(url, idLibro, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}});
     };
 
     
-    //conversaciones
+    //----------------------------------------------conversaciones
     this.listarConversaciones = function() {
         //codigo de prueba
         var url="conversaciones.json";

@@ -84,6 +84,7 @@
                                      <th>Estado</th>
                                      <th>Permisos</th>
                                      <th>Acciones</th>
+                                     <th>Precio</th>
                                      <!--<th><img src="../resources/prestamo.png" style="width: 2em;"></th>
                                      <th><img src="../resources/intercambio.png" style="width: 2em;"></th>
                                      <th><img src="../resources/compra.png" style="width: 2em;"></th>-->
@@ -105,9 +106,12 @@
                                          <span ng-if="libro.esPrestable"><img src="../resources/prestamo.png" style="width: 1.5em;"></span>
                                          <span ng-if="!libro.esPrestable"><img src="../resources/no_prestamo.png" style="width: 1.5em;"></span>
                                      </td>
+                                     <td ng-if="libro.precio==0"> </td>
+                                     <td ng-if="libro.precio!=0">{{libro.precio}}</td>
                                      <td>
-                                         <a href="modificarLibro.html" class="btn btn-success">Editar</a>
-                                         <a href="#" class="btn btn-danger">Retirar</a>
+                                         <a href="modificarLibro.html" ng-click="ctrl.setLibroActual(libro.id)"
+                                         class="btn btn-success">Editar</a>
+                                         <a href="#" class="btn btn-danger"  ng-click="ctrl.retirarLibro(libro.id)">Retirar</a>
                                      </td>
                                  </tr>
                                  </tbody>
