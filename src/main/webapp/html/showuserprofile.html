@@ -49,14 +49,18 @@
             <!-- Page Heading -->
 
             <div class="row">
-                <div class="col-lg-12 " ng-controller="CtrlLibro as ctrl">
+                <div class="col-lg-12 ">
                     <div class="panel-body" style="margin:auto; color: #ffffff;">
+                        <div ng-controller="CtrlLibro as ctrl">
                         <h1 style="color: #ffffff;" class="page-header">
-                            Perfil del usuario {{usuarioActual.username}}   <a href="modifyprofile.html" style="color: white"><i class="glyphicon glyphicon-edit"></i></a>
+                            Perfil del usuario {{usuarioActual.username}}
                         </h1>
+                        </div>
+                        <div ng-controller="CtrlPerfil as ctrl">
+                        <a href="userschat.html" ng-click="ctrl.enviarMensaje(/"Ha iniciado conversacion/", conversacion.conQuien)" style="color: white"><img src="../resources/mail.png" style="height: 40px; padding-bottom: 9px"></a>
 
-
-                        <div class="table-responsive">
+                        </div>
+                        <div class="table-responsive" ng-controller="CtrlLibro as ctrl">
                             <table style="width:100%">
                                 <tr id="username">
                                     <td>Nombre de usuario: {{usuarioActual.username}}</td>
@@ -70,7 +74,7 @@
                             </table>
                         </div>
                     </div>
-                    < <div class="panel-body" style="margin:auto; color: #ffffff;">
+                    < <div class="panel-body" style="margin:auto; color: #ffffff;" ng-controller="CtrlLibro as ctrl">
                          <br>
                          <h1>Lista de libros</h1>
                          <div class="table-responsive">
