@@ -55,8 +55,10 @@ public class JpaConversacion implements IDataConversacion {
             data.setId(conversa.getId());
             if(conversa.getUsuario1().getId()!=usuario.getId()){
                 data.setConQuien(conversa.getUsuario1().getUsername());
+                data.setIdPersona(conversa.getUsuario1().getId());
             }else{
                 data.setConQuien(conversa.getUsuario2().getUsername());
+                data.setIdPersona(conversa.getUsuario2().getId());
             }
 
             resultado[contador] = data;

@@ -12,6 +12,7 @@ public class DataListConversaciones {
     private int id;
 
     private String conQuien;
+    private int idPersona;
 
 
     public int getId() {
@@ -28,5 +29,13 @@ public class DataListConversaciones {
 
     public void setConQuien(String conQuien) {
         this.conQuien = conQuien;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
     }
 }
