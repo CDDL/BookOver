@@ -70,7 +70,7 @@ appBookOver.controller('CtrlProfile', ['$scope', '$window', 'WebService', functi
         else WebService.editarPerfil(dato)
             .then(function successCallback(response) {
                 console.log("Editado");
-                location="profilepage";
+                location="profilepage.html";
             });
     };
 }]);
@@ -121,7 +121,7 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         var item=JSON.parse(($window.sessionStorage.getItem('usuarioActual')));
         $scope.usuarioActual=item;
         console.log($scope.usuarioActual);
-        $scope.idUsuarioActual=$window.sessionStorage.getItem('idUsuarioActual');
+        $scope.idUsuarioActual=parseInt($window.sessionStorage.getItem('idUsuarioActual'));
         console.log($scope.idUsuarioActual);
         WebService.recuperaTodosLibros($scope.idUsuarioActual).then(function successCallback(response) {
             console.log(response.data.libro);
@@ -221,7 +221,7 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
                 WebService.recuperaTodosMisLibros()      //guarda tus propios libros en misLibros
                     .then(function successCallback(response) {
                         $scope.misLibros=response.data.libro;
-                        location="profilepage";
+                        location="profilepage.html";
                     }, function errorCallBack(response){
                         console.log("get profile failed");
                     });
@@ -242,11 +242,13 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         //location="profilepage.html";
     };
 
-    var conversacionActual= $window.sessionStorage.getItem('conversacion');
+    var conversacionActual= parseInt($window.sessionStorage.getItem('conversacion'));
 
     WebService.listarConversaciones().then(function successCallback(response) { //carga tus conversaciones en misConversaciones
         //console.log(response); //borrar
-        $scope.misConversaciones = response.data;
+        $scope.misConversaciones = response.data.dataListConversaciones;
+        console.log("conversacionesssss");
+        console.log(response.data);
     }, function errorCallBack(response) {
         console.log("get conversations failed");
     });
@@ -255,14 +257,23 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         WebService.mostrarConversacion(parseInt(conversacionActual)).then(function successCallback(response) {
             //console.log("entra");
             //console.log(response); //borrar
-            $scope.conversacion = response.data;
+            $scope.conversacion = response.data.dataConversacion;
+            console.log("la conversacion a mostrar:")
+            console.log(response.data);
         }, function errorCallBack(response) {
             console.log("get conversation failed");
         });
     }
-    self.setConversacion = function(conversacion, conQuien){
-        $window.sessionStorage.setItem('conversacion', conversacion.toString());
+    self.setConversacion = function(idConversacion, conQuien, idConQuien){
+        
+        console.log("estamos en setConversacion, id y conquien:");
+        console.log(idConversacion);
+        console.log(conQuien);
+        $window.sessionStorage.setItem('conversacion', idConversacion.toString());
         $window.sessionStorage.setItem('conversacionConQuien', conQuien);
+        $window.sessionStorage.setItem('idConQuien', idConQuien);
+        location="userschat.html";
+        
     };
     self.getConversacionConQuien=function(){
         return $window.sessionStorage.getItem('conversacionConQuien');
@@ -278,11 +289,20 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         });
     };
 
-    self.enviarMensaje = function(txt, para){
-        var dato={'dataMensaje': {'mensaje': txt, 'para': para}};
+    self.enviarMensaje = function(txt){
+
+        var dato={'dataMensaje': {'mensaje': txt, 'para': $window.sessionStorage.getItem('idConQuien')}};
         //console.log(dato);
         WebService.enviarMensaje(dato).then(function successCallback(response) {
-           // console.log(response); //borrar
+            if (conversacionActual != 'null') {
+                WebService.mostrarConversacion(parseInt(conversacionActual)).then(function successCallback(response) {
+                    //console.log("entra");
+                    //console.log(response); //borrar
+                    $scope.conversacion = response.data.dataConversacion;
+                }, function errorCallBack(response) {
+                    console.log("get conversation failed");
+                });
+            }
         }, function errorCallBack(response){
             console.log("enviar mensaje failed");
         });
