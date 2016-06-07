@@ -111,7 +111,6 @@ appBookOver.service('WebService', ['$http', '$window', function ($http, $window)
 
     this.editarLibro = function (dato, idLibro) {  //ok
         url=appBookOver.baseURI + "libros/" + idLibro;
-        //console.log($http.put(url, dato, {'headers': {'Authorization': $window.sessionStorage.getItem('token')}}));
         return $http.put(url, dato, {'headers': {'Authentication': $window.sessionStorage.getItem('token')}});
     };
 

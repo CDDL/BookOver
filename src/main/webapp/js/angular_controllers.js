@@ -23,10 +23,10 @@ appBookOver.controller('CtrlLogin', ['$scope', '$window', 'WebService', function
                 $window.sessionStorage.setItem('usuarioActual', 'null');
 
                 token = jsonObject.data.token;
-                console.log(token);
+                //console.log(token);
                 //$window.sessionStorage.setItem('token', JSON.stringify(token))
                 $window.sessionStorage.setItem('token', token.token)
-                console.log($window.sessionStorage.getItem('token'));
+                //console.log($window.sessionStorage.getItem('token'));
                 location = "profilepage.html";
                 //console.log('Authentication: ' + jsonObject.headers('Authentication'))
             }, function errorCallBack(response){
@@ -50,14 +50,14 @@ appBookOver.controller('CtrlRegister', ['$scope', '$window', 'WebService', funct
 
 appBookOver.controller('CtrlProfile', ['$scope', '$window', 'WebService', function ($scope, $window, WebService) {
     var self = this;
-    console.log("prefil");
-    console.log($window.sessionStorage.getItem('token'));
-   // console.log(JSON.parse($window.sessionStorage.getItem('token')));
+    //console.log("prefil");
+    //console.log($window.sessionStorage.getItem('token'));
+                    // console.log(JSON.parse($window.sessionStorage.getItem('token')));
     WebService.getMiPerfil().then(function successCallback(response) {
-        console.log('response: '); //borrar
-        console.log(response);
-        console.log('response.data: '); //borrar
-        console.log(response.data);
+        //console.log('response: '); //borrar
+        //console.log(response);
+        //console.log('response.data: '); //borrar
+        //console.log(response.data);
 
         $scope.miPerfil=response.data.dataProfileUser;
     }, function errorCallBack(response){
@@ -70,6 +70,7 @@ appBookOver.controller('CtrlProfile', ['$scope', '$window', 'WebService', functi
         else WebService.editarPerfil(dato)
             .then(function successCallback(response) {
                 console.log("Editado");
+                location="profilepage";
             });
     };
 }]);
@@ -81,6 +82,8 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
     var self = this;
 
     console.log($window.sessionStorage.getItem('usuarioActual'));
+
+
     self.recuperaTodosLibros = function (idUsuario){ //recupera los libros de un usuario
         WebService.recuperaTodosLibros(idUsuario)
             .success(function(data) {
@@ -114,28 +117,42 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
     }
 
     if($window.sessionStorage.getItem('usuarioActual') != 'null' && $window.sessionStorage.getItem('usuarioActual') != null){
+        console.log("pal scope");
         var item=JSON.parse(($window.sessionStorage.getItem('usuarioActual')));
         $scope.usuarioActual=item;
         console.log($scope.usuarioActual);
-        WebService.recuperaTodosLibros(item.id).then(function successCallback(response) {
-            $scope.listaLibrosUsuario = response.data;
+        $scope.idUsuarioActual=$window.sessionStorage.getItem('idUsuarioActual');
+        console.log($scope.idUsuarioActual);
+        WebService.recuperaTodosLibros($scope.idUsuarioActual).then(function successCallback(response) {
+            console.log(response.data.libro);
+            $scope.listaLibrosUsuario = response.data.libro;
         }, function errorCallBack(response) {
             console.log("recupera los libros de este usuario failed");
         });
     }
     
     self.setUsuarioActual= function(idLibro){
-                var idUsuario = 0;
+                //var idUsuario = 0;
                 WebService.getPropietario(idLibro).then(function successCallback(response) {
-                    idUsuario=response.data;
+                    console.log("id usuario= ");
+                    console.log(response.data);
+                    $window.sessionStorage.setItem('idUsuarioActual', response.data);
+                    WebService.getPerfil(response.data).then(function successCallback(response) {
+                        console.log("variable usuarioActual= ");
+                        console.log(JSON.stringify(response.data.dataProfileUser));
+                        console.log("/variable");
+                        $window.sessionStorage.setItem('usuarioActual',  JSON.stringify(response.data.dataProfileUser));
+                        console.log($window.sessionStorage.getItem('usuarioActual'));
+                        location="showuserprofile.html"
+                    }, function errorCallBack(response) {
+                        console.log("obtener propietario failed");
+                    });
+
+
                 }, function errorCallBack(response) {
                     console.log("obtener propietario failed");
                 });
-                WebService.getPerfil(idUsuario).then(function successCallback(response) {
-                    $window.sessionStorage.setItem('usuarioActual',  JSON.stringify(response.data.DataProfileUser));
-                }, function errorCallBack(response) {
-                    console.log("obtener propietario failed");
-                });
+
 
     };
 
@@ -200,11 +217,11 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         WebService.editarLibro(dato, id)
             .then(function successCallback(response) {
                 console.log("Libro editado correctamente");
-                //location="profilepage.html"
+                
                 WebService.recuperaTodosMisLibros()      //guarda tus propios libros en misLibros
                     .then(function successCallback(response) {
-                        console.log("cargamos libros de nuevo"); //borrar
                         $scope.misLibros=response.data.libro;
+                        location="profilepage";
                     }, function errorCallBack(response){
                         console.log("get profile failed");
                     });
@@ -214,15 +231,21 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
     self.retirarLibro = function(idLibro) {
         WebService.retirarLibro(idLibro).then(function successCallback(response){
             console.log("Libro retirado");
+            WebService.recuperaTodosMisLibros()      //guarda tus propios libros en misLibros
+                .then(function successCallback(response) {
+                    $scope.misLibros=response.data.libro;
 
+                }, function errorCallBack(response){
+                    console.log("get profile failed");
+                });
         });
-        location("profilepage.html");
+        //location="profilepage.html";
     };
 
     var conversacionActual= $window.sessionStorage.getItem('conversacion');
 
     WebService.listarConversaciones().then(function successCallback(response) { //carga tus conversaciones en misConversaciones
-        console.log(response); //borrar
+        //console.log(response); //borrar
         $scope.misConversaciones = response.data;
     }, function errorCallBack(response) {
         console.log("get conversations failed");
@@ -230,8 +253,8 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
 
     if (conversacionActual != 'null') {
         WebService.mostrarConversacion(parseInt(conversacionActual)).then(function successCallback(response) {
-            console.log("entra");
-            console.log(response); //borrar
+            //console.log("entra");
+            //console.log(response); //borrar
             $scope.conversacion = response.data;
         }, function errorCallBack(response) {
             console.log("get conversation failed");
@@ -245,14 +268,37 @@ appBookOver.controller('CtrlLibro', ['$scope', '$window', 'WebService', function
         return $window.sessionStorage.getItem('conversacionConQuien');
     };
 
-    self.enviarMensaje = function(txt, para){
-        var dato={'DataMensaje': {'mensaje': txt, 'para': para}};
-        console.log(dato);
+    self.iniciaConversacion = function(txt, para){
+        var dato={'dataMensaje': {'mensaje': txt, 'para': para}};
+        //console.log(dato);
         WebService.enviarMensaje(dato).then(function successCallback(response) {
-            console.log(response); //borrar
+           location="chatslist.html"
         }, function errorCallBack(response){
             console.log("enviar mensaje failed");
         });
     };
 
+    self.enviarMensaje = function(txt, para){
+        var dato={'dataMensaje': {'mensaje': txt, 'para': para}};
+        //console.log(dato);
+        WebService.enviarMensaje(dato).then(function successCallback(response) {
+           // console.log(response); //borrar
+        }, function errorCallBack(response){
+            console.log("enviar mensaje failed");
+        });
+    };
+
+    self.haySesion =  function(){
+        return ($window.sessionStorage.getItem('token')!=null);
+    };
+
+    self.cerrarSesion= function(){
+        $window.sessionStorage.removeItem('token');
+        $window.sessionStorage.removeItem('conversacion');
+        $window.sessionStorage.removeItem('libroActual');
+        $window.sessionStorage.removeItem('busqueda');
+        $window.sessionStorage.removeItem('usuarioActual');
+        $window.sessionStorage.removeItem('conversacionConQuien');
+        location="index.html";
+    };
 }]);
